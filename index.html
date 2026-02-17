@@ -171,25 +171,26 @@
                         </div>
                     )
                 },
-                // Slide 3: The 2026 Shift (New)
+                // Slide 3: The 2026 Shift (Revised)
                 {
                     id: 2,
                     type: 'content',
-                    title: "關鍵洞察：2026 年的媒體變革",
+                    title: "AI 改變了資訊流動的邏輯",
                     icon: <Zap size={40} className="text-amber-500" />,
                     content: (
                         <div className="flex flex-col h-full justify-center items-center px-4">
                             <div className="max-w-5xl w-full text-center space-y-12">
-                                <h2 className="text-4xl font-black text-slate-900 leading-tight">
-                                    AI 改變了資訊流動的根本邏輯
-                                </h2>
+                                {/* The Title is now in the header, focusing on the visual */}
 
                                 <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-24">
                                     {/* Left Circle */}
                                     <div className="bg-blue-50 border-4 border-blue-500 rounded-full w-72 h-72 flex flex-col items-center justify-center p-6 shadow-xl relative z-10 transform hover:scale-105 transition-transform">
                                         <Users size={56} className="text-blue-600 mb-4" />
                                         <h3 className="text-2xl font-bold text-slate-800 mb-2">人類讀者</h3>
-                                        <p className="text-lg text-slate-600 font-medium">想看 AI 整理過的<br/>高效率資訊</p>
+                                        <div className="space-y-1">
+                                            <p className="text-sm text-slate-400 line-through">不想看海量雜訊</p>
+                                            <p className="text-lg text-blue-700 font-bold">要看 AI 整理的情報</p>
+                                        </div>
                                     </div>
 
                                     {/* Arrows */}
@@ -210,34 +211,31 @@
                                     <div className="bg-amber-50 border-4 border-amber-500 rounded-full w-72 h-72 flex flex-col items-center justify-center p-6 shadow-xl relative z-10 transform hover:scale-105 transition-transform">
                                         <Bot size={56} className="text-amber-600 mb-4" />
                                         <h3 className="text-2xl font-bold text-slate-800 mb-2">AI 模型</h3>
-                                        <p className="text-lg text-slate-600 font-medium">想看人類創作的<br/>獨特觀點數據</p>
+                                        <div className="space-y-1">
+                                            <p className="text-sm text-slate-400 line-through">不想看合成垃圾</p>
+                                            <p className="text-lg text-amber-700 font-bold">要看人類的原創數據</p>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div className="bg-slate-100 p-8 rounded-2xl border border-slate-200 inline-block">
-                                    <p className="text-xl text-slate-700 font-medium">
-                                        結論：傳統媒體模式失效。<br/>
-                                        新媒體必須同時滿足<span className="text-blue-600 font-bold mx-1">人類的效率需求</span>與<span className="text-amber-600 font-bold mx-1">AI 的數據需求</span>。
+                                    <p className="text-2xl text-slate-700 font-bold">
+                                        成立一家新的媒體，必須同時滿足人類與 AI 的需求。
                                     </p>
                                 </div>
                             </div>
                         </div>
                     )
                 },
-                // Slide 4: Philosophy Part 1 (Dual Engine)
+                // Slide 4: Philosophy Part 1 (Dual Engine - Revised)
                 {
                     id: 3,
                     type: 'content',
-                    title: "核心策略：雙引擎架構",
+                    title: "媒體不是在賣「資訊」，而是在賣「共同理解」",
                     icon: <Cpu size={40} className="text-blue-600" />,
                     content: (
                         <div className="flex flex-col h-full justify-center px-4 md:px-0 gap-8">
-                            <div className="text-center">
-                                <p className="text-3xl text-slate-800 font-bold mb-2">
-                                    媒體不是在賣「資訊」，而是在賣「共同理解」
-                                </p>
-                            </div>
-
+                            
                             {/* Dual Engine */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 flex-1">
                                 {/* Left: AI / Breadth / Free */}
@@ -254,14 +252,14 @@
                                         </div>
                                     </div>
 
-                                    <div className="flex-1 space-y-6">
+                                    <div className="flex-1 space-y-8">
                                         <div className="bg-slate-50 p-6 rounded-lg border border-slate-100">
-                                            <h4 className="font-bold text-slate-700 mb-2 text-lg">任務</h4>
-                                            <p className="text-base text-slate-600">用即時資訊建立所有人都能對齊的「共同事實底盤」。</p>
+                                            <h4 className="font-bold text-slate-700 mb-2 text-xl">任務</h4>
+                                            <p className="text-lg text-slate-600 leading-relaxed">用即時資訊建立所有人都能對齊的「共同事實底盤」。</p>
                                         </div>
                                         <div className="bg-slate-50 p-6 rounded-lg border border-slate-100">
-                                            <h4 className="font-bold text-slate-700 mb-2 text-lg">形式</h4>
-                                            <p className="text-base text-slate-600">24 小時聚合、分類、摘要、更新，解決「怕漏掉」的焦慮。</p>
+                                            <h4 className="font-bold text-slate-700 mb-2 text-xl">形式</h4>
+                                            <p className="text-lg text-slate-600 leading-relaxed">24 小時聚合、分類、摘要、更新，解決「怕漏掉」的焦慮。</p>
                                         </div>
                                     </div>
                                 </div>
@@ -280,14 +278,14 @@
                                         </div>
                                     </div>
 
-                                    <div className="flex-1 space-y-6">
+                                    <div className="flex-1 space-y-8">
                                         <div className="bg-slate-50 p-6 rounded-lg border border-slate-100">
-                                            <h4 className="font-bold text-slate-700 mb-2 text-lg">任務</h4>
-                                            <p className="text-base text-slate-600">把雜訊變成判斷，把事件變成框架：你該怎麼看、怎麼做。</p>
+                                            <h4 className="font-bold text-slate-700 mb-2 text-xl">任務</h4>
+                                            <p className="text-lg text-slate-600 leading-relaxed">把雜訊變成判斷，把事件變成框架：你該怎麼看、怎麼做。</p>
                                         </div>
                                         <div className="bg-slate-50 p-6 rounded-lg border border-slate-100">
-                                            <h4 className="font-bold text-slate-700 mb-2 text-lg">形式</h4>
-                                            <p className="text-base text-slate-600">深度報告、立場、價值觀、可複用的思考模型。</p>
+                                            <h4 className="font-bold text-slate-700 mb-2 text-xl">形式</h4>
+                                            <p className="text-lg text-slate-600 leading-relaxed">深度報告、立場、價值觀、可複用的思考模型。</p>
                                         </div>
                                     </div>
                                 </div>
