@@ -23,7 +23,7 @@
         .udn-text-red { color: #C8102E; }
         .udn-border-red { border-color: #C8102E; }
         
-        /* Tailwind group-hover 與自訂 class 相容 */
+        /* group-hover 與自訂 class 相容 */
         .group:hover .group-hover\:udn-text-red { color: #C8102E; }
         
         .techmeme-headline { color: #000000; font-weight: 700; font-family: sans-serif; }
@@ -235,8 +235,8 @@
                                 {/* Category Nav */}
                                 <nav className="flex px-4 py-2 gap-6 text-sm font-bold text-slate-700 border-b-2 udn-border-red">
                                     <a href="#" className="udn-text-red">首頁</a>
-                                    <a href="#" className="hover:text-red-700">即時 (AI)</a>
-                                    <a href="#" className="hover:text-red-700">深度 (VIP)</a>
+                                    <a href="#" className="hover:text-red-700">即時</a>
+                                    <a href="#" className="hover:text-red-700">深度</a>
                                     <a href="#" className="hover:text-red-700">產業</a>
                                     <a href="#" className="hover:text-red-700">證券</a>
                                     <a href="#" className="hover:text-red-700">國際</a>
@@ -250,7 +250,7 @@
                                 {/* LEFT COLUMN: Techmeme Style (Real-time/Free) */}
                                 <div className="flex-1 overflow-y-auto p-4 bg-[#FDFDFD]">
                                     <div className="flex items-center gap-2 mb-4 border-b border-gray-200 pb-2">
-                                        <h2 className="text-lg font-bold text-slate-800">即時情報 (AI Aggregation)</h2>
+                                        <h2 className="text-lg font-bold text-slate-800">即時情報</h2>
                                         <span className="bg-gray-200 text-gray-600 text-[10px] px-1.5 py-0.5 rounded">Techmeme 模式</span>
                                     </div>
 
@@ -259,13 +259,13 @@
                                         <div className="flex gap-4">
                                             <div className="flex-1">
                                                 <a href="#" className="techmeme-headline text-lg leading-tight block mb-1">
-                                                    Sources: SpaceX and xAI are competing in a $100M DoD contest to make voice-controlled, autonomous drone swarms
+                                                    消息人士：SpaceX 和 xAI 正競逐國防部 1 億美元合約，開發語音控制自主無人機蜂群
                                                 </a>
                                                 <div className="techmeme-source mb-1">
                                                     Katrina Manson / Bloomberg <span className="mx-1 text-gray-300">|</span> 1 hour ago
                                                 </div>
                                                 <p className="techmeme-summary mb-2">
-                                                    Elon Musk's SpaceX and wholly owned subsidiary xAI are competing in a secretive new Pentagon contest to produce voice-controlled...
+                                                    馬斯克的 SpaceX 及其全資子公司 xAI 正參與五角大廈一項機密競賽，旨在生產語音控制的自主無人機蜂群...
                                                 </p>
                                                 
                                                 {/* Techmeme Cluster */}
@@ -294,13 +294,13 @@
                                     {/* News Item 2 */}
                                     <div className="mb-6 group">
                                         <a href="#" className="techmeme-headline text-lg leading-tight block mb-1">
-                                            A senior official says Pentagon is "close" to designating Anthropic a "supply chain risk"
+                                            國防部高官：五角大廈即將把 Anthropic 列為「供應鏈風險」
                                         </a>
                                         <div className="techmeme-source mb-1">
                                             Axios <span className="mx-1 text-gray-300">|</span> 2 hours ago
                                         </div>
                                         <p className="techmeme-summary mb-2">
-                                            Defense Secretary Pete Hegseth is "close" to cutting business ties with Anthropic and designating the AI company a national security risk...
+                                            國防部長 Pete Hegseth 即將切斷與 Anthropic 的商業聯繫，並將這家 AI 公司列為國家安全風險...
                                         </p>
                                          <div className="pl-3 border-l-2 border-slate-200 text-xs space-y-1">
                                             <div className="flex flex-wrap gap-1 items-baseline">
@@ -319,7 +319,7 @@
                                     {/* News Item 3 */}
                                     <div className="mb-6 group opacity-70 hover:opacity-100 transition-opacity">
                                         <a href="#" className="techmeme-headline text-base leading-tight block mb-1">
-                                            Coinbase launches "Base Identity", allowing passport-free travel in 5 crypto-friendly jurisdictions
+                                            Coinbase 推出「Base Identity」，允許在 5 個加密友善管轄區免護照旅行
                                         </a>
                                         <div className="techmeme-source mb-1">
                                             CoinDesk <span className="mx-1 text-gray-300">|</span> 3 hours ago
