@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blocktrend JV Proposal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- React & ReactDOM -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- Babel -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <!-- Lucide React (UMD build - 固定版本確保相容性) -->
+    <script src="https://unpkg.com/lucide-react@0.460.0/dist/umd/lucide-react.js"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Roboto+Mono:wght@400;500&display=swap');
+        body { font-family: 'Noto Sans TC', sans-serif; }
+        
+        /* Slide Transitions */
+        .slide-container { position: relative; width: 100%; height: 100%; overflow: hidden; }
+        
+        /* UDN & Techmeme Specific Styles */
+        .udn-red { background-color: #C8102E; }
+        .udn-text-red { color: #C8102E; }
+        .udn-border-red { border-color: #C8102E; }
+        
+        /* Tailwind group-hover 與自訂 class 相容 */
+        .group:hover .group-hover\:udn-text-red { color: #C8102E; }
+        
+        .techmeme-headline { color: #000000; font-weight: 700; font-family: sans-serif; }
+        .techmeme-headline:hover { text-decoration: underline; color: #0000AA; }
+        .techmeme-source { color: #545454; font-size: 0.75rem; }
+        .techmeme-summary { font-size: 0.9rem; line-height: 1.4; color: #000; }
+        .techmeme-cluster-label { color: #006400; font-weight: bold; font-size: 0.75rem; } /* Green for More */
+        .techmeme-cluster-label-x { color: #545454; font-weight: bold; font-size: 0.75rem; } /* Gray for Social */
+        .techmeme-link { color: #0000AA; text-decoration: none; font-size: 0.75rem; }
+        .techmeme-link:hover { text-decoration: underline; }
+        
+        /* Scrollbar hiding */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 h-screen overflow-hidden">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useCallback } = React;
+        // Lucide 全域變數可能為 lucide / lucideReact / LucideReact，使用 fallback
+        const Lucide = window.lucide || window.lucideReact || window.LucideReact;
+        const { ChevronRight, ChevronLeft, Users, ChefHat, DollarSign, Target, Zap, Crown, Shield, Bot, PenTool, Cpu, Newspaper, Search, Lock } = Lucide;
+
+        const StrategyDeck = () => {
+            const [currentSlide, setCurrentSlide] = useState(0);
+
+            const slides = [
+                // Slide 0: Simple Cover
+                {
+                    id: 0,
+                    type: 'cover',
+                    content: (
+                        <div className="flex flex-col items-center justify-center h-full text-center space-y-8">
+                            <div className="p-6 bg-white rounded-2xl shadow-xl border border-slate-100 mb-4">
+                                <Crown size={80} className="text-amber-600" />
+                            </div>
+                            <h1 className="text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-tight">
+                                區塊勢聯合營運計畫
+                            </h1>
+                            <div className="h-1 w-32 bg-slate-900 rounded-full"></div>
+                            <p className="text-2xl text-slate-500 font-light tracking-wide">
+                                定義 2026 Web3 媒體新標準
+                            </p>
+                            <p className="text-sm text-slate-400 mt-12 font-mono">
+                                PROPOSAL FOR UDN & TAIWAN MOBILE
+                            </p>
+                        </div>
+                    )
+                },
+                // Slide 1: Core Philosophy (AI vs Human)
+                {
+                    id: 1,
+                    type: 'philosophy',
+                    title: "1. 產品核心哲學",
+                    subtitle: "Product Core Philosophy",
+                    icon: <Cpu size={40} className="text-blue-600" />,
+                    content: (
+                        <div className="flex flex-col h-full justify-center space-y-10 px-4 md:px-0">
+                            <div className="text-center">
+                                <p className="text-3xl text-slate-800 font-bold mb-4">
+                                    媒體的雙引擎架構
+                                </p>
+                                <p className="text-xl text-slate-500">
+                                    解決<span className="text-blue-600 font-bold mx-2">資訊焦慮</span>與<span className="text-amber-600 font-bold mx-2">深度思考</span>的矛盾
+                                </p>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 h-[450px]">
+                                {/* Left: AI / Breadth / Free */}
+                                <div className="bg-white p-8 rounded-2xl border-t-8 border-blue-600 shadow-xl flex flex-col relative overflow-hidden group hover:translate-y-[-5px] transition-all duration-300">
+                                    <div className="absolute top-0 right-0 p-4 opacity-10">
+                                        <Bot size={120} />
+                                    </div>
+                                    <div className="flex items-center gap-4 mb-6">
+                                        <div className="bg-blue-100 p-4 rounded-full">
+                                            <Bot size={40} className="text-blue-600" />
+                                        </div>
+                                        <div>
+                                            <h3 className="text-2xl font-black text-slate-900">AI 負責「讀」</h3>
+                                            <p className="text-blue-600 font-bold text-sm tracking-wider uppercase">Techmeme 模式</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="flex-1 space-y-6">
+                                        <div className="bg-slate-50 p-4 rounded-lg border border-slate-100">
+                                            <h4 className="font-bold text-slate-700 mb-1">廣度 (Breadth)</h4>
+                                            <p className="text-sm text-slate-500">24小時掃描全球市場雜訊，即時聚合。</p>
+                                        </div>
+                                        <div className="bg-slate-50 p-4 rounded-lg border border-slate-100">
+                                            <h4 className="font-bold text-slate-700 mb-1">免費導流 (Free)</h4>
+                                            <p className="text-sm text-slate-500">解決讀者「怕漏掉新聞」的焦慮，創造高頻流量。</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Right: Human / Depth / Paid */}
+                                <div className="bg-white p-8 rounded-2xl border-t-8 border-amber-500 shadow-xl flex flex-col relative overflow-hidden group hover:translate-y-[-5px] transition-all duration-300">
+                                    <div className="absolute top-0 right-0 p-4 opacity-10">
+                                        <PenTool size={120} />
+                                    </div>
+                                    <div className="flex items-center gap-4 mb-6">
+                                        <div className="bg-amber-100 p-4 rounded-full">
+                                            <PenTool size={40} className="text-amber-600" />
+                                        </div>
+                                        <div>
+                                            <h3 className="text-2xl font-black text-slate-900">人類負責「寫」</h3>
+                                            <p className="text-amber-600 font-bold text-sm tracking-wider uppercase">Blocktrend 模式</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="flex-1 space-y-6">
+                                        <div className="bg-slate-50 p-4 rounded-lg border border-slate-100">
+                                            <h4 className="font-bold text-slate-700 mb-1">深度 (Depth)</h4>
+                                            <p className="text-sm text-slate-500">解釋意義、判斷價值。這是 AI 做不到的品味。</p>
+                                        </div>
+                                        <div className="bg-slate-50 p-4 rounded-lg border border-slate-100">
+                                            <h4 className="font-bold text-slate-700 mb-1">付費訂閱 (Paid)</h4>
+                                            <p className="text-sm text-slate-500">建立信任，將影響力變現。創造忠誠用戶。</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                },
+                // Slide 2: Visual Mockup (UDN Style)
+                {
+                    id: 2,
+                    type: 'mockup',
+                    title: "2. 產品視覺模擬 (2026)",
+                    subtitle: "Visual Mockup: UDN x Techmeme x Blocktrend",
+                    icon: <Newspaper size={40} className="text-slate-700" />,
+                    content: (
+                        <div className="w-full h-full flex flex-col bg-white rounded-lg shadow-2xl border border-slate-300 font-sans text-slate-900 overflow-hidden relative">
+                            {/* 1. UDN Header */}
+                            <header className="bg-white shrink-0">
+                                {/* Top Bar */}
+                                <div className="flex justify-between items-center px-4 py-1 border-b border-gray-100 text-[11px] text-gray-500">
+                                    <div className="flex gap-4">
+                                        <span>2026年2月17日 星期二</span>
+                                        <span>台北股市 ▲ 24,500</span>
+                                        <span className="text-amber-600 font-bold">BTC $102,000</span>
+                                    </div>
+                                    <div className="flex gap-3">
+                                        <span>登入</span>
+                                        <span>註冊</span>
+                                    </div>
+                                </div>
+                                {/* Main Nav Bar */}
+                                <div className="px-4 py-3 flex justify-between items-end border-b border-gray-100">
+                                    <div className="flex items-end gap-2">
+                                         {/* Mock UDN Logo Text */}
+                                        <h1 className="text-4xl font-bold udn-text-red tracking-tight leading-none" style={{fontFamily: '"Times New Roman", serif'}}>
+                                            經濟日報
+                                        </h1>
+                                        <span className="text-2xl font-bold text-slate-800 leading-none mb-0.5">Web3</span>
+                                    </div>
+                                    <div className="flex gap-4 items-center">
+                                        <div className="relative">
+                                            <input type="text" placeholder="搜尋..." className="bg-gray-100 rounded-full px-3 py-1 text-xs w-32 focus:w-48 transition-all outline-none" />
+                                            <Search size={14} className="absolute right-2 top-1.5 text-gray-400"/>
+                                        </div>
+                                        <button className="udn-red text-white text-xs font-bold px-3 py-1.5 rounded hover:bg-red-700">訂閱會員</button>
+                                    </div>
+                                </div>
+                                {/* Category Nav */}
+                                <nav className="flex px-4 py-2 gap-6 text-sm font-bold text-slate-700 border-b-2 udn-border-red">
+                                    <a href="#" className="udn-text-red">首頁</a>
+                                    <a href="#" className="hover:text-red-700">即時 (AI)</a>
+                                    <a href="#" className="hover:text-red-700">深度 (VIP)</a>
+                                    <a href="#" className="hover:text-red-700">產業</a>
+                                    <a href="#" className="hover:text-red-700">證券</a>
+                                    <a href="#" className="hover:text-red-700">國際</a>
+                                    <a href="#" className="hover:text-red-700">金融</a>
+                                </nav>
+                            </header>
+
+                            {/* 2. Main Layout */}
+                            <div className="flex flex-1 overflow-hidden">
+                                
+                                {/* LEFT COLUMN: Techmeme Style (Real-time/Free) */}
+                                <div className="flex-1 overflow-y-auto p-4 bg-[#FDFDFD]">
+                                    <div className="flex items-center gap-2 mb-4 border-b border-gray-200 pb-2">
+                                        <h2 className="text-lg font-bold text-slate-800">即時情報 (AI Aggregation)</h2>
+                                        <span className="bg-gray-200 text-gray-600 text-[10px] px-1.5 py-0.5 rounded">Techmeme 模式</span>
+                                    </div>
+
+                                    {/* News Item 1 */}
+                                    <div className="mb-6 group">
+                                        <div className="flex gap-4">
+                                            <div className="flex-1">
+                                                <a href="#" className="techmeme-headline text-lg leading-tight block mb-1">
+                                                    Sources: SpaceX and xAI are competing in a $100M DoD contest to make voice-controlled, autonomous drone swarms
+                                                </a>
+                                                <div className="techmeme-source mb-1">
+                                                    Katrina Manson / Bloomberg <span className="mx-1 text-gray-300">|</span> 1 hour ago
+                                                </div>
+                                                <p className="techmeme-summary mb-2">
+                                                    Elon Musk's SpaceX and wholly owned subsidiary xAI are competing in a secretive new Pentagon contest to produce voice-controlled...
+                                                </p>
+                                                
+                                                {/* Techmeme Cluster */}
+                                                <div className="pl-3 border-l-2 border-slate-200 text-xs space-y-1">
+                                                    <div className="flex flex-wrap gap-1 items-baseline">
+                                                        <span className="techmeme-cluster-label">More:</span>
+                                                        <a href="#" className="techmeme-link">Benzinga</a>,
+                                                        <a href="#" className="techmeme-link">Reuters</a>,
+                                                        <a href="#" className="techmeme-link">The Deep View</a>,
+                                                        <a href="#" className="techmeme-link">The Information</a>
+                                                    </div>
+                                                    <div className="flex flex-wrap gap-1 items-baseline">
+                                                        <span className="techmeme-cluster-label-x">On X:</span>
+                                                        <a href="#" className="techmeme-link text-gray-500">@elonmusk</a>,
+                                                        <a href="#" className="techmeme-link text-gray-500">@ashleevance</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {/* Thumbnail (Optional like Techmeme) */}
+                                            <div className="w-20 h-14 bg-slate-200 rounded shrink-0 hidden md:block overflow-hidden">
+                                                <div className="w-full h-full bg-slate-800 flex items-center justify-center text-white/20 text-xs">IMG</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* News Item 2 */}
+                                    <div className="mb-6 group">
+                                        <a href="#" className="techmeme-headline text-lg leading-tight block mb-1">
+                                            A senior official says Pentagon is "close" to designating Anthropic a "supply chain risk"
+                                        </a>
+                                        <div className="techmeme-source mb-1">
+                                            Axios <span className="mx-1 text-gray-300">|</span> 2 hours ago
+                                        </div>
+                                        <p className="techmeme-summary mb-2">
+                                            Defense Secretary Pete Hegseth is "close" to cutting business ties with Anthropic and designating the AI company a national security risk...
+                                        </p>
+                                         <div className="pl-3 border-l-2 border-slate-200 text-xs space-y-1">
+                                            <div className="flex flex-wrap gap-1 items-baseline">
+                                                <span className="techmeme-cluster-label">More:</span>
+                                                <a href="#" className="techmeme-link">Bloomberg</a>,
+                                                <a href="#" className="techmeme-link">SiliconANGLE</a>,
+                                                <a href="#" className="techmeme-link">The Verge</a>
+                                            </div>
+                                             <div className="flex flex-wrap gap-1 items-baseline">
+                                                <span className="techmeme-cluster-label-x">Bluesky:</span>
+                                                <a href="#" className="techmeme-link text-gray-500">@carnage4life</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* News Item 3 */}
+                                    <div className="mb-6 group opacity-70 hover:opacity-100 transition-opacity">
+                                        <a href="#" className="techmeme-headline text-base leading-tight block mb-1">
+                                            Coinbase launches "Base Identity", allowing passport-free travel in 5 crypto-friendly jurisdictions
+                                        </a>
+                                        <div className="techmeme-source mb-1">
+                                            CoinDesk <span className="mx-1 text-gray-300">|</span> 3 hours ago
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* RIGHT COLUMN: Blocktrend Style (Subscription/Paid) */}
+                                <div className="w-[320px] bg-white border-l border-gray-200 flex flex-col shrink-0">
+                                    {/* Header matching Economic VIP style */}
+                                    <div className="udn-red text-white px-4 py-2 flex items-center justify-between">
+                                        <div className="font-bold flex items-center gap-2">
+                                            <Crown size={16} />
+                                            <span>經濟 VIP 專區</span>
+                                        </div>
+                                        <span className="text-[10px] bg-red-800 px-1.5 py-0.5 rounded text-red-100">Blocktrend</span>
+                                    </div>
+
+                                    <div className="p-4 space-y-6 overflow-y-auto">
+                                        {/* Featured Article Card */}
+                                        <div className="group cursor-pointer">
+                                            <div className="relative aspect-video bg-slate-800 rounded mb-3 overflow-hidden">
+                                                <div className="absolute top-2 left-2 bg-amber-500 text-white text-[10px] font-bold px-2 py-0.5 rounded">深度報告</div>
+                                                <div className="w-full h-full flex items-center justify-center text-slate-600 font-mono text-4xl opacity-20">VIP</div>
+                                            </div>
+                                            <h3 className="font-bold text-lg text-slate-800 leading-snug mb-2 group-hover:udn-text-red transition-colors">
+                                                為何亞資中心產險業枯坐冷板凳 問題出在哪？
+                                            </h3>
+                                            <div className="flex items-center gap-2 text-xs text-gray-500">
+                                                <span className="font-medium text-slate-700">許明恩</span>
+                                                <span>·</span>
+                                                <span>6 min read</span>
+                                                <Lock size={12} className="text-amber-600" />
+                                            </div>
+                                        </div>
+
+                                        <hr className="border-gray-100" />
+
+                                        {/* List Item 1 */}
+                                        <div className="group cursor-pointer">
+                                            <h3 className="font-bold text-base text-slate-800 leading-snug mb-2 group-hover:udn-text-red transition-colors">
+                                                包紅包可能涉及贈與稅、集資買彩券也可能要稅？過年別踩雷
+                                            </h3>
+                                            <div className="flex items-center gap-2 text-xs text-gray-500">
+                                                <span className="bg-gray-100 px-1 rounded text-[10px] text-gray-600">會員專屬</span>
+                                                <Lock size={12} className="text-amber-600" />
+                                            </div>
+                                        </div>
+
+                                        <hr className="border-gray-100" />
+
+                                        {/* List Item 2 */}
+                                        <div className="group cursor-pointer">
+                                            <h3 className="font-bold text-base text-slate-800 leading-snug mb-2 group-hover:udn-text-red transition-colors">
+                                                解密國際／為了15%輸美關稅 台灣付了多少代價？
+                                            </h3>
+                                            <div className="flex items-center gap-2 text-xs text-gray-500">
+                                                <span className="bg-gray-100 px-1 rounded text-[10px] text-gray-600">會員專屬</span>
+                                                <Lock size={12} className="text-amber-600" />
+                                            </div>
+                                        </div>
+                                        
+                                        {/* CTA */}
+                                        <div className="bg-amber-50 border border-amber-200 rounded p-3 text-center mt-4">
+                                            <p className="text-xs text-amber-900 mb-2 font-medium">訂閱解鎖所有深度內容</p>
+                                            <button className="w-full bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold py-2 rounded transition-colors">
+                                                立即升級
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                },
+                // Slide 3: Team
+                {
+                    id: 3,
+                    type: 'content',
+                    title: "3. 內容團隊最小配置",
+                    subtitle: "The Lean Team Structure (MVP)",
+                    icon: <Users size={40} className="text-blue-600" />,
+                    content: (
+                        <div className="space-y-6">
+                            <div className="text-center mb-6">
+                                <h3 className="text-xl font-bold text-slate-900">1 + 4 特種部隊架構</h3>
+                                <p className="text-slate-500 text-sm">少於這個人數，產能將會因為行政內耗而下降</p>
+                            </div>
+
+                            <div className="relative p-6 border border-slate-200 rounded-xl bg-white shadow-sm h-[350px] flex items-center justify-center">
+                                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-px h-full bg-slate-100 hidden md:block"></div>
+                                
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full">
+                                    {/* Left: The Brain */}
+                                    <div className="text-center flex flex-col items-center justify-center">
+                                        <div className="bg-amber-100 p-5 rounded-full mb-4 ring-4 ring-amber-50">
+                                            <Crown size={40} className="text-amber-600" />
+                                        </div>
+                                        <h4 className="font-bold text-xl text-slate-900">1 位 內容長 (主廚)</h4>
+                                        <p className="text-sm text-slate-500 mt-1">負責：研發、品控、靈魂</p>
+                                    </div>
+
+                                    {/* Right: The Hands */}
+                                    <div className="grid grid-cols-2 gap-4">
+                                        <div className="bg-slate-50 p-3 rounded border border-slate-100">
+                                            <span className="block font-bold text-blue-600 text-xs uppercase mb-1">Ops</span>
+                                            <h5 className="font-bold text-slate-800 text-sm">營運經理 (PM)</h5>
+                                            <p className="text-[10px] text-slate-500 mt-1">流程與行政</p>
+                                        </div>
+                                        <div className="bg-slate-50 p-3 rounded border border-slate-100">
+                                            <span className="block font-bold text-blue-600 text-xs uppercase mb-1">Content</span>
+                                            <h5 className="font-bold text-slate-800 text-sm">內容轉譯 (Editor)</h5>
+                                            <p className="text-[10px] text-slate-500 mt-1">改寫與多形式製作</p>
+                                        </div>
+                                        <div className="bg-slate-50 p-3 rounded border border-slate-100">
+                                            <span className="block font-bold text-emerald-600 text-xs uppercase mb-1">Growth</span>
+                                            <h5 className="font-bold text-slate-800 text-sm">成長行銷</h5>
+                                            <p className="text-[10px] text-slate-500 mt-1">推廣與漏斗優化</p>
+                                        </div>
+                                        <div className="bg-slate-50 p-3 rounded border border-slate-100">
+                                            <span className="block font-bold text-emerald-600 text-xs uppercase mb-1">Sales</span>
+                                            <h5 className="font-bold text-slate-800 text-sm">商務開發 (BD)</h5>
+                                            <p className="text-[10px] text-slate-500 mt-1">B2B 銷售與變現</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                },
+                // Slide 4: Role
+                {
+                    id: 4,
+                    type: 'content',
+                    title: "4. 內容長職責",
+                    subtitle: "Founder & CCO Responsibilities",
+                    icon: <ChefHat size={40} className="text-amber-600" />,
+                    content: (
+                        <div className="space-y-6">
+                            <div className="bg-amber-50 p-6 rounded-xl border-l-4 border-amber-500 shadow-sm">
+                                <h3 className="text-lg font-bold text-amber-900 mb-2">不做「管理者」，做「造局者」</h3>
+                                <p className="text-amber-800/80 text-sm">
+                                    將時間集中在三個高槓桿領域，確保「區塊勢」不可取代的市場地位。
+                                </p>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col items-center text-center">
+                                    <Target className="text-blue-500 mb-4" size={32}/>
+                                    <h4 className="font-bold text-slate-900 mb-2">議題定調 (Strategy)</h4>
+                                    <p className="text-xs text-slate-600 leading-relaxed">
+                                        決定「不寫什麼」比寫什麼更重要。定義市場論述，確保我們走在雜訊之前。
+                                    </p>
+                                </div>
+                                <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col items-center text-center">
+                                    <Zap className="text-amber-500 mb-4" size={32}/>
+                                    <h4 className="font-bold text-slate-900 mb-2">深度原創 (Originals)</h4>
+                                    <p className="text-xs text-slate-600 leading-relaxed">
+                                        維持每週核心分析產出。這是所有流量的源頭，也是讀者付費的理由。
+                                    </p>
+                                </div>
+                                <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col items-center text-center">
+                                    <Crown className="text-emerald-500 mb-4" size={32}/>
+                                    <h4 className="font-bold text-slate-900 mb-2">品牌輸出 (Ambassador)</h4>
+                                    <p className="text-xs text-slate-600 leading-relaxed">
+                                        出席關鍵論壇、政府諮詢、媒體採訪。成為集團在 Web3 領域的頂級門面。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                },
+                // Slide 5: Support
+                {
+                    id: 5,
+                    type: 'content',
+                    title: "5. 關鍵支援系統",
+                    subtitle: "Essential Support",
+                    icon: <Shield size={40} className="text-emerald-600" />,
+                    content: (
+                        <div className="space-y-6">
+                            <div className="grid grid-cols-1 gap-5">
+                                <div className="flex items-start gap-5 bg-white p-5 rounded-lg border-l-4 border-blue-500 shadow-sm">
+                                    <div className="shrink-0 pt-1"><Shield size={24} className="text-blue-500"/></div>
+                                    <div>
+                                        <h4 className="font-bold text-slate-800 text-lg">我的防火牆：營運經理 (PM)</h4>
+                                        <p className="text-sm text-slate-600 mt-2">
+                                            PM 保護我不受行政、財務、人事流程干擾。讓我專注於內容創作。
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-start gap-5 bg-white p-5 rounded-lg border-l-4 border-amber-500 shadow-sm">
+                                    <div className="shrink-0 pt-1"><Zap size={24} className="text-amber-500"/></div>
+                                    <div>
+                                        <h4 className="font-bold text-slate-800 text-lg">我的擴大器：內容轉譯 (Editor)</h4>
+                                        <p className="text-sm text-slate-600 mt-2">
+                                            編輯將 5000 字長文轉化為短影音、圖文、新聞稿。沒有編輯，影響力出不去。
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-start gap-5 bg-white p-5 rounded-lg border-l-4 border-emerald-500 shadow-sm">
+                                    <div className="shrink-0 pt-1"><DollarSign size={24} className="text-emerald-500"/></div>
+                                    <div>
+                                        <h4 className="font-bold text-slate-800 text-lg">我的收割機：商務與行銷 (BD & Growth)</h4>
+                                        <p className="text-sm text-slate-600 mt-2">
+                                            專業團隊負責將影響力變現（企業客戶、訂閱戶）。讓主廚專心做菜，外場專心銷售。
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                },
+                // Slide 6: Package
+                {
+                    id: 6,
+                    type: 'content',
+                    title: "6. 投資報價 (Package)",
+                    subtitle: "The Investment Proposal",
+                    icon: <DollarSign size={40} className="text-slate-700" />,
+                    content: (
+                        <div className="space-y-6">
+                            <div className="bg-white rounded-xl border border-slate-300 shadow-lg overflow-hidden">
+                                <div className="divide-y divide-slate-100">
+                                    {/* Asset */}
+                                    <div className="p-6 flex flex-col md:flex-row justify-between items-center hover:bg-slate-50 gap-4">
+                                        <div>
+                                            <div className="flex items-center gap-2 mb-1">
+                                                <span className="bg-amber-100 text-amber-800 text-xs px-2 py-1 rounded font-bold">資產注入</span>
+                                                <h4 className="font-bold text-slate-900 text-lg">品牌收購 (Upfront)</h4>
+                                            </div>
+                                            <p className="text-sm text-slate-500">買斷區塊勢品牌、會員名單、SEO 權重</p>
+                                        </div>
+                                        <div className="text-right">
+                                            <span className="font-black text-slate-900 block text-2xl">4x ARR</span>
+                                            <span className="text-xs text-slate-400 font-bold">(或 4 年個人年收, 取高者)</span>
+                                        </div>
+                                    </div>
+
+                                    {/* Salary */}
+                                    <div className="p-6 flex flex-col md:flex-row justify-between items-center hover:bg-slate-50 gap-4">
+                                        <div>
+                                            <div className="flex items-center gap-2 mb-1">
+                                                <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded font-bold">執行薪酬</span>
+                                                <h4 className="font-bold text-slate-900 text-lg">內容長薪資 (Retainer)</h4>
+                                            </div>
+                                            <p className="text-sm text-slate-500">Founder & CCO 全職投入</p>
+                                        </div>
+                                        <div className="text-right">
+                                            <span className="font-black text-blue-700 block text-2xl">VP Level</span>
+                                            <span className="text-xs text-slate-400 font-bold">月薪 20-25萬 + 高管福利</span>
+                                        </div>
+                                    </div>
+
+                                    {/* Bonus */}
+                                    <div className="p-6 flex flex-col md:flex-row justify-between items-center hover:bg-slate-50 bg-emerald-50/40 gap-4">
+                                        <div>
+                                            <div className="flex items-center gap-2 mb-1">
+                                                <span className="bg-emerald-100 text-emerald-800 text-xs px-2 py-1 rounded font-bold">成長激勵</span>
+                                                <h4 className="font-bold text-slate-900 text-lg">績效分潤 (Upside Sharing)</h4>
+                                            </div>
+                                            <p className="text-sm text-slate-500">新增訂閱與活動營收抽成</p>
+                                        </div>
+                                        <div className="text-right">
+                                            <span className="font-black text-emerald-600 block text-2xl">10-15% Rev</span>
+                                            <span className="text-xs text-slate-400 font-bold">連動營收成長 (不扣成本)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                             <div className="text-center text-xs text-slate-400 mt-2">
+                                * 團隊(4人)薪資與營運成本由 JV 營運預算另行支出
+                            </div>
+                        </div>
+                    )
+                },
+                 // Slide 7: Conclusion
+                 {
+                    id: 7,
+                    type: 'cover',
+                    content: (
+                        <div className="flex flex-col items-center justify-center h-full text-center space-y-8">
+                            <div className="bg-white p-10 rounded-2xl border border-slate-200 shadow-2xl max-w-2xl">
+                                <h3 className="text-3xl font-bold text-slate-900 mb-6">高效率的資源轉換器</h3>
+                                <p className="text-slate-600 leading-relaxed text-lg mb-8">
+                                    這份提案確保在<span className="font-bold text-slate-900">最小的編制 (1+4)</span> 下，<br/>
+                                    將「區塊勢」的品牌資產做出<span className="font-bold text-blue-600">最大的商業槓桿</span>。
+                                </p>
+                                
+                                <div className="mt-10 pt-8 border-t border-slate-100">
+                                    <button className="bg-slate-900 text-white px-10 py-4 rounded-full font-bold shadow-lg hover:bg-slate-800 transition-colors transform hover:scale-105 active:scale-95">
+                                        啟動細節討論
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                }
+            ];
+
+            const nextSlide = useCallback(() => {
+                setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+            }, [slides.length]);
+
+            const prevSlide = useCallback(() => {
+                setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+            }, [slides.length]);
+
+            useEffect(() => {
+                const handleKeyDown = (e) => {
+                    if (e.key === 'ArrowRight') nextSlide();
+                    if (e.key === 'ArrowLeft') prevSlide();
+                };
+                window.addEventListener('keydown', handleKeyDown);
+                return () => window.removeEventListener('keydown', handleKeyDown);
+            }, [nextSlide, prevSlide]);
+
+            return (
+                <div className="flex flex-col h-screen w-full">
+                    {/* Slide Container */}
+                    <div className="flex-1 relative overflow-hidden bg-slate-50 flex items-center justify-center">
+                        {/* Navigation Arrows */}
+                        <button 
+                            onClick={prevSlide}
+                            className="absolute left-4 md:left-8 z-20 p-4 rounded-full bg-white/80 backdrop-blur-sm shadow-lg border border-slate-200 hover:bg-white hover:scale-110 transition-all text-slate-400 hover:text-blue-600"
+                            aria-label="上一頁"
+                        >
+                            <ChevronLeft size={24} />
+                        </button>
+                        <button 
+                            onClick={nextSlide}
+                            className="absolute right-4 md:right-8 z-20 p-4 rounded-full bg-white/80 backdrop-blur-sm shadow-lg border border-slate-200 hover:bg-white hover:scale-110 transition-all text-slate-400 hover:text-blue-600"
+                            aria-label="下一頁"
+                        >
+                            <ChevronRight size={24} />
+                        </button>
+
+                        {/* Slide Render */}
+                        <div className="w-full max-w-6xl h-[85vh] px-4 md:px-12 transition-all duration-500 ease-in-out">
+                            {slides[currentSlide].type === 'cover' ? (
+                                slides[currentSlide].content
+                            ) : slides[currentSlide].type === 'mockup' ? (
+                                <div className="bg-white border border-slate-200 shadow-2xl rounded-2xl p-4 md:p-8 h-full flex flex-col relative">
+                                    {/* Header */}
+                                    <div className="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4 shrink-0">
+                                        <div className="p-2 bg-slate-50 rounded-lg border border-slate-100">
+                                            {slides[currentSlide].icon}
+                                        </div>
+                                        <div>
+                                            <h1 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">
+                                                {slides[currentSlide].title}
+                                            </h1>
+                                            <p className="text-blue-600 font-bold tracking-wide uppercase text-xs mt-1">
+                                                {slides[currentSlide].subtitle}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    {/* Content */}
+                                    <div className="flex-1 overflow-hidden">
+                                        {slides[currentSlide].content}
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="bg-white border border-slate-200 shadow-2xl rounded-2xl p-8 md:p-12 h-full flex flex-col relative">
+                                    {/* Header */}
+                                    <div className="flex items-center gap-4 mb-8 border-b border-slate-100 pb-6 shrink-0">
+                                        <div className="p-3 bg-slate-50 rounded-lg border border-slate-100">
+                                            {slides[currentSlide].icon}
+                                        </div>
+                                        <div>
+                                            <h1 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
+                                                {slides[currentSlide].title}
+                                            </h1>
+                                            <p className="text-blue-600 font-bold tracking-wide uppercase text-xs mt-2">
+                                                {slides[currentSlide].subtitle}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    {/* Content */}
+                                    <div className="flex-1 flex flex-col justify-center">
+                                        {slides[currentSlide].content}
+                                    </div>
+                                    {/* Page Number */}
+                                    <div className="absolute bottom-6 right-8 text-slate-400 text-xs font-mono font-medium">
+                                        {currentSlide} <span className="text-slate-300">/</span> {slides.length - 1}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+
+                    {/* Progress Bar */}
+                    <div className="h-2 bg-slate-200 w-full flex shrink-0">
+                        {slides.map((_, index) => (
+                            <div 
+                                key={index}
+                                className={`h-full flex-1 transition-all duration-300 border-r border-white ${
+                                    index <= currentSlide ? 'bg-slate-900' : 'bg-transparent'
+                                }`}
+                            />
+                        ))}
+                    </div>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<StrategyDeck />);
+    </script>
+</body>
+</html>
