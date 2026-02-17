@@ -90,10 +90,11 @@
             AlertCircle: (p) => <IconBase {...p}><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></IconBase>,
             Landmark: (p) => <IconBase {...p}><line x1="3" x2="21" y1="22" y2="22"/><line x1="6" x2="6" y1="18" y2="11"/><line x1="10" x2="10" y1="18" y2="11"/><line x1="14" x2="14" y1="18" y2="11"/><line x1="18" x2="18" y1="18" y2="11"/><polygon points="12 2 20 7 4 7 12 2"/></IconBase>,
             Building: (p) => <IconBase {...p}><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></IconBase>,
-            Clock: (p) => <IconBase {...p}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></IconBase>
+            Clock: (p) => <IconBase {...p}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></IconBase>,
+            Image: (p) => <IconBase {...p}><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></IconBase>
         };
 
-        const { ChevronRight, ChevronLeft, Users, User, ChefHat, DollarSign, Target, Layers, Zap, Crown, Shield, Bot, PenTool, Cpu, Newspaper, Search, Lock, HeartHandshake, Video, List, AlertCircle, Landmark, Building, Clock } = Icons;
+        const { ChevronRight, ChevronLeft, Users, User, ChefHat, DollarSign, Target, Layers, Zap, Crown, Shield, Bot, PenTool, Cpu, Newspaper, Search, Lock, HeartHandshake, Video, List, AlertCircle, Landmark, Building, Clock, Image } = Icons;
 
         // --- 2. Main Application ---
 
@@ -187,7 +188,10 @@
                     content: (
                         <div className="flex flex-col h-full justify-center items-center px-4">
                             <div className="max-w-5xl w-full text-center space-y-8">
-                                
+                                <h2 className="text-3xl font-black text-slate-900 leading-tight">
+                                    從「線性傳遞」轉變為「價值三角」
+                                </h2>
+
                                 <div className="relative w-full max-w-3xl h-[400px] mx-auto flex items-center justify-center">
                                     {/* Top: AI */}
                                     <div className="absolute top-0 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-20">
@@ -222,17 +226,14 @@
                                     {/* Connections (SVG Lines) */}
                                     <svg className="absolute inset-0 w-full h-full z-0 pointer-events-none" viewBox="0 0 768 400" style={{overflow: 'visible'}}>
                                         {/* 1. AI (Top) to Reader (Left) - Blue Solid */}
-                                        {/* Start: ~320,150 (Bottom-Left of Top Circle) -> End: ~150,240 (Top-Right of Left Circle) */}
                                         <path d="M 320 150 Q 200 180 150 240" fill="none" stroke="#3b82f6" strokeWidth="4" markerEnd="url(#arrow-blue)" />
                                         <text x="180" y="180" className="text-sm font-bold fill-blue-600 bg-white" textAnchor="middle">提供整理情報</text>
 
                                         {/* 2. Creator (Right) to AI (Top) - Grey Dashed */}
-                                        {/* Start: ~618,240 (Top-Left of Right Circle) -> End: ~448,150 (Bottom-Right of Top Circle) */}
                                         <path d="M 618 240 Q 568 180 448 150" fill="none" stroke="#94a3b8" strokeWidth="4" strokeDasharray="8 8" markerEnd="url(#arrow-grey)" />
                                         <text x="580" y="180" className="text-sm font-bold fill-slate-500 bg-white" textAnchor="middle">提供原創觀點</text>
 
                                         {/* 3. Reader (Left) to Creator (Right) - Green Solid */}
-                                        {/* Start: ~192,304 (Right of Left Circle) -> End: ~576,304 (Left of Right Circle) */}
                                         <path d="M 192 304 L 560 304" fill="none" stroke="#10b981" strokeWidth="4" markerEnd="url(#arrow-green)" />
                                         <text x="384" y="290" className="text-sm font-bold fill-emerald-600 bg-white" textAnchor="middle">價值回流 (信任/付費)</text>
 
@@ -371,63 +372,47 @@
                 {
                     id: 5,
                     type: 'content',
-                    title: "目標受眾與價值主張",
+                    title: "我們賣「時間」與「判斷」",
                     icon: <Target size={40} className="text-purple-600" />,
                     content: (
                         <div className="flex flex-col h-full justify-center px-4 md:px-0">
-                            <div className="text-center mb-8">
-                                <h3 className="text-3xl font-black text-slate-900 mb-3">我們不賣更多資訊，我們賣「時間」與「判斷」</h3>
-                                <p className="text-xl text-slate-500">
-                                    打造區塊鏈領域裡<span className="text-amber-600 font-bold mx-2">「最有價值的 10 分鐘」</span>
-                                </p>
+                            <div className="text-center mb-10">
+                                <h3 className="text-4xl font-black text-slate-900 mb-4">
+                                    打造區塊鏈領域裡<span className="text-amber-600 font-bold mx-3 bg-amber-50 px-3 py-1 rounded-lg">最有價值的 10 分鐘</span>
+                                </h3>
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-8 flex-1">
                                 {/* Audience A */}
-                                <div className="bg-slate-50 p-8 rounded-2xl border-t-4 border-purple-600 shadow-sm flex flex-col relative overflow-hidden group hover:-translate-y-1 transition-transform">
-                                    <div className="flex items-center gap-4 mb-4">
-                                        <div className="bg-purple-100 p-3 rounded-lg text-purple-600">
-                                            <Landmark size={32} />
+                                <div className="bg-white p-10 rounded-3xl border-t-8 border-purple-600 shadow-xl flex flex-col relative overflow-hidden group hover:-translate-y-1 transition-transform">
+                                    <div className="flex items-center gap-6 mb-6">
+                                        <div className="bg-purple-100 p-4 rounded-2xl text-purple-600">
+                                            <Landmark size={48} />
                                         </div>
                                         <div>
-                                            <h4 className="text-2xl font-bold text-slate-900">監管與政府單位</h4>
-                                            <p className="text-sm text-purple-600 font-bold uppercase tracking-wider">高影響力</p>
+                                            <h4 className="text-3xl font-bold text-slate-900">監管與政府單位</h4>
+                                            <p className="text-base text-purple-600 font-bold uppercase tracking-wider mt-1">高影響力</p>
                                         </div>
                                     </div>
-                                    <p className="text-slate-600 text-lg leading-relaxed">
+                                    <p className="text-slate-600 text-xl leading-relaxed">
                                         制定法律、標準與政策的人。他們不需要雜訊，他們需要精準的產業脈絡與風險評估，以做出影響全市場的決策。
                                     </p>
                                 </div>
 
                                 {/* Audience B */}
-                                <div className="bg-slate-50 p-8 rounded-2xl border-t-4 border-blue-600 shadow-sm flex flex-col relative overflow-hidden group hover:-translate-y-1 transition-transform">
-                                    <div className="flex items-center gap-4 mb-4">
-                                        <div className="bg-blue-100 p-3 rounded-lg text-blue-600">
-                                            <Building size={32} />
+                                <div className="bg-white p-10 rounded-3xl border-t-8 border-blue-600 shadow-xl flex flex-col relative overflow-hidden group hover:-translate-y-1 transition-transform">
+                                    <div className="flex items-center gap-6 mb-6">
+                                        <div className="bg-blue-100 p-4 rounded-2xl text-blue-600">
+                                            <Building size={48} />
                                         </div>
                                         <div>
-                                            <h4 className="text-2xl font-bold text-slate-900">企業與機構決策者</h4>
-                                            <p className="text-sm text-blue-600 font-bold uppercase tracking-wider">高資本價值</p>
+                                            <h4 className="text-3xl font-bold text-slate-900">企業與機構決策者</h4>
+                                            <p className="text-base text-blue-600 font-bold uppercase tracking-wider mt-1">高資本價值</p>
                                         </div>
                                     </div>
-                                    <p className="text-slate-600 text-lg leading-relaxed">
+                                    <p className="text-slate-600 text-xl leading-relaxed">
                                         掌握預算與商業方向的人。他們時間最貴，需要快速掌握競爭態勢與技術趨勢，以避免錯失機會。
                                     </p>
-                                </div>
-                            </div>
-
-                            <div className="bg-white border border-slate-200 rounded-xl p-6 flex items-center justify-between shadow-sm">
-                                <div className="flex items-center gap-4">
-                                    <div className="bg-slate-100 p-3 rounded-full text-slate-400">
-                                        <User size={24} />
-                                    </div>
-                                    <div>
-                                        <h5 className="font-bold text-slate-500">個人投資者 / 散戶</h5>
-                                        <p className="text-sm text-slate-400">有大量時間瀏覽各處資訊，非首要核心目標。</p>
-                                    </div>
-                                </div>
-                                <div className="text-right">
-                                    <span className="text-xs font-bold text-slate-400 bg-slate-100 px-2 py-1 rounded">次要受眾</span>
                                 </div>
                             </div>
                         </div>
@@ -556,10 +541,10 @@
                                     <a href="#" className="udn-text-red">首頁</a>
                                     <a href="#" className="hover:text-red-700">即時</a>
                                     <a href="#" className="hover:text-red-700">深度</a>
-                                    <a href="#" className="hover:text-red-700">產業</a>
-                                    <a href="#" className="hover:text-red-700">證券</a>
-                                    <a href="#" className="hover:text-red-700">國際</a>
-                                    <a href="#" className="hover:text-red-700">金融</a>
+                                    <a href="#" className="hover:text-red-700">法規</a>
+                                    <a href="#" className="hover:text-red-700">企業</a>
+                                    <a href="#" className="hover:text-red-700">技術</a>
+                                    <a href="#" className="hover:text-red-700">行情</a>
                                 </nav>
                             </header>
 
@@ -570,41 +555,73 @@
                                         <h2 className="text-lg font-bold text-slate-800">即時情報</h2>
                                         <span className="bg-gray-200 text-gray-600 text-[10px] px-1.5 py-0.5 rounded">Techmeme 模式</span>
                                     </div>
+                                    
+                                    {/* News Item 1: Fact-Based */}
+                                    <div className="mb-6 group border-b border-slate-100 pb-4">
+                                        <div className="flex gap-4">
+                                            <div className="flex-1">
+                                                <a href="#" className="techmeme-headline text-lg leading-tight block mb-1">
+                                                    歐盟 MiCA 法規今日正式生效，所有穩定幣發行商必須取得合規牌照
+                                                </a>
+                                                <div className="techmeme-source mb-1">
+                                                    Financial Times <span className="mx-1 text-gray-300">|</span> 1 hour ago
+                                                </div>
+                                                <p className="techmeme-summary mb-2">
+                                                    歐盟加密資產市場法規 (MiCA) 第二階段於今日午夜生效，Circle 已取得首張電子貨幣機構 (EMI) 牌照，Tether 則表示將逐步退出歐洲市場...
+                                                </p>
+                                                <div className="pl-3 border-l-2 border-slate-200 text-xs space-y-1.5">
+                                                    <div className="flex flex-wrap gap-1 items-baseline">
+                                                        <span className="techmeme-cluster-label">More:</span>
+                                                        <a href="#" className="techmeme-link">Bloomberg</a>,
+                                                        <a href="#" className="techmeme-link">CoinDesk</a>,
+                                                        <a href="#" className="techmeme-link">The Block</a>
+                                                    </div>
+                                                    <div className="flex flex-wrap gap-1 items-baseline">
+                                                        <span className="techmeme-cluster-label-x">社群熱議 (Social):</span>
+                                                        <a href="#" className="techmeme-link text-gray-500">@jeremyallaire (X)</a>,
+                                                        <a href="#" className="techmeme-link text-gray-500">@paoloardoino (X)</a>,
+                                                        <a href="#" className="techmeme-link text-purple-600">/ue_reg (Farcaster)</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {/* Image Thumbnail */}
+                                            <div className="w-32 h-20 bg-slate-100 rounded-lg shrink-0 hidden md:flex items-center justify-center border border-slate-200">
+                                                <Image size={24} className="text-slate-300" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* News Item 2: Fact-Based */}
                                     <div className="mb-6 group">
                                         <div className="flex gap-4">
                                             <div className="flex-1">
                                                 <a href="#" className="techmeme-headline text-lg leading-tight block mb-1">
-                                                    消息人士：SpaceX 和 xAI 正競逐國防部 1 億美元合約，開發語音控制自主無人機蜂群
+                                                    貝萊德 (BlackRock) 宣布將其代幣化基金 BUIDL 擴展至亞太市場
                                                 </a>
                                                 <div className="techmeme-source mb-1">
-                                                    Katrina Manson / Bloomberg <span className="mx-1 text-gray-300">|</span> 1 hour ago
+                                                    Wall Street Journal <span className="mx-1 text-gray-300">|</span> 2 hours ago
                                                 </div>
                                                 <p className="techmeme-summary mb-2">
-                                                    馬斯克的 SpaceX 及其全資子公司 xAI 正參與五角大廈一項機密競賽，旨在生產語音控制的自主無人機蜂群...
+                                                    全球最大資產管理公司貝萊德證實，其與 Securitize 合作發行的代幣化國債基金 BUIDL 將開放新加坡與香港的合格投資人申購...
                                                 </p>
-                                                <div className="pl-3 border-l-2 border-slate-200 text-xs space-y-1">
+                                                <div className="pl-3 border-l-2 border-slate-200 text-xs space-y-1.5">
                                                     <div className="flex flex-wrap gap-1 items-baseline">
                                                         <span className="techmeme-cluster-label">More:</span>
-                                                        <a href="#" className="techmeme-link">Benzinga</a>,
-                                                        <a href="#" className="techmeme-link">Reuters</a>
+                                                        <a href="#" className="techmeme-link">Reuters</a>,
+                                                        <a href="#" className="techmeme-link">Nikkei Asia</a>
+                                                    </div>
+                                                    <div className="flex flex-wrap gap-1 items-baseline">
+                                                        <span className="techmeme-cluster-label-x">社群熱議 (Social):</span>
+                                                        <a href="#" className="techmeme-link text-gray-500">@larryfink (X)</a>,
+                                                        <a href="#" className="techmeme-link text-purple-600">/rwa_world (Warpcast)</a>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="w-20 h-14 bg-slate-200 rounded shrink-0 hidden md:block overflow-hidden">
-                                                <div className="w-full h-full bg-slate-800 flex items-center justify-center text-white/20 text-xs">IMG</div>
+                                            {/* Image Thumbnail */}
+                                            <div className="w-32 h-20 bg-slate-100 rounded-lg shrink-0 hidden md:flex items-center justify-center border border-slate-200">
+                                                <Image size={24} className="text-slate-300" />
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="mb-6 group">
-                                        <a href="#" className="techmeme-headline text-lg leading-tight block mb-1">
-                                            國防部高官：五角大廈即將把 Anthropic 列為「供應鏈風險」
-                                        </a>
-                                        <div className="techmeme-source mb-1">
-                                            Axios <span className="mx-1 text-gray-300">|</span> 2 hours ago
-                                        </div>
-                                        <p className="techmeme-summary mb-2">
-                                            國防部長 Pete Hegseth 即將切斷與 Anthropic 的商業聯繫，並將這家 AI 公司列為國家安全風險...
-                                        </p>
                                     </div>
                                 </div>
 
