@@ -84,10 +84,12 @@
             Shield: (p) => <IconBase {...p}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></IconBase>,
             DollarSign: (p) => <IconBase {...p}><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></IconBase>,
             HeartHandshake: (p) => <IconBase {...p}><path d="M19.414 14.414C21 12.828 22 11.5 22 9.5a5.5 5.5 0 0 0-9.591-3.676.6.6 0 0 1-.818.001A5.5 5.5 0 0 0 2 9.5c0 2.3 1.5 4 3 5.5l5.535 5.362a2 2 0 0 0 2.879.052 2.12 2.12 0 0 0-.004-3 2.124 2.124 0 1 0 3-3 2.124 2.124 0 0 0 3.004 0 2 2 0 0 0 0-2.828l-1.881-1.882a2.41 2.41 0 0 0-3.409 0l-1.71 1.71a2 2 0 0 1-2.828 0 2 2 0 0 1 0-2.828l2.823-2.762"/></IconBase>,
-            Video: (p) => <IconBase {...p}><path d="m22 8-6 4 6 4V8Z"/><path d="M2 5v14c0 2 1 3 3 3h12c2 0 3-1 3-3V5c0-2-1-3-3-3H5C3 2 2 3 2 5Z"/></IconBase>
+            Video: (p) => <IconBase {...p}><path d="m22 8-6 4 6 4V8Z"/><path d="M2 5v14c0 2 1 3 3 3h12c2 0 3-1 3-3V5c0-2-1-3-3-3H5C3 2 2 3 2 5Z"/></IconBase>,
+            List: (p) => <IconBase {...p}><line x1="8" x2="21" y1="6" y2="6"/><line x1="8" x2="21" y1="12" y2="12"/><line x1="8" x2="21" y1="18" y2="18"/><line x1="3" x2="3.01" y1="6" y2="6"/><line x1="3" x2="3.01" y1="12" y2="12"/><line x1="3" x2="3.01" y1="18" y2="18"/></IconBase>,
+            ArrowDown: (p) => <IconBase {...p}><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></IconBase>
         };
 
-        const { ChevronRight, ChevronLeft, Users, ChefHat, DollarSign, Target, Layers, Zap, Crown, Shield, Bot, PenTool, Cpu, Newspaper, Search, Lock, HeartHandshake, Video } = Icons;
+        const { ChevronRight, ChevronLeft, Users, ChefHat, DollarSign, Target, Layers, Zap, Crown, Shield, Bot, PenTool, Cpu, Newspaper, Search, Lock, HeartHandshake, Video, List, ArrowDown } = Icons;
 
         // --- 2. Main Application ---
 
@@ -95,7 +97,7 @@
             const [currentSlide, setCurrentSlide] = useState(0);
 
             const slides = [
-                // Slide 1: Simple Cover
+                // Slide 1: Cover
                 {
                     id: 0,
                     type: 'cover',
@@ -105,33 +107,134 @@
                                 <Crown size={80} className="text-amber-600" />
                             </div>
                             <h1 className="text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-tight">
-                                區塊勢聯合營運計畫
+                                JV 營運計畫
                             </h1>
                             <div className="h-1 w-32 bg-slate-900 rounded-full"></div>
                             <p className="text-2xl text-slate-500 font-light tracking-wide">
-                                定義 2026 Web3 媒體新標準
+                                定義 2026 區塊鏈媒體的新標準
                             </p>
                             <p className="text-sm text-slate-400 mt-12 font-mono tracking-wider">
-                                聯合報 & 台灣大哥大
+                                區塊勢 Blocktrend
                             </p>
                         </div>
                     )
                 },
-                // Slide 2: Philosophy Part 1 (Concept)
+                // Slide 2: Agenda (New)
                 {
                     id: 1,
                     type: 'content',
-                    title: "產品核心哲學：雙引擎架構",
+                    title: "提案大綱",
+                    icon: <List size={40} className="text-slate-600" />,
+                    content: (
+                        <div className="flex flex-col h-full justify-center px-8 md:px-16">
+                            <div className="space-y-6">
+                                <div className="flex items-center gap-6 group">
+                                    <div className="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-xl group-hover:bg-blue-600 group-hover:text-white transition-colors">1</div>
+                                    <div className="flex-1 border-b border-slate-100 pb-4">
+                                        <h3 className="text-2xl font-bold text-slate-800">趨勢洞察：2026 媒體變革</h3>
+                                        <p className="text-slate-500">為什麼傳統模式不再適用？</p>
+                                    </div>
+                                </div>
+                                
+                                <div className="flex items-center gap-6 group">
+                                    <div className="w-12 h-12 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-xl group-hover:bg-amber-600 group-hover:text-white transition-colors">2</div>
+                                    <div className="flex-1 border-b border-slate-100 pb-4">
+                                        <h3 className="text-2xl font-bold text-slate-800">核心策略：雙引擎架構</h3>
+                                        <p className="text-slate-500">AI 與人類如何分工？商業模式如何運作？</p>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center gap-6 group">
+                                    <div className="w-12 h-12 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-xl group-hover:bg-slate-600 group-hover:text-white transition-colors">3</div>
+                                    <div className="flex-1 border-b border-slate-100 pb-4">
+                                        <h3 className="text-2xl font-bold text-slate-800">產品樣貌：視覺模擬</h3>
+                                        <p className="text-slate-500">具體呈現給使用者的產品長什麼樣子？</p>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center gap-6 group">
+                                    <div className="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-xl group-hover:bg-emerald-600 group-hover:text-white transition-colors">4</div>
+                                    <div className="flex-1 border-b border-slate-100 pb-4">
+                                        <h3 className="text-2xl font-bold text-slate-800">營運配置：團隊與分工</h3>
+                                        <p className="text-slate-500">需要什麼樣的團隊？創辦人的角色為何？</p>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center gap-6 group">
+                                    <div className="w-12 h-12 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold text-xl group-hover:scale-110 transition-transform">5</div>
+                                    <div className="flex-1 border-b border-slate-100 pb-4">
+                                        <h3 className="text-2xl font-bold text-slate-800">合作提案：投資報價</h3>
+                                        <p className="text-slate-500">資產收購、薪酬與預算規劃。</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                },
+                // Slide 3: The 2026 Shift (New)
+                {
+                    id: 2,
+                    type: 'content',
+                    title: "關鍵洞察：2026 年的媒體變革",
+                    icon: <Zap size={40} className="text-amber-500" />,
+                    content: (
+                        <div className="flex flex-col h-full justify-center items-center px-4">
+                            <div className="max-w-4xl w-full text-center space-y-12">
+                                <h2 className="text-4xl font-black text-slate-900 leading-tight">
+                                    AI 改變了資訊流動的根本邏輯
+                                </h2>
+
+                                <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
+                                    {/* Left Circle */}
+                                    <div className="bg-blue-50 border-4 border-blue-500 rounded-full w-64 h-64 flex flex-col items-center justify-center p-6 shadow-xl relative z-10">
+                                        <Users size={48} className="text-blue-600 mb-4" />
+                                        <h3 className="text-xl font-bold text-slate-800 mb-2">人類讀者</h3>
+                                        <p className="text-sm text-slate-600 font-medium">想看 AI 整理過的<br/>高效率資訊</p>
+                                    </div>
+
+                                    {/* Arrows */}
+                                    <div className="flex flex-col gap-4 text-slate-400">
+                                        <div className="flex items-center gap-2">
+                                            <span className="text-xs font-bold uppercase tracking-widest">需求</span>
+                                            <div className="h-px w-16 bg-slate-300"></div>
+                                            <div className="w-2 h-2 bg-slate-300 rounded-full"></div>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <div className="w-2 h-2 bg-slate-300 rounded-full"></div>
+                                            <div className="h-px w-16 bg-slate-300"></div>
+                                            <span className="text-xs font-bold uppercase tracking-widest">供給</span>
+                                        </div>
+                                    </div>
+
+                                    {/* Right Circle */}
+                                    <div className="bg-amber-50 border-4 border-amber-500 rounded-full w-64 h-64 flex flex-col items-center justify-center p-6 shadow-xl relative z-10">
+                                        <Bot size={48} className="text-amber-600 mb-4" />
+                                        <h3 className="text-xl font-bold text-slate-800 mb-2">AI 模型</h3>
+                                        <p className="text-sm text-slate-600 font-medium">想看人類創作的<br/>獨特觀點數據</p>
+                                    </div>
+                                </div>
+
+                                <div className="bg-slate-100 p-6 rounded-xl border border-slate-200 inline-block">
+                                    <p className="text-lg text-slate-700 font-medium">
+                                        結論：傳統媒體模式失效。<br/>
+                                        新媒體必須同時滿足<span className="text-blue-600 font-bold mx-1">人類的效率需求</span>與<span className="text-amber-600 font-bold mx-1">AI 的數據需求</span>。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                },
+                // Slide 4: Philosophy Part 1 (Dual Engine)
+                {
+                    id: 3,
+                    type: 'content',
+                    title: "核心策略：雙引擎架構",
                     icon: <Cpu size={40} className="text-blue-600" />,
                     content: (
                         <div className="flex flex-col h-full justify-center px-4 md:px-0 gap-8">
-                            {/* Headline */}
                             <div className="text-center">
-                                <p className="text-3xl text-slate-800 font-bold mb-3">
+                                <p className="text-2xl text-slate-800 font-bold mb-2">
                                     媒體不是在賣「資訊」，而是在賣「共同理解」
-                                </p>
-                                <p className="text-lg text-slate-500">
-                                    AI 讓事實更便宜；人類要負責的，是框架、信任與情緒價值。
                                 </p>
                             </div>
 
@@ -192,20 +295,20 @@
                         </div>
                     )
                 },
-                // Slide 3: Philosophy Part 2 (Pricing)
+                // Slide 5: Philosophy Part 2 (Business Model)
                 {
-                    id: 2,
+                    id: 4,
                     type: 'content',
-                    title: "產品核心哲學：商業模式",
+                    title: "商業模式：收費邊界",
                     icon: <Target size={40} className="text-emerald-600" />,
                     content: (
                         <div className="flex flex-col h-full justify-center gap-8">
                             <div className="bg-slate-50 border border-slate-200 rounded-2xl p-8 shadow-sm flex-1 flex flex-col justify-center">
-                                <div className="mb-8">
+                                <div className="mb-8 text-center md:text-left">
                                     <h4 className="text-2xl font-black text-slate-900 mb-2">免費與付費的切分原則</h4>
                                     <p className="text-lg text-slate-600 leading-relaxed">
                                         「共同事實」可以用 AI 大量自動化，因此適合免費；<br/>
-                                        「共同理解」與「共同感受」高度依賴人類，因此適合收費與建立社群。
+                                        「共同理解」與「共同感受」高度依賴人類，因此適合收費。
                                     </p>
                                 </div>
 
@@ -262,23 +365,19 @@
                                     </div>
                                 </div>
 
-                                {/* A crisp one-liner for execs */}
+                                {/* Summary */}
                                 <div className="mt-8 flex items-center justify-between gap-4 flex-col md:flex-row bg-slate-100 p-4 rounded-lg">
                                     <div className="text-base font-bold text-slate-900">
                                         總結：事實免費、理解付費、信任更值錢。
-                                    </div>
-                                    <div className="flex items-center gap-2 text-sm text-slate-500">
-                                        <Video size={18} className="text-slate-500" />
-                                        <span>只在人類不可取代的地方用人</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     )
                 },
-                // Slide 4: Visual Mockup (UDN Style)
+                // Slide 6: Visual Mockup
                 {
-                    id: 3,
+                    id: 5,
                     type: 'mockup',
                     title: "產品視覺模擬 (2026)",
                     icon: <Newspaper size={40} className="text-slate-700" />,
@@ -286,7 +385,6 @@
                         <div className="w-full h-full flex flex-col bg-white rounded-lg shadow-2xl border border-slate-300 font-sans text-slate-900 overflow-hidden relative">
                             {/* 1. UDN Header */}
                             <header className="bg-white shrink-0">
-                                {/* Top Bar */}
                                 <div className="flex justify-between items-center px-4 py-1 border-b border-gray-100 text-[11px] text-gray-500">
                                     <div className="flex gap-4">
                                         <span>2026年2月17日 星期二</span>
@@ -298,10 +396,8 @@
                                         <span>註冊</span>
                                     </div>
                                 </div>
-                                {/* Main Nav Bar */}
                                 <div className="px-4 py-3 flex justify-between items-end border-b border-gray-100">
                                     <div className="flex items-end gap-2">
-                                         {/* Mock UDN Logo Text */}
                                         <h1 className="text-4xl font-bold udn-text-red tracking-tight leading-none" style={{fontFamily: '"Times New Roman", serif'}}>
                                             經濟日報
                                         </h1>
@@ -315,7 +411,6 @@
                                         <button className="udn-red text-white text-xs font-bold px-3 py-1.5 rounded hover:bg-red-700">訂閱會員</button>
                                     </div>
                                 </div>
-                                {/* Category Nav */}
                                 <nav className="flex px-4 py-2 gap-6 text-sm font-bold text-slate-700 border-b-2 udn-border-red">
                                     <a href="#" className="udn-text-red">首頁</a>
                                     <a href="#" className="hover:text-red-700">即時</a>
@@ -329,15 +424,11 @@
 
                             {/* 2. Main Layout */}
                             <div className="flex flex-1 overflow-hidden">
-                                
-                                {/* LEFT COLUMN: Techmeme Style (Real-time/Free) */}
                                 <div className="flex-1 overflow-y-auto p-4 bg-[#FDFDFD]">
                                     <div className="flex items-center gap-2 mb-4 border-b border-gray-200 pb-2">
                                         <h2 className="text-lg font-bold text-slate-800">即時情報</h2>
                                         <span className="bg-gray-200 text-gray-600 text-[10px] px-1.5 py-0.5 rounded">Techmeme 模式</span>
                                     </div>
-
-                                    {/* News Item 1 */}
                                     <div className="mb-6 group">
                                         <div className="flex gap-4">
                                             <div className="flex-1">
@@ -350,31 +441,19 @@
                                                 <p className="techmeme-summary mb-2">
                                                     馬斯克的 SpaceX 及其全資子公司 xAI 正參與五角大廈一項機密競賽，旨在生產語音控制的自主無人機蜂群...
                                                 </p>
-                                                
-                                                {/* Techmeme Cluster */}
                                                 <div className="pl-3 border-l-2 border-slate-200 text-xs space-y-1">
                                                     <div className="flex flex-wrap gap-1 items-baseline">
                                                         <span className="techmeme-cluster-label">More:</span>
                                                         <a href="#" className="techmeme-link">Benzinga</a>,
-                                                        <a href="#" className="techmeme-link">Reuters</a>,
-                                                        <a href="#" className="techmeme-link">The Deep View</a>,
-                                                        <a href="#" className="techmeme-link">The Information</a>
-                                                    </div>
-                                                    <div className="flex flex-wrap gap-1 items-baseline">
-                                                        <span className="techmeme-cluster-label-x">On X:</span>
-                                                        <a href="#" className="techmeme-link text-gray-500">@elonmusk</a>,
-                                                        <a href="#" className="techmeme-link text-gray-500">@ashleevance</a>
+                                                        <a href="#" className="techmeme-link">Reuters</a>
                                                     </div>
                                                 </div>
                                             </div>
-                                            {/* Thumbnail (Optional like Techmeme) */}
                                             <div className="w-20 h-14 bg-slate-200 rounded shrink-0 hidden md:block overflow-hidden">
                                                 <div className="w-full h-full bg-slate-800 flex items-center justify-center text-white/20 text-xs">IMG</div>
                                             </div>
                                         </div>
                                     </div>
-
-                                    {/* News Item 2 */}
                                     <div className="mb-6 group">
                                         <a href="#" className="techmeme-headline text-lg leading-tight block mb-1">
                                             國防部高官：五角大廈即將把 Anthropic 列為「供應鏈風險」
@@ -385,34 +464,10 @@
                                         <p className="techmeme-summary mb-2">
                                             國防部長 Pete Hegseth 即將切斷與 Anthropic 的商業聯繫，並將這家 AI 公司列為國家安全風險...
                                         </p>
-                                         <div className="pl-3 border-l-2 border-slate-200 text-xs space-y-1">
-                                            <div className="flex flex-wrap gap-1 items-baseline">
-                                                <span className="techmeme-cluster-label">More:</span>
-                                                <a href="#" className="techmeme-link">Bloomberg</a>,
-                                                <a href="#" className="techmeme-link">SiliconANGLE</a>,
-                                                <a href="#" className="techmeme-link">The Verge</a>
-                                            </div>
-                                             <div className="flex flex-wrap gap-1 items-baseline">
-                                                <span className="techmeme-cluster-label-x">Bluesky:</span>
-                                                <a href="#" className="techmeme-link text-gray-500">@carnage4life</a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    {/* News Item 3 */}
-                                    <div className="mb-6 group opacity-70 hover:opacity-100 transition-opacity">
-                                        <a href="#" className="techmeme-headline text-base leading-tight block mb-1">
-                                            Coinbase 推出「Base Identity」，允許在 5 個加密友善管轄區免護照旅行
-                                        </a>
-                                        <div className="techmeme-source mb-1">
-                                            CoinDesk <span className="mx-1 text-gray-300">|</span> 3 hours ago
-                                        </div>
                                     </div>
                                 </div>
 
-                                {/* RIGHT COLUMN: Blocktrend Style (Subscription/Paid) */}
                                 <div className="w-[320px] bg-white border-l border-gray-200 flex flex-col shrink-0">
-                                    {/* Header matching Economic VIP style */}
                                     <div className="udn-red text-white px-4 py-2 flex items-center justify-between">
                                         <div className="font-bold flex items-center gap-2">
                                             <Crown size={16} />
@@ -420,9 +475,7 @@
                                         </div>
                                         <span className="text-[10px] bg-red-800 px-1.5 py-0.5 rounded text-red-100">Blocktrend</span>
                                     </div>
-
                                     <div className="p-4 space-y-6 overflow-y-auto">
-                                        {/* Featured Article Card */}
                                         <div className="group cursor-pointer">
                                             <div className="relative aspect-video bg-slate-800 rounded mb-3 overflow-hidden">
                                                 <div className="absolute top-2 left-2 bg-amber-500 text-white text-[10px] font-bold px-2 py-0.5 rounded">深度報告</div>
@@ -438,10 +491,7 @@
                                                 <Lock size={12} className="text-amber-600" />
                                             </div>
                                         </div>
-
                                         <hr className="border-gray-100" />
-
-                                        {/* List Item 1 */}
                                         <div className="group cursor-pointer">
                                             <h3 className="font-bold text-base text-slate-800 leading-snug mb-2 group-hover:udn-text-red transition-colors">
                                                 包紅包可能涉及贈與稅、集資買彩券也可能要稅？過年別踩雷
@@ -451,21 +501,6 @@
                                                 <Lock size={12} className="text-amber-600" />
                                             </div>
                                         </div>
-
-                                        <hr className="border-gray-100" />
-
-                                        {/* List Item 2 */}
-                                        <div className="group cursor-pointer">
-                                            <h3 className="font-bold text-base text-slate-800 leading-snug mb-2 group-hover:udn-text-red transition-colors">
-                                                解密國際／為了15%輸美關稅 台灣付了多少代價？
-                                            </h3>
-                                            <div className="flex items-center gap-2 text-xs text-gray-500">
-                                                <span className="bg-gray-100 px-1 rounded text-[10px] text-gray-600">會員專屬</span>
-                                                <Lock size={12} className="text-amber-600" />
-                                            </div>
-                                        </div>
-                                        
-                                        {/* CTA */}
                                         <div className="bg-amber-50 border border-amber-200 rounded p-3 text-center mt-4">
                                             <p className="text-xs text-amber-900 mb-2 font-medium">訂閱解鎖所有深度內容</p>
                                             <button className="w-full bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold py-2 rounded transition-colors">
@@ -478,11 +513,11 @@
                         </div>
                     )
                 },
-                // Slide 5: Team
+                // Slide 7: Team
                 {
-                    id: 4,
+                    id: 6,
                     type: 'content',
-                    title: "內容團隊最小配置",
+                    title: "營運配置：團隊與分工",
                     icon: <Users size={40} className="text-blue-600" />,
                     content: (
                         <div className="space-y-6">
@@ -532,9 +567,9 @@
                         </div>
                     )
                 },
-                // Slide 6: Role
+                // Slide 8: Role
                 {
-                    id: 5,
+                    id: 7,
                     type: 'content',
                     title: "內容長職責",
                     icon: <ChefHat size={40} className="text-amber-600" />,
@@ -573,9 +608,9 @@
                         </div>
                     )
                 },
-                // Slide 7: Support
+                // Slide 9: Support
                 {
-                    id: 6,
+                    id: 8,
                     type: 'content',
                     title: "關鍵支援系統",
                     icon: <Shield size={40} className="text-emerald-600" />,
@@ -615,9 +650,9 @@
                         </div>
                     )
                 },
-                // Slide 8: Package
+                // Slide 10: Package
                 {
-                    id: 7,
+                    id: 9,
                     type: 'content',
                     title: "投資報價",
                     icon: <DollarSign size={40} className="text-slate-700" />,
@@ -677,9 +712,9 @@
                         </div>
                     )
                 },
-                 // Slide 9: Conclusion
+                 // Slide 11: Conclusion
                  {
-                    id: 8,
+                    id: 10,
                     type: 'cover',
                     content: (
                         <div className="flex flex-col items-center justify-center h-full text-center space-y-8">
