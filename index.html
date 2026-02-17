@@ -47,9 +47,24 @@
 
     <script type="text/babel">
         const { useState, useEffect, useCallback } = React;
-        // Lucide 全域變數可能為 lucide / lucideReact / LucideReact，使用 fallback
+        // Lucide 可能為 lucide / lucideReact / LucideReact；若載入失敗則用空組件避免整頁崩潰
         const Lucide = window.lucide || window.lucideReact || window.LucideReact;
-        const { ChevronRight, ChevronLeft, Users, ChefHat, DollarSign, Target, Zap, Crown, Shield, Bot, PenTool, Cpu, Newspaper, Search, Lock } = Lucide;
+        const Icon = ({ size = 24, className }) => <span style={{ display: 'inline-block', width: size, height: size }} className={className} />;
+        const ChevronRight = Lucide?.ChevronRight ?? Icon;
+        const ChevronLeft = Lucide?.ChevronLeft ?? Icon;
+        const Users = Lucide?.Users ?? Icon;
+        const ChefHat = Lucide?.ChefHat ?? Icon;
+        const DollarSign = Lucide?.DollarSign ?? Icon;
+        const Target = Lucide?.Target ?? Icon;
+        const Zap = Lucide?.Zap ?? Icon;
+        const Crown = Lucide?.Crown ?? Icon;
+        const Shield = Lucide?.Shield ?? Icon;
+        const Bot = Lucide?.Bot ?? Icon;
+        const PenTool = Lucide?.PenTool ?? Icon;
+        const Cpu = Lucide?.Cpu ?? Icon;
+        const Newspaper = Lucide?.Newspaper ?? Icon;
+        const Search = Lucide?.Search ?? Icon;
+        const Lock = Lucide?.Lock ?? Icon;
 
         const StrategyDeck = () => {
             const [currentSlide, setCurrentSlide] = useState(0);
