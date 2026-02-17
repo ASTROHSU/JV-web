@@ -91,10 +91,13 @@
             Landmark: (p) => <IconBase {...p}><line x1="3" x2="21" y1="22" y2="22"/><line x1="6" x2="6" y1="18" y2="11"/><line x1="10" x2="10" y1="18" y2="11"/><line x1="14" x2="14" y1="18" y2="11"/><line x1="18" x2="18" y1="18" y2="11"/><polygon points="12 2 20 7 4 7 12 2"/></IconBase>,
             Building: (p) => <IconBase {...p}><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></IconBase>,
             Clock: (p) => <IconBase {...p}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></IconBase>,
-            Image: (p) => <IconBase {...p}><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></IconBase>
+            Image: (p) => <IconBase {...p}><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></IconBase>,
+            Compass: (p) => <IconBase {...p}><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></IconBase>,
+            TrendingDown: (p) => <IconBase {...p}><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></IconBase>,
+            MousePointerClick: (p) => <IconBase {...p}><path d="m9 9 5 12 1.8-5.2L21 14Z"/><path d="M7.2 2.2 8 5.1"/><path d="m5.1 8-2.9-.8"/><path d="M14 4.1 12 6"/><path d="m6 12-1.9 2"/></IconBase>
         };
 
-        const { ChevronRight, ChevronLeft, Users, User, ChefHat, DollarSign, Target, Layers, Zap, Crown, Shield, Bot, PenTool, Cpu, Newspaper, Search, Lock, HeartHandshake, Video, List, AlertCircle, Landmark, Building, Clock, Image } = Icons;
+        const { ChevronRight, ChevronLeft, Users, User, ChefHat, DollarSign, Target, Layers, Zap, Crown, Shield, Bot, PenTool, Cpu, Newspaper, Search, Lock, HeartHandshake, Video, List, AlertCircle, Landmark, Building, Clock, Image, Compass, TrendingDown, MousePointerClick } = Icons;
 
         // --- 2. Main Application ---
 
@@ -124,7 +127,7 @@
                         </div>
                     )
                 },
-                // Slide 2: Agenda (Updated Order)
+                // Slide 2: Agenda (Updated)
                 {
                     id: 1,
                     type: 'content',
@@ -134,134 +137,54 @@
                         <div className="flex flex-col h-full justify-center px-4 md:px-12">
                             <div className="space-y-4">
                                 <div className="flex items-center gap-6 group">
-                                    <div className="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-lg group-hover:bg-blue-600 group-hover:text-white transition-colors shrink-0">1</div>
-                                    <div className="flex-1 border-b border-slate-100 pb-3">
-                                        <h3 className="text-xl font-bold text-slate-800">趨勢洞察：2026 媒體變革</h3>
-                                        <p className="text-sm text-slate-500">人類與 AI 的資訊流動三角。</p>
-                                    </div>
-                                </div>
-                                <div className="flex items-center gap-6 group">
-                                    <div className="w-10 h-10 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-bold text-lg group-hover:bg-red-600 group-hover:text-white transition-colors shrink-0">2</div>
+                                    <div className="w-10 h-10 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-bold text-lg group-hover:bg-red-600 group-hover:text-white transition-colors shrink-0">1</div>
                                     <div className="flex-1 border-b border-slate-100 pb-3">
                                         <h3 className="text-xl font-bold text-slate-800">現況痛點：缺乏共識與座標</h3>
                                         <p className="text-sm text-slate-500">市場當前最迫切的問題是什麼？</p>
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-6 group">
-                                    <div className="w-10 h-10 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-lg group-hover:bg-amber-600 group-hover:text-white transition-colors shrink-0">3</div>
+                                    <div className="w-10 h-10 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-lg group-hover:bg-slate-600 group-hover:text-white transition-colors shrink-0">2</div>
+                                    <div className="flex-1 border-b border-slate-100 pb-3">
+                                        <h3 className="text-xl font-bold text-slate-800">競品困境：流量陷阱</h3>
+                                        <p className="text-sm text-slate-500">為什麼現有的幣圈媒體模式不可持續？</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-center gap-6 group">
+                                    <div className="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-lg group-hover:bg-blue-600 group-hover:text-white transition-colors shrink-0">3</div>
+                                    <div className="flex-1 border-b border-slate-100 pb-3">
+                                        <h3 className="text-xl font-bold text-slate-800">趨勢變革：AI 價值三角</h3>
+                                        <p className="text-sm text-slate-500">2026 年資訊與價值如何傳遞？</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-center gap-6 group">
+                                    <div className="w-10 h-10 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-lg group-hover:bg-amber-600 group-hover:text-white transition-colors shrink-0">4</div>
                                     <div className="flex-1 border-b border-slate-100 pb-3">
                                         <h3 className="text-xl font-bold text-slate-800">核心策略：雙引擎架構</h3>
                                         <p className="text-sm text-slate-500">AI 負責共同事實，人類負責共同框架。</p>
                                     </div>
                                 </div>
-                                {/* New Item 4: Visual Mockup */}
                                 <div className="flex items-center gap-6 group">
-                                    <div className="w-10 h-10 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-lg group-hover:bg-slate-600 group-hover:text-white transition-colors shrink-0">4</div>
+                                    <div className="w-10 h-10 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-lg group-hover:bg-slate-600 group-hover:text-white transition-colors shrink-0">5</div>
                                     <div className="flex-1 border-b border-slate-100 pb-3">
                                         <h3 className="text-xl font-bold text-slate-800">產品樣貌：視覺模擬</h3>
                                         <p className="text-sm text-slate-500">具體呈現給使用者的產品長什麼樣子？</p>
                                     </div>
                                 </div>
-                                {/* New Item 5: Target Audience */}
-                                <div className="flex items-center gap-6 group">
-                                    <div className="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center font-bold text-lg group-hover:bg-purple-600 group-hover:text-white transition-colors shrink-0">5</div>
-                                    <div className="flex-1 border-b border-slate-100 pb-3">
-                                        <h3 className="text-xl font-bold text-slate-800">目標受眾：最有價值的 10 分鐘</h3>
-                                        <p className="text-sm text-slate-500">我們為誰服務？為什麼他們願意付費？</p>
-                                    </div>
-                                </div>
                                 <div className="flex items-center gap-6 group">
                                     <div className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-lg group-hover:bg-emerald-600 group-hover:text-white transition-colors shrink-0">6</div>
                                     <div className="flex-1 border-b border-slate-100 pb-3">
-                                        <h3 className="text-xl font-bold text-slate-800">產品全貌 & 投資報價</h3>
-                                        <p className="text-sm text-slate-500">三大支柱與營運配置。</p>
+                                        <h3 className="text-xl font-bold text-slate-800">營運配置 & 投資報價</h3>
+                                        <p className="text-sm text-slate-500">三大支柱、團隊與資產收購。</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     )
                 },
-                // Slide 3: The 2026 Shift (Triangle Revised)
+                // Slide 3: The Problem (Current Status)
                 {
                     id: 2,
-                    type: 'content',
-                    title: "AI 改變了資訊流動的邏輯",
-                    icon: <Zap size={40} className="text-amber-500" />,
-                    content: (
-                        <div className="flex flex-col h-full justify-center items-center px-4">
-                            <div className="max-w-5xl w-full text-center space-y-8">
-                                
-                                <div className="relative w-full max-w-3xl h-[400px] mx-auto flex items-center justify-center">
-                                    {/* Top: AI */}
-                                    <div className="absolute top-0 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-20">
-                                        <div className="bg-amber-50 border-4 border-amber-500 rounded-full w-48 h-48 flex flex-col items-center justify-center p-4 shadow-xl">
-                                            <Bot size={40} className="text-amber-600 mb-2" />
-                                            <h3 className="text-lg font-bold text-slate-800">AI 模型</h3>
-                                            <p className="text-xs text-slate-500 font-bold mt-1 bg-amber-100 px-2 py-1 rounded">讀合成內容導致崩塌</p>
-                                            <p className="text-sm text-amber-700 font-medium mt-1">需讀人類原創數據</p>
-                                        </div>
-                                    </div>
-
-                                    {/* Bottom Left: Reader (Swapped from Right) */}
-                                    <div className="absolute bottom-0 left-0 flex flex-col items-center z-20">
-                                        <div className="bg-blue-50 border-4 border-blue-500 rounded-full w-48 h-48 flex flex-col items-center justify-center p-4 shadow-xl">
-                                            <Users size={40} className="text-blue-600 mb-2" />
-                                            <h3 className="text-lg font-bold text-slate-800">人類讀者</h3>
-                                            <p className="text-xs text-slate-500 font-bold mt-1 bg-blue-100 px-2 py-1 rounded">讀原始資訊效率低</p>
-                                            <p className="text-sm text-blue-700 font-medium mt-1">需讀 AI 整理情報</p>
-                                        </div>
-                                    </div>
-
-                                    {/* Bottom Right: Creator (Swapped from Left) */}
-                                    <div className="absolute bottom-0 right-0 flex flex-col items-center z-20">
-                                        <div className="bg-white border-4 border-slate-300 rounded-full w-48 h-48 flex flex-col items-center justify-center p-4 shadow-xl">
-                                            <PenTool size={40} className="text-slate-600 mb-2" />
-                                            <h3 className="text-lg font-bold text-slate-800">人類創作者</h3>
-                                            <p className="text-sm text-slate-500 font-medium mt-1">為讀者服務 (本質)</p>
-                                            <p className="text-xs text-slate-400 mt-1">透過 AI 傳遞價值</p>
-                                        </div>
-                                    </div>
-
-                                    {/* Connections (SVG Lines) */}
-                                    <svg className="absolute inset-0 w-full h-full z-0 pointer-events-none" viewBox="0 0 768 400" style={{overflow: 'visible'}}>
-                                        {/* 1. AI (Top) to Reader (Left) - Blue Solid */}
-                                        <path d="M 320 150 Q 200 180 150 240" fill="none" stroke="#3b82f6" strokeWidth="4" markerEnd="url(#arrow-blue)" />
-                                        <text x="180" y="180" className="text-sm font-bold fill-blue-600 bg-white" textAnchor="middle">整理情報</text>
-
-                                        {/* 2. Creator (Right) to AI (Top) - Grey Solid (Changed from Dashed) */}
-                                        <path d="M 618 240 Q 568 180 448 150" fill="none" stroke="#94a3b8" strokeWidth="4" markerEnd="url(#arrow-grey)" />
-                                        <text x="580" y="180" className="text-sm font-bold fill-slate-500 bg-white" textAnchor="middle">原創觀點</text>
-
-                                        {/* 3. Reader (Left) to Creator (Right) - Green Dashed (Changed from Solid) */}
-                                        <path d="M 192 304 L 560 304" fill="none" stroke="#10b981" strokeWidth="4" strokeDasharray="8 8" markerEnd="url(#arrow-green)" />
-                                        <text x="384" y="290" className="text-sm font-bold fill-emerald-600 bg-white" textAnchor="middle">價值回流 (信任/付費)</text>
-
-                                        <defs>
-                                            <marker id="arrow-grey" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
-                                                <path d="M0,0 L0,6 L9,3 z" fill="#94a3b8" />
-                                            </marker>
-                                            <marker id="arrow-blue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
-                                                <path d="M0,0 L0,6 L9,3 z" fill="#3b82f6" />
-                                            </marker>
-                                            <marker id="arrow-green" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
-                                                <path d="M0,0 L0,6 L9,3 z" fill="#10b981" />
-                                            </marker>
-                                        </defs>
-                                    </svg>
-                                </div>
-
-                                <div className="bg-slate-100 px-8 py-4 rounded-xl border border-slate-200 inline-block">
-                                    <p className="text-xl text-slate-700 font-bold">
-                                        在 2026 年成立一家新媒體，必須同時滿足人類和 AI 的需求。
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    )
-                },
-                // Slide 4: The Problem
-                {
-                    id: 3,
                     type: 'content',
                     title: "現況：缺乏共同事實，更沒有理解框架",
                     icon: <AlertCircle size={40} className="text-red-500" />,
@@ -301,9 +224,155 @@
                         </div>
                     )
                 },
-                // Slide 5: Dual Engine Solution
+                 // Slide 4: Competitor Analysis (NEW)
+                 {
+                    id: 3,
+                    type: 'content',
+                    title: "幣圈媒體的現況：流量陷阱與定位迷失",
+                    icon: <Compass size={40} className="text-slate-600" />,
+                    content: (
+                        <div className="flex flex-col h-full justify-center px-4 md:px-0 gap-8">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 h-full items-center">
+                                {/* The Trap */}
+                                <div className="bg-slate-50 p-8 rounded-2xl border-t-8 border-red-400 shadow-lg flex flex-col h-full justify-center relative overflow-hidden opacity-90">
+                                    <div className="flex items-center gap-3 mb-6">
+                                        <TrendingDown size={32} className="text-red-500" />
+                                        <h3 className="text-2xl font-black text-slate-800">現有媒體的困境</h3>
+                                    </div>
+                                    <ul className="space-y-6 text-slate-600 text-lg">
+                                        <li className="flex gap-4">
+                                            <span className="font-bold text-red-500 shrink-0">1.</span>
+                                            <div>
+                                                <strong className="block text-slate-800 mb-1">廣告模式的詛咒</strong>
+                                                <span>依賴流量生存，必須追逐熱點。市場冷淡時即面臨生存危機。</span>
+                                            </div>
+                                        </li>
+                                        <li className="flex gap-4">
+                                            <span className="font-bold text-red-500 shrink-0">2.</span>
+                                            <div>
+                                                <strong className="block text-slate-800 mb-1">議題發散與失焦</strong>
+                                                <span>為了流量開始寫 AI、泛科技、政治，導致品牌面目全非。</span>
+                                            </div>
+                                        </li>
+                                        <li className="flex gap-4">
+                                            <span className="font-bold text-red-500 shrink-0">3.</span>
+                                            <div>
+                                                <strong className="block text-slate-800 mb-1">糟糕的讀者體驗</strong>
+                                                <span>想看加密貨幣的人被迫看無關的政治新聞。專業度被稀釋。</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                {/* Our Approach */}
+                                <div className="bg-white p-8 rounded-2xl border-t-8 border-blue-600 shadow-2xl flex flex-col h-full justify-center transform md:scale-105 z-10">
+                                    <div className="flex items-center gap-3 mb-6">
+                                        <Target size={32} className="text-blue-600" />
+                                        <h3 className="text-2xl font-black text-slate-900">我們的反向操作</h3>
+                                    </div>
+                                    <ul className="space-y-6 text-slate-700 text-lg">
+                                        <li className="flex gap-4">
+                                            <span className="font-bold text-blue-600 shrink-0">1.</span>
+                                            <div>
+                                                <strong className="block text-slate-900 mb-1">價值導向 (Value First)</strong>
+                                                <span>不追逐所有眼球。如果你對區塊鏈沒興趣，我們不爭取你的注意力。</span>
+                                            </div>
+                                        </li>
+                                        <li className="flex gap-4">
+                                            <span className="font-bold text-blue-600 shrink-0">2.</span>
+                                            <div>
+                                                <strong className="block text-slate-900 mb-1">極致專注與品質</strong>
+                                                <span>只做加密貨幣。成為該領域最權威、無可替代的資訊來源。</span>
+                                            </div>
+                                        </li>
+                                        <li className="flex gap-4">
+                                            <span className="font-bold text-blue-600 shrink-0">3.</span>
+                                            <div>
+                                                <strong className="block text-slate-900 mb-1">最有價值的 10 分鐘</strong>
+                                                <span>不求你整天掛在網站上。只求你每天最重要的 10 分鐘給我們。</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                },
+                // Slide 5: The 2026 Shift (Triangle Revised - Updated Text & Arrows)
                 {
                     id: 4,
+                    type: 'content',
+                    title: "AI 改變資訊與價值的傳遞邏輯",
+                    icon: <Zap size={40} className="text-amber-500" />,
+                    content: (
+                        <div className="flex flex-col h-full justify-center items-center px-4">
+                            <div className="max-w-5xl w-full text-center space-y-8">
+                                
+                                <div className="relative w-full max-w-3xl h-[400px] mx-auto flex items-center justify-center">
+                                    {/* Top: AI */}
+                                    <div className="absolute top-0 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-20">
+                                        <div className="bg-amber-50 border-4 border-amber-500 rounded-full w-48 h-48 flex flex-col items-center justify-center p-4 shadow-xl">
+                                            <Bot size={40} className="text-amber-600 mb-2" />
+                                            <h3 className="text-lg font-bold text-slate-800">AI 模型</h3>
+                                            <p className="text-xs text-slate-500 font-bold mt-1 bg-amber-100 px-2 py-1 rounded">讀合成內容導致崩塌</p>
+                                            <p className="text-sm text-amber-700 font-medium mt-1">需讀人類原創數據</p>
+                                        </div>
+                                    </div>
+
+                                    {/* Bottom Left: Reader */}
+                                    <div className="absolute bottom-0 left-0 flex flex-col items-center z-20">
+                                        <div className="bg-blue-50 border-4 border-blue-500 rounded-full w-48 h-48 flex flex-col items-center justify-center p-4 shadow-xl">
+                                            <Users size={40} className="text-blue-600 mb-2" />
+                                            <h3 className="text-lg font-bold text-slate-800">人類讀者</h3>
+                                            <p className="text-xs text-slate-500 font-bold mt-1 bg-blue-100 px-2 py-1 rounded">讀原始資訊效率低</p>
+                                            <p className="text-sm text-blue-700 font-medium mt-1">需讀 AI 整理情報</p>
+                                        </div>
+                                    </div>
+
+                                    {/* Bottom Right: Creator */}
+                                    <div className="absolute bottom-0 right-0 flex flex-col items-center z-20">
+                                        <div className="bg-white border-4 border-slate-300 rounded-full w-48 h-48 flex flex-col items-center justify-center p-4 shadow-xl">
+                                            <PenTool size={40} className="text-slate-600 mb-2" />
+                                            <h3 className="text-lg font-bold text-slate-800">人類創作者</h3>
+                                            <p className="text-sm text-slate-500 font-medium mt-1">為讀者服務 (本質)</p>
+                                            <p className="text-xs text-slate-400 mt-1">透過 AI 傳遞價值</p>
+                                        </div>
+                                    </div>
+
+                                    {/* Connections (SVG Lines) */}
+                                    <svg className="absolute inset-0 w-full h-full z-0 pointer-events-none" viewBox="0 0 768 400" style={{overflow: 'visible'}}>
+                                        {/* 1. AI (Top) to Reader (Left) - Blue Solid */}
+                                        <path d="M 320 150 Q 200 180 150 240" fill="none" stroke="#3b82f6" strokeWidth="4" markerEnd="url(#arrow-blue)" />
+                                        <text x="180" y="180" className="text-sm font-bold fill-blue-600 bg-white" textAnchor="middle">整理情報</text>
+
+                                        {/* 2. Creator (Right) to AI (Top) - Grey Solid */}
+                                        <path d="M 618 240 Q 568 180 448 150" fill="none" stroke="#94a3b8" strokeWidth="4" markerEnd="url(#arrow-grey)" />
+                                        <text x="580" y="180" className="text-sm font-bold fill-slate-500 bg-white" textAnchor="middle">原創觀點</text>
+
+                                        {/* 3. Reader (Left) to Creator (Right) - Green Dashed */}
+                                        <path d="M 192 304 L 560 304" fill="none" stroke="#10b981" strokeWidth="4" strokeDasharray="8 8" markerEnd="url(#arrow-green)" />
+                                        <text x="384" y="290" className="text-sm font-bold fill-emerald-600 bg-white" textAnchor="middle">價值回流 (信任/付費/廣告)</text>
+
+                                        <defs>
+                                            <marker id="arrow-grey" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                                                <path d="M0,0 L0,6 L9,3 z" fill="#94a3b8" />
+                                            </marker>
+                                            <marker id="arrow-blue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                                                <path d="M0,0 L0,6 L9,3 z" fill="#3b82f6" />
+                                            </marker>
+                                            <marker id="arrow-green" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                                                <path d="M0,0 L0,6 L9,3 z" fill="#10b981" />
+                                            </marker>
+                                        </defs>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                },
+                // Slide 6: Dual Engine Solution
+                {
+                    id: 5,
                     type: 'content',
                     title: "AI 建立共同事實，人類建立共同框架",
                     icon: <Cpu size={40} className="text-blue-600" />,
@@ -367,9 +436,9 @@
                         </div>
                     )
                 },
-                 // Slide 6: Visual Mockup (Moved up)
+                 // Slide 7: Visual Mockup (Moved up)
                  {
-                    id: 7,
+                    id: 6,
                     type: 'mockup',
                     title: "產品視覺模擬 (2026)",
                     icon: <Newspaper size={40} className="text-slate-700" />,
@@ -539,7 +608,7 @@
                 },
                 // Slide 7: Target Audience (Moved down)
                 {
-                    id: 5,
+                    id: 7,
                     type: 'content',
                     title: "我們賣「時間」與「判斷」",
                     icon: <Target size={40} className="text-purple-600" />,
@@ -589,7 +658,7 @@
                 },
                 // Slide 8: Product Overview (Three Pillars) (Moved down)
                 {
-                    id: 6,
+                    id: 8,
                     type: 'content',
                     title: "產品全貌：事實、理解與感受",
                     icon: <Target size={40} className="text-emerald-600" />,
@@ -672,7 +741,7 @@
                 },
                 // Slide 9: Team
                 {
-                    id: 8,
+                    id: 9,
                     type: 'content',
                     title: "營運配置：團隊與分工",
                     icon: <Users size={40} className="text-blue-600" />,
@@ -726,7 +795,7 @@
                 },
                 // Slide 10: Role
                 {
-                    id: 9,
+                    id: 10,
                     type: 'content',
                     title: "內容長職責",
                     icon: <ChefHat size={40} className="text-amber-600" />,
@@ -767,7 +836,7 @@
                 },
                 // Slide 11: Support
                 {
-                    id: 10,
+                    id: 11,
                     type: 'content',
                     title: "關鍵支援系統",
                     icon: <Shield size={40} className="text-emerald-600" />,
@@ -809,7 +878,7 @@
                 },
                 // Slide 12: Package
                 {
-                    id: 11,
+                    id: 12,
                     type: 'content',
                     title: "投資報價",
                     icon: <DollarSign size={40} className="text-slate-700" />,
@@ -871,7 +940,7 @@
                 },
                  // Slide 13: Conclusion
                  {
-                    id: 12,
+                    id: 13,
                     type: 'cover',
                     content: (
                         <div className="flex flex-col items-center justify-center h-full text-center space-y-8">
