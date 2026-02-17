@@ -188,10 +188,7 @@
                     content: (
                         <div className="flex flex-col h-full justify-center items-center px-4">
                             <div className="max-w-5xl w-full text-center space-y-8">
-                                <h2 className="text-3xl font-black text-slate-900 leading-tight">
-                                    從「線性傳遞」轉變為「價值三角」
-                                </h2>
-
+                                
                                 <div className="relative w-full max-w-3xl h-[400px] mx-auto flex items-center justify-center">
                                     {/* Top: AI */}
                                     <div className="absolute top-0 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-20">
@@ -227,14 +224,14 @@
                                     <svg className="absolute inset-0 w-full h-full z-0 pointer-events-none" viewBox="0 0 768 400" style={{overflow: 'visible'}}>
                                         {/* 1. AI (Top) to Reader (Left) - Blue Solid */}
                                         <path d="M 320 150 Q 200 180 150 240" fill="none" stroke="#3b82f6" strokeWidth="4" markerEnd="url(#arrow-blue)" />
-                                        <text x="180" y="180" className="text-sm font-bold fill-blue-600 bg-white" textAnchor="middle">提供整理情報</text>
+                                        <text x="180" y="180" className="text-sm font-bold fill-blue-600 bg-white" textAnchor="middle">整理情報</text>
 
-                                        {/* 2. Creator (Right) to AI (Top) - Grey Dashed */}
-                                        <path d="M 618 240 Q 568 180 448 150" fill="none" stroke="#94a3b8" strokeWidth="4" strokeDasharray="8 8" markerEnd="url(#arrow-grey)" />
-                                        <text x="580" y="180" className="text-sm font-bold fill-slate-500 bg-white" textAnchor="middle">提供原創觀點</text>
+                                        {/* 2. Creator (Right) to AI (Top) - Grey Solid (Changed from Dashed) */}
+                                        <path d="M 618 240 Q 568 180 448 150" fill="none" stroke="#94a3b8" strokeWidth="4" markerEnd="url(#arrow-grey)" />
+                                        <text x="580" y="180" className="text-sm font-bold fill-slate-500 bg-white" textAnchor="middle">原創觀點</text>
 
-                                        {/* 3. Reader (Left) to Creator (Right) - Green Solid */}
-                                        <path d="M 192 304 L 560 304" fill="none" stroke="#10b981" strokeWidth="4" markerEnd="url(#arrow-green)" />
+                                        {/* 3. Reader (Left) to Creator (Right) - Green Dashed (Changed from Solid) */}
+                                        <path d="M 192 304 L 560 304" fill="none" stroke="#10b981" strokeWidth="4" strokeDasharray="8 8" markerEnd="url(#arrow-green)" />
                                         <text x="384" y="290" className="text-sm font-bold fill-emerald-600 bg-white" textAnchor="middle">價值回流 (信任/付費)</text>
 
                                         <defs>
@@ -330,11 +327,11 @@
                                     <div className="flex-1 space-y-8">
                                         <div className="bg-slate-50 p-6 rounded-lg border border-slate-100">
                                             <h4 className="font-bold text-slate-700 mb-2 text-xl">任務</h4>
-                                            <p className="text-lg text-slate-600 leading-relaxed">用即時資訊建立所有人都能對齊的「共同事實底盤」。</p>
+                                            <p className="text-lg text-slate-600 leading-relaxed">用即時資訊建立所有人都能對齊的「共同事實基礎」。</p>
                                         </div>
                                         <div className="bg-slate-50 p-6 rounded-lg border border-slate-100">
                                             <h4 className="font-bold text-slate-700 mb-2 text-xl">形式</h4>
-                                            <p className="text-lg text-slate-600 leading-relaxed">24 小時聚合、分類、摘要、更新，解決「怕漏掉」的焦慮。</p>
+                                            <p className="text-lg text-slate-600 leading-relaxed">整理各家媒體的第一手報導與不同社群的重要討論，拼湊出完整事實。</p>
                                         </div>
                                     </div>
                                 </div>
@@ -360,7 +357,7 @@
                                         </div>
                                         <div className="bg-slate-50 p-6 rounded-lg border border-slate-100">
                                             <h4 className="font-bold text-slate-700 mb-2 text-xl">形式</h4>
-                                            <p className="text-lg text-slate-600 leading-relaxed">深度報告、立場、價值觀、可複用的思考模型。</p>
+                                            <p className="text-lg text-slate-600 leading-relaxed">第一手體驗、獨特觀點，以及結合生活經驗的價值判斷框架。</p>
                                         </div>
                                     </div>
                                 </div>
