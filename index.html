@@ -170,8 +170,8 @@
                                 <div className="flex items-center gap-6 group">
                                     <div className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-lg group-hover:bg-emerald-600 group-hover:text-white transition-colors shrink-0">6</div>
                                     <div className="flex-1 border-b border-slate-100 pb-3">
-                                        <h3 className="text-xl font-bold text-slate-800">營運配置 & 投資報價</h3>
-                                        <p className="text-sm text-slate-500">團隊、分工與資產收購。</p>
+                                        <h3 className="text-xl font-bold text-slate-800">產品全貌 & 投資報價</h3>
+                                        <p className="text-sm text-slate-500">三大支柱與營運配置。</p>
                                     </div>
                                 </div>
                             </div>
@@ -187,33 +187,20 @@
                     content: (
                         <div className="flex flex-col h-full justify-center items-center px-4">
                             <div className="max-w-5xl w-full text-center space-y-8">
-                                <h2 className="text-3xl font-black text-slate-900 leading-tight">
-                                    從「線性傳遞」轉變為「價值三角」
-                                </h2>
-
+                                
                                 <div className="relative w-full max-w-3xl h-[400px] mx-auto flex items-center justify-center">
                                     {/* Top: AI */}
                                     <div className="absolute top-0 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-20">
                                         <div className="bg-amber-50 border-4 border-amber-500 rounded-full w-48 h-48 flex flex-col items-center justify-center p-4 shadow-xl">
                                             <Bot size={40} className="text-amber-600 mb-2" />
                                             <h3 className="text-lg font-bold text-slate-800">AI 模型</h3>
-                                            <p className="text-xs text-slate-500 font-bold mt-1 bg-amber-100 px-2 py-1 rounded">不可讀 AI 產物 (崩塌)</p>
+                                            <p className="text-xs text-slate-500 font-bold mt-1 bg-amber-100 px-2 py-1 rounded">讀合成內容導致崩塌</p>
                                             <p className="text-sm text-amber-700 font-medium mt-1">需讀人類原創數據</p>
                                         </div>
                                     </div>
 
-                                    {/* Bottom Left: Creator */}
+                                    {/* Bottom Left: Reader (Swapped from Right) */}
                                     <div className="absolute bottom-0 left-0 flex flex-col items-center z-20">
-                                        <div className="bg-white border-4 border-slate-300 rounded-full w-48 h-48 flex flex-col items-center justify-center p-4 shadow-xl">
-                                            <PenTool size={40} className="text-slate-600 mb-2" />
-                                            <h3 className="text-lg font-bold text-slate-800">人類創作者</h3>
-                                            <p className="text-sm text-slate-500 font-medium mt-1">為讀者服務 (本質)</p>
-                                            <p className="text-xs text-slate-400 mt-1">透過 AI 傳遞價值</p>
-                                        </div>
-                                    </div>
-
-                                    {/* Bottom Right: Reader */}
-                                    <div className="absolute bottom-0 right-0 flex flex-col items-center z-20">
                                         <div className="bg-blue-50 border-4 border-blue-500 rounded-full w-48 h-48 flex flex-col items-center justify-center p-4 shadow-xl">
                                             <Users size={40} className="text-blue-600 mb-2" />
                                             <h3 className="text-lg font-bold text-slate-800">人類讀者</h3>
@@ -222,19 +209,29 @@
                                         </div>
                                     </div>
 
+                                    {/* Bottom Right: Creator (Swapped from Left) */}
+                                    <div className="absolute bottom-0 right-0 flex flex-col items-center z-20">
+                                        <div className="bg-white border-4 border-slate-300 rounded-full w-48 h-48 flex flex-col items-center justify-center p-4 shadow-xl">
+                                            <PenTool size={40} className="text-slate-600 mb-2" />
+                                            <h3 className="text-lg font-bold text-slate-800">人類創作者</h3>
+                                            <p className="text-sm text-slate-500 font-medium mt-1">為讀者服務 (本質)</p>
+                                            <p className="text-xs text-slate-400 mt-1">透過 AI 傳遞價值</p>
+                                        </div>
+                                    </div>
+
                                     {/* Connections (SVG Lines) */}
                                     <svg className="absolute inset-0 w-full h-full z-0 pointer-events-none" style={{overflow: 'visible'}}>
-                                        {/* Creator -> AI */}
-                                        <path d="M 120 300 Q 150 150 280 80" fill="none" stroke="#94a3b8" strokeWidth="4" strokeDasharray="8 8" markerEnd="url(#arrow)" />
-                                        <text x="130" y="200" className="text-xs font-bold fill-slate-500 bg-white">提供原創觀點</text>
+                                        {/* Creator -> AI (Now Right to Top) */}
+                                        <path d="M 470 300 Q 600 150 280 80" fill="none" stroke="#94a3b8" strokeWidth="4" strokeDasharray="8 8" markerEnd="url(#arrow)" />
+                                        <text x="400" y="200" className="text-xs font-bold fill-slate-500 bg-white">提供原創觀點</text>
 
-                                        {/* AI -> Reader */}
-                                        <path d="M 470 80 Q 600 150 630 300" fill="none" stroke="#3b82f6" strokeWidth="4" markerEnd="url(#arrow-blue)" />
-                                        <text x="560" y="200" className="text-xs font-bold fill-blue-600 bg-white">提供整理情報</text>
+                                        {/* AI -> Reader (Now Top to Left) */}
+                                        <path d="M 280 80 Q 100 150 120 300" fill="none" stroke="#3b82f6" strokeWidth="4" markerEnd="url(#arrow-blue)" />
+                                        <text x="180" y="200" className="text-xs font-bold fill-blue-600 bg-white">提供整理情報</text>
 
-                                        {/* Reader -> Creator (Value) */}
-                                        <path d="M 600 380 L 150 380" fill="none" stroke="#10b981" strokeWidth="4" markerEnd="url(#arrow-green)" />
-                                        <text x="350" y="370" className="text-xs font-bold fill-emerald-600 bg-white">價值回流 (信任/付費)</text>
+                                        {/* Reader -> Creator (Value flow: Left to Right) */}
+                                        <path d="M 150 380 L 450 380" fill="none" stroke="#10b981" strokeWidth="4" markerEnd="url(#arrow-green)" />
+                                        <text x="250" y="370" className="text-xs font-bold fill-emerald-600 bg-white">價值回流 (信任/付費)</text>
 
                                         <defs>
                                             <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
@@ -433,19 +430,19 @@
                         </div>
                     )
                 },
-                // Slide 7: Business Model (Philosophy Part 2)
+                // Slide 7: Product Overview (Three Pillars)
                 {
                     id: 6,
                     type: 'content',
-                    title: "商業模式：收費邊界",
+                    title: "產品全貌：事實、理解與感受",
                     icon: <Target size={40} className="text-emerald-600" />,
                     content: (
                         <div className="flex flex-col h-full justify-center gap-8">
                             <div className="bg-slate-50 border border-slate-200 rounded-2xl p-8 shadow-sm flex-1 flex flex-col justify-center">
                                 <div className="mb-8 text-center md:text-left">
-                                    <h4 className="text-2xl font-black text-slate-900 mb-2">免費與付費的切分原則</h4>
+                                    <h4 className="text-2xl font-black text-slate-900 mb-2">三大核心支柱</h4>
                                     <p className="text-lg text-slate-600 leading-relaxed">
-                                        「共同事實」適合免費；「共同理解」與「共同感受」適合收費。
+                                        網站包含即時資訊與深度內容，加上實體活動，構成完整生態。
                                     </p>
                                 </div>
 
@@ -493,7 +490,7 @@
                                             <div className="font-bold text-xl text-slate-900">共同感受</div>
                                         </div>
                                         <div className="text-base text-slate-500 leading-relaxed space-y-4">
-                                            <p>開箱示範、第一手操作、露面活動、情緒價值。</p>
+                                            <p>開箱示範、第一手操作、<span className="font-bold text-emerald-700">實體活動</span>。</p>
                                             <div className="pt-3 border-t border-slate-100">
                                                 <span className="font-bold text-emerald-700 text-lg block">信任護城河</span>
                                                 <span className="text-sm text-slate-400">主要目的：品牌溢價</span>
