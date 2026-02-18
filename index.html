@@ -98,10 +98,11 @@
             Anchor: (p) => <IconBase {...p}><circle cx="12" cy="5" r="3"/><line x1="12" x2="12" y1="22" y2="8"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/></IconBase>,
             Rocket: (p) => <IconBase {...p}><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></IconBase>,
             Briefcase: (p) => <IconBase {...p}><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></IconBase>,
-            BookOpen: (p) => <IconBase {...p}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></IconBase>
+            BookOpen: (p) => <IconBase {...p}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></IconBase>,
+            Cogs: (p) => <IconBase {...p}><path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z"/><path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path d="M12 2v2"/><path d="M12 22v-2"/><path d="m17 7-1.4 1.4"/><path d="M22 12h-2"/><path d="m17 17-1.4-1.4"/><path d="m7 7 1.4 1.4"/><path d="M2 12h2"/><path d="m7 17 1.4-1.4"/></IconBase>
         };
 
-        const { ChevronRight, ChevronLeft, Users, User, ChefHat, DollarSign, Target, Layers, Zap, Crown, Shield, Bot, PenTool, Cpu, Newspaper, Search, Lock, HeartHandshake, Video, List, AlertCircle, Landmark, Building, Clock, Image, Compass, TrendingDown, MousePointerClick, Anchor, Rocket, Briefcase, BookOpen } = Icons;
+        const { ChevronRight, ChevronLeft, Users, User, ChefHat, DollarSign, Target, Layers, Zap, Crown, Shield, Bot, PenTool, Cpu, Newspaper, Search, Lock, HeartHandshake, Video, List, AlertCircle, Landmark, Building, Clock, Image, Compass, TrendingDown, MousePointerClick, Anchor, Rocket, Briefcase, BookOpen, Cogs } = Icons;
 
         // --- 2. Main Application ---
 
@@ -178,15 +179,15 @@
                                 <div className="flex items-center gap-6 group">
                                     <div className="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center font-bold text-lg group-hover:bg-purple-600 group-hover:text-white transition-colors shrink-0">6</div>
                                     <div className="flex-1 border-b border-slate-100 pb-3">
-                                        <h3 className="text-xl font-bold text-slate-800">核心價值：AI 越客製，共同性越珍貴</h3>
-                                        <p className="text-sm text-slate-500">產品價值的三大支柱。</p>
+                                        <h3 className="text-xl font-bold text-slate-800">我們賣「時間」與「判斷」</h3>
+                                        <p className="text-sm text-slate-500">目標受眾與價值主張。</p>
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-6 group">
                                     <div className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-lg group-hover:bg-emerald-600 group-hover:text-white transition-colors shrink-0">7</div>
                                     <div className="flex-1 border-b border-slate-100 pb-3">
-                                        <h3 className="text-xl font-bold text-slate-800">團隊哲學：全員寫作</h3>
-                                        <p className="text-sm text-slate-500">營運配置與投資報價。</p>
+                                        <h3 className="text-xl font-bold text-slate-800">產品全貌 & 投資報價</h3>
+                                        <p className="text-sm text-slate-500">三大支柱、團隊與資產收購。</p>
                                     </div>
                                 </div>
                             </div>
@@ -461,20 +462,20 @@
                                                     川普政府傳將於下週發布加密貨幣行政命令，重點關注穩定幣與託管
                                                 </a>
                                                 <div className="techmeme-source mb-1">
-                                                    Bloomberg <span className="mx-1 text-gray-300">|</span> 1 hour ago
+                                                    彭博社 (Bloomberg) <span className="mx-1 text-gray-300">|</span> 1 小時前
                                                 </div>
                                                 <p className="techmeme-summary mb-2">
                                                     據知情人士透露，新政府正草擬一份全面的數位資產框架，可能包括賦予 CFTC 更多權力，並明確定義數位資產的證券屬性...
                                                 </p>
                                                 <div className="pl-3 border-l-2 border-slate-200 text-xs space-y-1.5">
                                                     <div className="flex flex-wrap gap-1 items-baseline">
-                                                        <span className="techmeme-cluster-label">More:</span>
+                                                        <span className="techmeme-cluster-label">更多來源:</span>
                                                         <a href="#" className="techmeme-link">CoinDesk</a>,
                                                         <a href="#" className="techmeme-link">The Block</a>,
-                                                        <a href="#" className="techmeme-link">WSJ</a>
+                                                        <a href="#" className="techmeme-link">華爾街日報</a>
                                                     </div>
                                                     <div className="flex flex-wrap gap-1 items-baseline">
-                                                        <span className="techmeme-cluster-label-x">社群熱議 (Social):</span>
+                                                        <span className="techmeme-cluster-label-x">社群熱議:</span>
                                                         <a href="#" className="techmeme-link text-gray-500">@cameron (X)</a>,
                                                         <a href="#" className="techmeme-link text-gray-500">@balajis (X)</a>,
                                                         <a href="#" className="techmeme-link text-purple-600">/us_policy (Farcaster)</a>
@@ -496,19 +497,19 @@
                                                     RWA 賽道增溫：高盛與摩根大通傳正測試代幣化抵押品網路
                                                 </a>
                                                 <div className="techmeme-source mb-1">
-                                                    Financial Times <span className="mx-1 text-gray-300">|</span> 2 hours ago
+                                                    金融時報 (FT) <span className="mx-1 text-gray-300">|</span> 2 小時前
                                                 </div>
                                                 <p className="techmeme-summary mb-2">
                                                     華爾街巨頭正在推進其區塊鏈試點項目，旨在透過代幣化資產實現即時的日內回購交易，預計將大幅降低結算風險與資本成本...
                                                 </p>
                                                 <div className="pl-3 border-l-2 border-slate-200 text-xs space-y-1.5">
                                                     <div className="flex flex-wrap gap-1 items-baseline">
-                                                        <span className="techmeme-cluster-label">More:</span>
-                                                        <a href="#" className="techmeme-link">Reuters</a>,
-                                                        <a href="#" className="techmeme-link">Ledger Insights</a>
+                                                        <span className="techmeme-cluster-label">更多來源:</span>
+                                                        <a href="#" className="techmeme-link">路透社</a>,
+                                                        <a href="#" className="techmeme-link">日經亞洲</a>
                                                     </div>
                                                     <div className="flex flex-wrap gap-1 items-baseline">
-                                                        <span className="techmeme-cluster-label-x">社群熱議 (Social):</span>
+                                                        <span className="techmeme-cluster-label-x">社群熱議:</span>
                                                         <a href="#" className="techmeme-link text-gray-500">@stablekwon (X)</a>,
                                                         <a href="#" className="techmeme-link text-purple-600">/defi_pro (Warpcast)</a>
                                                     </div>
@@ -542,7 +543,7 @@
                                             <div className="flex items-center gap-2 text-xs text-gray-500">
                                                 <span className="font-medium text-slate-700">許明恩</span>
                                                 <span>·</span>
-                                                <span>6 min read</span>
+                                                <span>閱讀時間 6 分鐘</span>
                                                 <Lock size={12} className="text-amber-600" />
                                             </div>
                                         </div>
@@ -568,7 +569,7 @@
                         </div>
                     )
                 },
-                // Slide 7: Target Audience (Moved down)
+                // Slide 8: Target Audience (Moved down)
                 {
                     id: 7,
                     type: 'content',
@@ -618,7 +619,7 @@
                         </div>
                     )
                 },
-                // Slide 8: Product Overview (Three Pillars) (Concentric Circles)
+                // Slide 9: Product Overview (Three Pillars) (Concentric Circles)
                 {
                     id: 8,
                     type: 'content',
@@ -691,14 +692,14 @@
                                     </div>
                                     
                                     <div className="mt-4 text-center text-slate-400 text-sm italic">
-                                        "越往核心，價值越高，我們投入的力氣也越多。"
+                                        "越往核心，價值越高。"
                                     </div>
                                 </div>
                             </div>
                         </div>
                     )
                 },
-                // Slide 9: Team Philosophy (NEW)
+                // Slide 10: Team Philosophy (NEW)
                 {
                     id: 9,
                     type: 'content',
@@ -748,7 +749,7 @@
                         </div>
                     )
                 },
-                // Slide 10: Team Allocation (Revised)
+                // Slide 11: Team Allocation (Revised)
                 {
                     id: 10,
                     type: 'content',
@@ -766,8 +767,8 @@
                                 <div className="flex-1 bg-blue-50 border-t-8 border-blue-500 rounded-2xl p-6 shadow-sm flex flex-col relative">
                                     <div className="absolute top-4 right-4 bg-blue-200 text-blue-800 text-xs font-bold px-2 py-1 rounded">外層：共同事實</div>
                                     <div className="mb-4 text-blue-600"><Bot size={40}/></div>
-                                    <h4 className="text-xl font-bold text-slate-900 mb-2">內容轉譯 (Editor)</h4>
-                                    <p className="text-sm text-slate-600 mb-4">負責 AI 自動化流的建置與監控，確保資訊源頭的準確性。</p>
+                                    <h4 className="text-xl font-bold text-slate-900 mb-2">編輯團隊 (Editorial Team)</h4>
+                                    <p className="text-sm text-slate-600 mb-4">負責 AI 自動化流的建置與監控，同時產出長文內容。</p>
                                     <div className="mt-auto bg-white p-3 rounded-lg border border-blue-100 text-xs text-blue-700 font-bold">
                                         ⚠️ 初期需高投入：<br/>建立自動化 S.O.P 與查核標準
                                     </div>
@@ -779,16 +780,13 @@
                                     <div className="mb-4 text-amber-600 flex gap-2">
                                         <Crown size={40}/>
                                         <Briefcase size={40}/>
-                                        <Rocket size={40}/>
                                     </div>
-                                    <h4 className="text-xl font-bold text-slate-900 mb-2">內容長 + 成長 + 商務</h4>
+                                    <h4 className="text-xl font-bold text-slate-900 mb-2">總編輯 (Editor-in-Chief)</h4>
                                     <p className="text-sm text-slate-600 mb-4">
-                                        <strong>內容長 (Founder)</strong>：產出核心觀點。<br/>
-                                        <strong>成長 (Growth)</strong>：優化漏斗與電子報。<br/>
-                                        <strong>商務 (BD)</strong>：將影響力變現 (B2B)。
+                                        負責核心觀點產出、戰略定調與信任變現 (BD)。
                                     </p>
                                     <div className="mt-auto bg-white p-3 rounded-lg border border-amber-100 text-xs text-amber-700 font-bold text-center">
-                                        主要寫作戰力來源
+                                        品牌靈魂與商業核心
                                     </div>
                                 </div>
 
@@ -796,7 +794,7 @@
                                 <div className="flex-1 bg-emerald-50 border-t-8 border-emerald-500 rounded-2xl p-6 shadow-sm flex flex-col relative">
                                     <div className="absolute top-4 right-4 bg-emerald-200 text-emerald-800 text-xs font-bold px-2 py-1 rounded">核心：共同感受</div>
                                     <div className="mb-4 text-emerald-600"><HeartHandshake size={40}/></div>
-                                    <h4 className="text-xl font-bold text-slate-900 mb-2">營運經理 (PM)</h4>
+                                    <h4 className="text-xl font-bold text-slate-900 mb-2">營運與社群 (Ops)</h4>
                                     <p className="text-sm text-slate-600 mb-4">負責實體活動策劃、社群維護與行政防火牆。</p>
                                     <div className="mt-auto bg-white p-3 rounded-lg border border-emerald-100 text-xs text-emerald-700 font-bold">
                                         信任變現的關鍵推手
@@ -807,41 +805,41 @@
                         </div>
                     )
                 },
-                // Slide 11: Support
+                // Slide 11: Systematization (NEW)
                 {
                     id: 11,
                     type: 'content',
-                    title: "關鍵支援系統",
-                    icon: <Shield size={40} className="text-emerald-600" />,
+                    title: "建構系統的目的：規模化與專注",
+                    icon: <Cogs size={40} className="text-slate-600" />,
                     content: (
-                        <div className="space-y-6">
-                            <div className="grid grid-cols-1 gap-6">
-                                <div className="flex items-start gap-6 bg-white p-6 rounded-lg border-l-4 border-blue-500 shadow-sm">
-                                    <div className="shrink-0 pt-1"><Shield size={32} className="text-blue-500"/></div>
+                        <div className="flex flex-col h-full justify-center px-4 md:px-0">
+                            <div className="grid grid-cols-1 gap-8 max-w-4xl mx-auto w-full">
+                                <div className="flex items-start gap-6 bg-white p-8 rounded-2xl border-l-8 border-blue-500 shadow-sm">
+                                    <div className="shrink-0 pt-1"><Layers size={40} className="text-blue-500"/></div>
                                     <div>
-                                        <h4 className="font-bold text-slate-800 text-xl">我的防火牆：營運經理 (PM)</h4>
-                                        <p className="text-base text-slate-600 mt-2">
-                                            PM 保護我不受行政、財務、人事流程干擾。讓我專注於內容創作。
+                                        <h4 className="font-bold text-slate-900 text-2xl mb-2">建立系統 (Systematization)</h4>
+                                        <p className="text-lg text-slate-600 leading-relaxed">
+                                            將「區塊勢」的一人作業模式，拆解為可被多人協作的標準化流程 (S.O.P.)，讓品質可複製。
                                         </p>
                                     </div>
                                 </div>
 
-                                <div className="flex items-start gap-6 bg-white p-6 rounded-lg border-l-4 border-amber-500 shadow-sm">
-                                    <div className="shrink-0 pt-1"><Zap size={32} className="text-amber-500"/></div>
+                                <div className="flex items-start gap-6 bg-white p-8 rounded-2xl border-l-8 border-amber-500 shadow-sm">
+                                    <div className="shrink-0 pt-1"><List size={40} className="text-amber-500"/></div>
                                     <div>
-                                        <h4 className="font-bold text-slate-800 text-xl">我的擴大器：內容轉譯 (Editor)</h4>
-                                        <p className="text-base text-slate-600 mt-2">
-                                            編輯將 5000 字長文轉化為短影音、圖文、新聞稿。沒有編輯，影響力出不去。
+                                        <h4 className="font-bold text-slate-900 text-2xl mb-2">職責分層 (Decoupling)</h4>
+                                        <p className="text-lg text-slate-600 leading-relaxed">
+                                            透過管理，將「共同事實 (AI/外層)」與「行政庶務」交由團隊執行，不再事必躬親。
                                         </p>
                                     </div>
                                 </div>
 
-                                <div className="flex items-start gap-6 bg-white p-6 rounded-lg border-l-4 border-emerald-500 shadow-sm">
-                                    <div className="shrink-0 pt-1"><DollarSign size={32} className="text-emerald-500"/></div>
+                                <div className="flex items-start gap-6 bg-white p-8 rounded-2xl border-l-8 border-emerald-500 shadow-sm">
+                                    <div className="shrink-0 pt-1"><Target size={40} className="text-emerald-500"/></div>
                                     <div>
-                                        <h4 className="font-bold text-slate-800 text-xl">我的收割機：商務與行銷 (BD & Growth)</h4>
-                                        <p className="text-base text-slate-600 mt-2">
-                                            專業團隊負責將影響力變現（企業客戶、訂閱戶）。讓主廚專心做菜，外場專心銷售。
+                                        <h4 className="font-bold text-slate-900 text-2xl mb-2">回歸核心 (Focus)</h4>
+                                        <p className="text-lg text-slate-600 leading-relaxed">
+                                            讓總編輯專注於最無法被取代的「原創內容」與「價值主張 (BD)」，確保品牌靈魂不被稀釋。
                                         </p>
                                     </div>
                                 </div>
@@ -879,9 +877,9 @@
                                         <div>
                                             <div className="flex items-center gap-3 mb-2">
                                                 <span className="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded font-bold">執行薪酬</span>
-                                                <h4 className="font-bold text-slate-900 text-2xl">內容長薪資 (Retainer)</h4>
+                                                <h4 className="font-bold text-slate-900 text-2xl">總編輯薪資 (Retainer)</h4>
                                             </div>
-                                            <p className="text-base text-slate-500">創辦人暨內容長 全職投入</p>
+                                            <p className="text-base text-slate-500">創辦人暨總編輯 全職投入</p>
                                         </div>
                                         <div className="text-right">
                                             <span className="font-black text-blue-700 block text-3xl">VP Level</span>
