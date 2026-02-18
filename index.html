@@ -101,10 +101,11 @@
             BookOpen: (p) => <IconBase {...p}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></IconBase>,
             Cogs: (p) => <IconBase {...p}><path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z"/><path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path d="M12 2v2"/><path d="M12 22v-2"/><path d="m17 7-1.4 1.4"/><path d="M22 12h-2"/><path d="m17 17-1.4-1.4"/><path d="m7 7 1.4 1.4"/><path d="M2 12h2"/><path d="m7 17 1.4-1.4"/></IconBase>,
             Mic: (p) => <IconBase {...p}><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></IconBase>,
-            ExternalLink: (p) => <IconBase {...p}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></IconBase>
+            ExternalLink: (p) => <IconBase {...p}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></IconBase>,
+            Workflow: (p) => <IconBase {...p}><rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/></IconBase>
         };
 
-        const { ChevronRight, ChevronLeft, Users, User, ChefHat, DollarSign, Target, Layers, Zap, Crown, Shield, Bot, PenTool, Cpu, Newspaper, Search, Lock, HeartHandshake, Video, List, AlertCircle, Landmark, Building, Clock, Image, Compass, TrendingDown, MousePointerClick, Anchor, Rocket, Briefcase, BookOpen, Cogs, Mic, ExternalLink } = Icons;
+        const { ChevronRight, ChevronLeft, Users, User, ChefHat, DollarSign, Target, Layers, Zap, Crown, Shield, Bot, PenTool, Cpu, Newspaper, Search, Lock, HeartHandshake, Video, List, AlertCircle, Landmark, Building, Clock, Image, Compass, TrendingDown, MousePointerClick, Anchor, Rocket, Briefcase, BookOpen, Cogs, Mic, ExternalLink, Workflow } = Icons;
 
         // --- 2. Main Application ---
 
@@ -134,7 +135,7 @@
                         </div>
                     )
                 },
-                // Slide 2: Agenda
+                // Slide 2: Agenda (Updated)
                 {
                     id: 1,
                     type: 'content',
@@ -200,7 +201,7 @@
                         </div>
                     )
                 },
-                // Slide 4: The Problem
+                // Slide 4: The Problem (Current Status)
                 {
                     id: 3,
                     type: 'content',
@@ -247,8 +248,8 @@
                                 <div className="relative w-full max-w-3xl h-[400px] mx-auto flex items-center justify-center">
                                     {/* Top: AI */}
                                     <div className="absolute top-0 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-20">
-                                        <div className="bg-amber-50 border-4 border-amber-500 rounded-full w-64 h-64 flex flex-col items-center justify-center p-4 shadow-xl">
-                                            <Bot size={56} className="text-amber-600 mb-2" />
+                                        <div className="bg-amber-50 border-4 border-amber-500 rounded-full w-56 h-56 flex flex-col items-center justify-center p-4 shadow-xl">
+                                            <Bot size={48} className="text-amber-600 mb-2" />
                                             <h3 className="text-xl font-bold text-slate-800">AI 模型</h3>
                                             <p className="text-sm text-slate-500 font-bold mt-1 bg-amber-100 px-2 py-1 rounded">讀合成內容導致崩塌</p>
                                             <p className="text-base text-amber-700 font-medium mt-1">需讀人類原創數據</p>
@@ -257,8 +258,8 @@
 
                                     {/* Bottom Left: Reader */}
                                     <div className="absolute bottom-0 left-0 flex flex-col items-center z-20">
-                                        <div className="bg-blue-50 border-4 border-blue-500 rounded-full w-64 h-64 flex flex-col items-center justify-center p-4 shadow-xl">
-                                            <Users size={56} className="text-blue-600 mb-2" />
+                                        <div className="bg-blue-50 border-4 border-blue-500 rounded-full w-56 h-56 flex flex-col items-center justify-center p-4 shadow-xl">
+                                            <Users size={48} className="text-blue-600 mb-2" />
                                             <h3 className="text-xl font-bold text-slate-800">人類讀者</h3>
                                             <p className="text-sm text-slate-500 font-bold mt-1 bg-blue-100 px-2 py-1 rounded">讀原始資訊效率低</p>
                                             <p className="text-base text-blue-700 font-medium mt-1">需讀 AI 整理情報</p>
@@ -267,8 +268,8 @@
 
                                     {/* Bottom Right: Creator */}
                                     <div className="absolute bottom-0 right-0 flex flex-col items-center z-20">
-                                        <div className="bg-white border-4 border-slate-300 rounded-full w-64 h-64 flex flex-col items-center justify-center p-4 shadow-xl">
-                                            <PenTool size={56} className="text-slate-600 mb-2" />
+                                        <div className="bg-white border-4 border-slate-300 rounded-full w-56 h-56 flex flex-col items-center justify-center p-4 shadow-xl">
+                                            <PenTool size={48} className="text-slate-600 mb-2" />
                                             <h3 className="text-xl font-bold text-slate-800">人類創作者</h3>
                                             <p className="text-base text-slate-500 font-medium mt-1">為讀者服務 (本質)</p>
                                             <p className="text-sm text-slate-400 mt-1">透過 AI 傳遞價值</p>
@@ -679,7 +680,7 @@
                         <div className="flex flex-col h-full justify-center px-4 md:px-0">
                             
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 h-[400px] items-center">
-                                <div className="bg-blue-50 p-10 rounded-3xl border border-blue-200 shadow-sm text-center flex flex-col justify-center h-full">
+                                <div className="bg-blue-50 p-10 rounded-3xl border border-blue-500 shadow-sm text-center flex flex-col justify-center h-full">
                                     <div className="bg-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-8 text-blue-600 shadow-sm">
                                         <Users size={40} />
                                     </div>
@@ -689,7 +690,7 @@
                                     </p>
                                 </div>
 
-                                <div className="bg-amber-50 p-10 rounded-3xl border border-amber-200 shadow-sm text-center flex flex-col justify-center h-full">
+                                <div className="bg-amber-50 p-10 rounded-3xl border border-amber-500 shadow-sm text-center flex flex-col justify-center h-full">
                                     <div className="bg-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-8 text-amber-600 shadow-sm">
                                         <Target size={40} />
                                     </div>
@@ -699,7 +700,7 @@
                                     </p>
                                 </div>
 
-                                <div className="bg-emerald-50 p-10 rounded-3xl border border-emerald-200 shadow-sm text-center flex flex-col justify-center h-full">
+                                <div className="bg-emerald-50 p-10 rounded-3xl border border-emerald-500 shadow-sm text-center flex flex-col justify-center h-full">
                                     <div className="bg-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-8 text-emerald-600 shadow-sm">
                                         <BookOpen size={40} />
                                     </div>
@@ -796,7 +797,7 @@
                                         <div>
                                             <h5 className="font-bold text-blue-800 mb-1 text-lg">職責</h5>
                                             <ul className="list-disc list-inside text-base text-slate-600 space-y-1">
-                                                <li>核心：撰寫深度長文 (付費內容)</li>
+                                                <li>核心：撰寫深度長文</li>
                                                 <li>日常：社群海巡</li>
                                                 <li>延伸：多媒體策展</li>
                                             </ul>
@@ -835,7 +836,7 @@
                                             <p className="text-base text-slate-500">戰略入股區塊勢，取得內容獨家授權導入付費專區</p>
                                         </div>
                                         <div className="text-right">
-                                            <span className="font-black text-slate-900 block text-3xl">戰略投資</span>
+                                            <span className="font-black text-slate-900 block text-3xl">股權投資</span>
                                             <span className="text-sm text-slate-400 font-bold">(Equity Investment)</span>
                                         </div>
                                     </div>
