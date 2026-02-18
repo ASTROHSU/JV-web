@@ -1041,27 +1041,32 @@
                             )}
                         </div>
                     </div>
-                    {/* Progress Bar: 三大段 + 目前所在段標籤 */}
+                    {/* Progress Bar: 三大段，每段內依頁數切小格 */}
                     <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-t border-slate-200 shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
-                        <div className="h-2 w-full flex shrink-0">
+                        <div className="h-2.5 w-full flex shrink-0">
                             {sectionRanges.map((section, idx) => {
-                                const isPast = currentSlide > section.end;
-                                const isCurrent = currentSlide >= section.start && currentSlide <= section.end;
-                                const isFuture = currentSlide < section.start;
                                 const colorMap = {
                                     blue: { active: 'bg-blue-600', past: 'bg-blue-400', future: 'bg-slate-200' },
                                     amber: { active: 'bg-amber-500', past: 'bg-amber-400', future: 'bg-slate-200' },
                                     emerald: { active: 'bg-emerald-600', past: 'bg-emerald-400', future: 'bg-slate-200' }
                                 };
                                 const colors = colorMap[section.color];
-                                const bgClass = isPast ? colors.past : isCurrent ? colors.active : colors.future;
                                 const slideCount = section.end - section.start + 1;
                                 return (
-                                    <div 
-                                        key={idx} 
-                                        className={`h-full transition-all duration-300 ${bgClass}`}
-                                        style={{ flex: slideCount }}
-                                    />
+                                    <div key={idx} className={`flex gap-px flex-1 min-w-0 ${idx < 2 ? 'border-r-2 border-slate-300/50 mr-px' : ''}`} style={{ flex: slideCount }}>
+                                        {Array.from({ length: slideCount }, (_, i) => {
+                                            const slideIndex = section.start + i;
+                                            const isPast = currentSlide > slideIndex;
+                                            const isCurrent = currentSlide === slideIndex;
+                                            const bgClass = isPast ? colors.past : isCurrent ? colors.active : colors.future;
+                                            return (
+                                                <div
+                                                    key={slideIndex}
+                                                    className={`h-full flex-1 min-w-[2px] transition-all duration-300 ${bgClass}`}
+                                                />
+                                            );
+                                        })}
+                                    </div>
                                 );
                             })}
                         </div>
