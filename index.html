@@ -713,77 +713,7 @@
                         </div>
                     )
                 },
-                // Slide 11: Systematization (NEW)
-                {
-                    id: 10,
-                    type: 'content',
-                    title: "內容生產系統",
-                    icon: <Layers size={40} className="text-slate-600" />,
-                    content: (
-                        <div className="flex flex-col h-full justify-center px-4 md:px-0">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto w-full">
-                                {/* Left: Core (40%) */}
-                                <div className="bg-white p-10 rounded-2xl border-t-8 border-slate-800 shadow-lg flex flex-col h-full relative">
-                                    <div className="absolute top-4 right-4 bg-slate-800 text-white text-xs font-bold px-3 py-1 rounded-full">40% 時間</div>
-                                    <div className="mb-6 text-slate-800 flex items-center gap-3">
-                                        <PenTool size={40}/>
-                                        <h4 className="text-3xl font-black">核心產能</h4>
-                                    </div>
-                                    <div className="flex-1">
-                                        <p className="text-xl font-bold text-slate-900 mb-4">每週產出一篇深度長文</p>
-                                        <ul className="space-y-4 text-slate-600 text-lg">
-                                            <li className="flex gap-3">
-                                                <span className="text-slate-400 font-bold">•</span>
-                                                <span>這是不可妥協的基石。</span>
-                                            </li>
-                                            <li className="flex gap-3">
-                                                <span className="text-slate-400 font-bold">•</span>
-                                                <span>建立媒體的品味與觀點。</span>
-                                            </li>
-                                            <li className="flex gap-3">
-                                                <span className="text-slate-400 font-bold">•</span>
-                                                <span>確保內容足以讓讀者付費。</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div className="mt-8 pt-6 border-t border-slate-100 text-center">
-                                        <span className="text-sm font-bold text-slate-400 uppercase tracking-widest">約 2 個工作天</span>
-                                    </div>
-                                </div>
-
-                                {/* Right: Extension (60%) */}
-                                <div className="bg-slate-50 p-10 rounded-2xl border-t-8 border-amber-500 shadow-sm flex flex-col h-full relative">
-                                    <div className="absolute top-4 right-4 bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full">60% 時間</div>
-                                    <div className="mb-6 text-amber-600 flex items-center gap-3">
-                                        <Mic size={40}/>
-                                        <h4 className="text-3xl font-black">多元產出</h4>
-                                    </div>
-                                    <div className="flex-1">
-                                        <p className="text-xl font-bold text-slate-900 mb-4">核心能力的延伸</p>
-                                        <ul className="space-y-4 text-slate-600 text-lg">
-                                            <li className="flex gap-3">
-                                                <span className="text-amber-400 font-bold">•</span>
-                                                <span>Podcast / 影音錄製。</span>
-                                            </li>
-                                            <li className="flex gap-3">
-                                                <span className="text-amber-400 font-bold">•</span>
-                                                <span>社群海巡與即時資訊篩選。</span>
-                                            </li>
-                                            <li className="flex gap-3">
-                                                <span className="text-amber-400 font-bold">•</span>
-                                                <span>教育內容、深度報告、活動參與。</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div className="mt-8 pt-6 border-t border-slate-200 text-center">
-                                        <span className="text-sm font-bold text-slate-400 uppercase tracking-widest">約 3 個工作天</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )
-                },
-                // Slide 12: Team Allocation (Revised)
+                // Slide 11: Team Allocation
                 {
                     id: 11,
                     type: 'content',
@@ -850,6 +780,76 @@
                             </div>
                              <div className="text-center text-sm text-slate-400">
                                 * 營運支援 (Ops) 為初期次要配置，視需求彈性加入。
+                            </div>
+                        </div>
+                    )
+                },
+                // Slide 12: Systematization
+                {
+                    id: 10,
+                    type: 'content',
+                    title: "內容生產系統",
+                    icon: <Layers size={40} className="text-slate-600" />,
+                    content: (
+                        <div className="flex flex-col h-full justify-center px-4 md:px-0">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto w-full">
+                                {/* Left: Core (40%) */}
+                                <div className="bg-white p-10 rounded-2xl border-t-8 border-slate-800 shadow-lg flex flex-col h-full relative">
+                                    <div className="absolute top-4 right-4 bg-slate-800 text-white text-xs font-bold px-3 py-1 rounded-full">40% 時間</div>
+                                    <div className="mb-6 text-slate-800 flex items-center gap-3">
+                                        <PenTool size={40}/>
+                                        <h4 className="text-3xl font-black">核心產能</h4>
+                                    </div>
+                                    <div className="flex-1">
+                                        <p className="text-xl font-bold text-slate-900 mb-4">每週產出一篇深度長文</p>
+                                        <ul className="space-y-4 text-slate-600 text-lg">
+                                            <li className="flex gap-3">
+                                                <span className="text-slate-400 font-bold">•</span>
+                                                <span>這是不可妥協的基石。</span>
+                                            </li>
+                                            <li className="flex gap-3">
+                                                <span className="text-slate-400 font-bold">•</span>
+                                                <span>建立媒體的品味與觀點。</span>
+                                            </li>
+                                            <li className="flex gap-3">
+                                                <span className="text-slate-400 font-bold">•</span>
+                                                <span>確保內容足以讓讀者付費。</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div className="mt-8 pt-6 border-t border-slate-100 text-center">
+                                        <span className="text-sm font-bold text-slate-400 uppercase tracking-widest">約 2 個工作天</span>
+                                    </div>
+                                </div>
+
+                                {/* Right: Extension (60%) */}
+                                <div className="bg-slate-50 p-10 rounded-2xl border-t-8 border-amber-500 shadow-sm flex flex-col h-full relative">
+                                    <div className="absolute top-4 right-4 bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full">60% 時間</div>
+                                    <div className="mb-6 text-amber-600 flex items-center gap-3">
+                                        <Mic size={40}/>
+                                        <h4 className="text-3xl font-black">多元產出</h4>
+                                    </div>
+                                    <div className="flex-1">
+                                        <p className="text-xl font-bold text-slate-900 mb-4">核心能力的延伸</p>
+                                        <ul className="space-y-4 text-slate-600 text-lg">
+                                            <li className="flex gap-3">
+                                                <span className="text-amber-400 font-bold">•</span>
+                                                <span>Podcast / 影音錄製。</span>
+                                            </li>
+                                            <li className="flex gap-3">
+                                                <span className="text-amber-400 font-bold">•</span>
+                                                <span>社群海巡與即時資訊篩選。</span>
+                                            </li>
+                                            <li className="flex gap-3">
+                                                <span className="text-amber-400 font-bold">•</span>
+                                                <span>教育內容、深度報告、活動參與。</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div className="mt-8 pt-6 border-t border-slate-200 text-center">
+                                        <span className="text-sm font-bold text-slate-400 uppercase tracking-widest">約 3 個工作天</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     )
