@@ -142,42 +142,54 @@
                     icon: <List size={40} className="text-slate-600" />,
                     content: (
                         <div className="flex flex-col h-full justify-center px-4 md:px-12">
-                            <div className="flex flex-col gap-6 w-full max-w-4xl mx-auto">
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div className="flex items-center gap-4 group bg-white p-6 rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-all h-full">
-                                        <div className="w-12 h-12 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-xl group-hover:bg-slate-600 group-hover:text-white transition-colors shrink-0">1</div>
-                                        <div>
-                                            <h3 className="text-xl font-bold text-slate-800">現況洞察</h3>
-                                            <p className="text-sm text-slate-500 mt-1">媒體困境與市場痛點。</p>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center gap-4 group bg-white p-6 rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-all h-full">
-                                        <div className="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-xl group-hover:bg-blue-600 group-hover:text-white transition-colors shrink-0">2</div>
-                                        <div>
-                                            <h3 className="text-xl font-bold text-slate-800">趨勢與策略</h3>
-                                            <p className="text-sm text-slate-500 mt-1">AI 價值三角與雙引擎架構。</p>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center gap-4 group bg-white p-6 rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-all h-full">
-                                        <div className="w-12 h-12 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-xl group-hover:bg-slate-600 group-hover:text-white transition-colors shrink-0">3</div>
-                                        <div>
-                                            <h3 className="text-xl font-bold text-slate-800">產品樣貌</h3>
-                                            <p className="text-sm text-slate-500 mt-1">產品視覺模擬。</p>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center gap-4 group bg-white p-6 rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-all h-full">
-                                        <div className="w-12 h-12 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center font-bold text-xl group-hover:bg-purple-600 group-hover:text-white transition-colors shrink-0">4</div>
-                                        <div>
-                                            <h3 className="text-xl font-bold text-slate-800">價值主張</h3>
-                                            <p className="text-sm text-slate-500 mt-1">目標受眾與同心圓價值。</p>
-                                        </div>
+                            <div className="flex flex-col gap-4 w-full max-w-2xl mx-auto">
+                                <div className="flex items-center gap-6 group">
+                                    <div className="w-10 h-10 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-lg group-hover:bg-slate-600 group-hover:text-white transition-colors shrink-0">1</div>
+                                    <div className="flex-1 border-b border-slate-100 pb-3">
+                                        <h3 className="text-xl font-bold text-slate-800">幣圈媒體的現況</h3>
+                                        <p className="text-sm text-slate-500">流量陷阱與定位迷失。</p>
                                     </div>
                                 </div>
-                                <div className="flex items-center gap-4 group bg-white p-6 rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-all w-full">
-                                    <div className="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-xl group-hover:bg-emerald-600 group-hover:text-white transition-colors shrink-0">5</div>
-                                    <div>
-                                        <h3 className="text-xl font-bold text-slate-800">營運與報價</h3>
-                                        <p className="text-sm text-slate-500 mt-1">團隊哲學、生產系統與資產收購。</p>
+                                <div className="flex items-center gap-6 group">
+                                    <div className="w-10 h-10 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-bold text-lg group-hover:bg-red-600 group-hover:text-white transition-colors shrink-0">2</div>
+                                    <div className="flex-1 border-b border-slate-100 pb-3">
+                                        <h3 className="text-xl font-bold text-slate-800">現況痛點：缺乏共識與座標</h3>
+                                        <p className="text-sm text-slate-500">市場當前最迫切的問題是什麼？</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-center gap-6 group">
+                                    <div className="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-lg group-hover:bg-blue-600 group-hover:text-white transition-colors shrink-0">3</div>
+                                    <div className="flex-1 border-b border-slate-100 pb-3">
+                                        <h3 className="text-xl font-bold text-slate-800">趨勢變革：AI 價值三角</h3>
+                                        <p className="text-sm text-slate-500">AI 改變資訊與價值的傳遞邏輯。</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-center gap-6 group">
+                                    <div className="w-10 h-10 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-lg group-hover:bg-amber-600 group-hover:text-white transition-colors shrink-0">4</div>
+                                    <div className="flex-1 border-b border-slate-100 pb-3">
+                                        <h3 className="text-xl font-bold text-slate-800">JV 的核心解法</h3>
+                                        <p className="text-sm text-slate-500">AI 負責共同事實，人類負責共同框架。</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-center gap-6 group">
+                                    <div className="w-10 h-10 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-lg group-hover:bg-slate-600 group-hover:text-white transition-colors shrink-0">5</div>
+                                    <div className="flex-1 border-b border-slate-100 pb-3">
+                                        <h3 className="text-xl font-bold text-slate-800">產品樣貌：視覺模擬</h3>
+                                        <p className="text-sm text-slate-500">具體呈現給使用者的產品長什麼樣子？</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-center gap-6 group">
+                                    <div className="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center font-bold text-lg group-hover:bg-purple-600 group-hover:text-white transition-colors shrink-0">6</div>
+                                    <div className="flex-1 border-b border-slate-100 pb-3">
+                                        <h3 className="text-xl font-bold text-slate-800">我們賣「時間」與「判斷」</h3>
+                                        <p className="text-sm text-slate-500">目標受眾與價值主張。</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-center gap-6 group">
+                                    <div className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-lg group-hover:bg-emerald-600 group-hover:text-white transition-colors shrink-0">7</div>
+                                    <div className="flex-1 border-b border-slate-100 pb-3">
+                                        <h3 className="text-xl font-bold text-slate-800">產品全貌 & 投資報價</h3>
+                                        <p className="text-sm text-slate-500">三大支柱、團隊與資產收購。</p>
                                     </div>
                                 </div>
                             </div>
@@ -690,38 +702,41 @@
                 {
                     id: 9,
                     type: 'content',
-                    title: "以寫作建立品味",
+                    title: "團隊鐵律：以寫作建立品味",
                     icon: <PenTool size={40} className="text-slate-600" />,
                     content: (
                         <div className="flex flex-col h-full justify-center px-4 md:px-0">
-                            
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 h-[400px] items-center">
-                                <div className="bg-white p-10 rounded-3xl border border-slate-200 shadow-sm text-center flex flex-col justify-center h-full group hover:border-blue-400 transition-colors">
-                                    <div className="bg-slate-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-8 text-slate-600 group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">
-                                        <Users size={40} />
+                            <div className="text-center mb-12">
+                                <h3 className="text-3xl font-black text-slate-900 mb-4">寫作不是職位，是團隊的必修課</h3>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                                <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm text-center">
+                                    <div className="bg-slate-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-slate-600">
+                                        <Users size={32} />
                                     </div>
-                                    <h4 className="text-2xl font-bold text-slate-900 mb-4">人人都是創作者</h4>
-                                    <p className="text-slate-600 text-lg leading-relaxed">
-                                        在這個團隊裡，所有人都必須具備產製長文的能力。
+                                    <h4 className="text-xl font-bold text-slate-900 mb-3">人人都是創作者</h4>
+                                    <p className="text-slate-600 leading-relaxed">
+                                        在這個團隊裡，所有人都必須具備產製長文的能力，將專業轉化為影響力。
                                     </p>
                                 </div>
 
-                                <div className="bg-white p-10 rounded-3xl border border-slate-200 shadow-sm text-center flex flex-col justify-center h-full group hover:border-amber-400 transition-colors">
-                                    <div className="bg-slate-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-8 text-slate-600 group-hover:bg-amber-50 group-hover:text-amber-600 transition-colors">
-                                        <Target size={40} />
+                                <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm text-center">
+                                    <div className="bg-slate-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-slate-600">
+                                        <Target size={32} />
                                     </div>
-                                    <h4 className="text-2xl font-bold text-slate-900 mb-4">市場驗證</h4>
-                                    <p className="text-slate-600 text-lg leading-relaxed">
+                                    <h4 className="text-xl font-bold text-slate-900 mb-3">市場驗證</h4>
+                                    <p className="text-slate-600 leading-relaxed">
                                         市場是唯一的老師。初期沒有品牌紅利，內容必須強到足以讓讀者掏錢訂閱，這是最直接的價值證明。
                                     </p>
                                 </div>
 
-                                <div className="bg-white p-10 rounded-3xl border border-slate-200 shadow-sm text-center flex flex-col justify-center h-full group hover:border-emerald-400 transition-colors">
-                                    <div className="bg-slate-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-8 text-slate-600 group-hover:bg-emerald-50 group-hover:text-emerald-600 transition-colors">
-                                        <BookOpen size={40} />
+                                <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm text-center">
+                                    <div className="bg-slate-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-slate-600">
+                                        <BookOpen size={32} />
                                     </div>
-                                    <h4 className="text-2xl font-bold text-slate-900 mb-4">建立品味</h4>
-                                    <p className="text-slate-600 text-lg leading-relaxed">
+                                    <h4 className="text-xl font-bold text-slate-900 mb-3">建立品味</h4>
+                                    <p className="text-slate-600 leading-relaxed">
                                         唯有親手產製深度內容並接受市場檢驗，才能具備判斷市場訊號的眼光，這是 AI 時代不可被取代的核心能力。
                                     </p>
                                 </div>
@@ -733,38 +748,66 @@
                 {
                     id: 10,
                     type: 'content',
-                    title: "內容生產系統",
+                    title: "內容生產系統：核心產能與價值延伸",
                     icon: <Layers size={40} className="text-slate-600" />,
                     content: (
                         <div className="flex flex-col h-full justify-center px-4 md:px-0">
-                            <div className="grid grid-cols-1 gap-8 max-w-4xl mx-auto w-full">
-                                <div className="flex items-start gap-6 bg-white p-8 rounded-2xl border-l-8 border-blue-500 shadow-sm">
-                                    <div className="shrink-0 pt-1"><PenTool size={40} className="text-blue-500"/></div>
-                                    <div>
-                                        <h4 className="font-bold text-slate-900 text-2xl mb-2">核心：文字原創</h4>
-                                        <p className="text-lg text-slate-600 leading-relaxed">
-                                            文字是所有內容的靈魂與源代碼。記者與編輯的首要任務是產出高品質的文本。
-                                        </p>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto w-full">
+                                {/* Left: Core (40%) */}
+                                <div className="bg-white p-10 rounded-2xl border-t-8 border-slate-800 shadow-lg flex flex-col h-full relative">
+                                    <div className="absolute top-4 right-4 bg-slate-800 text-white text-xs font-bold px-3 py-1 rounded-full">40% 時間</div>
+                                    <div className="mb-6 text-slate-800 flex items-center gap-3">
+                                        <PenTool size={40}/>
+                                        <h4 className="text-3xl font-black">核心產能</h4>
+                                    </div>
+                                    <div className="flex-1">
+                                        <p className="text-xl font-bold text-slate-900 mb-4">每週產出一篇深度長文</p>
+                                        <ul className="space-y-4 text-slate-600 text-lg">
+                                            <li className="flex gap-3">
+                                                <span className="text-slate-400 font-bold">•</span>
+                                                <span>這是不可妥協的基石。</span>
+                                            </li>
+                                            <li className="flex gap-3">
+                                                <span className="text-slate-400 font-bold">•</span>
+                                                <span>建立媒體的品味與觀點。</span>
+                                            </li>
+                                            <li className="flex gap-3">
+                                                <span className="text-slate-400 font-bold">•</span>
+                                                <span>確保內容足以讓讀者付費。</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div className="mt-8 pt-6 border-t border-slate-100 text-center">
+                                        <span className="text-sm font-bold text-slate-400 uppercase tracking-widest">約 2 個工作天</span>
                                     </div>
                                 </div>
 
-                                <div className="flex items-start gap-6 bg-white p-8 rounded-2xl border-l-8 border-amber-500 shadow-sm">
-                                    <div className="shrink-0 pt-1"><Mic size={40} className="text-amber-500"/></div>
-                                    <div>
-                                        <h4 className="font-bold text-slate-900 text-2xl mb-2">槓桿：集團資源</h4>
-                                        <p className="text-lg text-slate-600 leading-relaxed">
-                                            影音與 Podcast 製作交由聯合報系既有專業團隊支援。我們出「腦（內容與講者）」，夥伴出「手（製作技術）」。
-                                        </p>
+                                {/* Right: Extension (60%) */}
+                                <div className="bg-slate-50 p-10 rounded-2xl border-t-8 border-amber-500 shadow-sm flex flex-col h-full relative">
+                                    <div className="absolute top-4 right-4 bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full">60% 時間</div>
+                                    <div className="mb-6 text-amber-600 flex items-center gap-3">
+                                        <Mic size={40}/>
+                                        <h4 className="text-3xl font-black">多元產出</h4>
                                     </div>
-                                </div>
-
-                                <div className="flex items-start gap-6 bg-white p-8 rounded-2xl border-l-8 border-emerald-500 shadow-sm">
-                                    <div className="shrink-0 pt-1"><Target size={40} className="text-emerald-500"/></div>
-                                    <div>
-                                        <h4 className="font-bold text-slate-900 text-2xl mb-2">專注：回歸內容本質</h4>
-                                        <p className="text-lg text-slate-600 leading-relaxed">
-                                            讓總編輯與團隊專注於內容創作與核心觀點，不被技術製作流程綁架。
-                                        </p>
+                                    <div className="flex-1">
+                                        <p className="text-xl font-bold text-slate-900 mb-4">核心能力的延伸</p>
+                                        <ul className="space-y-4 text-slate-600 text-lg">
+                                            <li className="flex gap-3">
+                                                <span className="text-amber-400 font-bold">•</span>
+                                                <span>Podcast / 影音錄製。</span>
+                                            </li>
+                                            <li className="flex gap-3">
+                                                <span className="text-amber-400 font-bold">•</span>
+                                                <span>社群海巡與即時資訊篩選。</span>
+                                            </li>
+                                            <li className="flex gap-3">
+                                                <span className="text-amber-400 font-bold">•</span>
+                                                <span>教育內容、深度報告、活動參與。</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div className="mt-8 pt-6 border-t border-slate-200 text-center">
+                                        <span className="text-sm font-bold text-slate-400 uppercase tracking-widest">約 3 個工作天</span>
                                     </div>
                                 </div>
                             </div>
@@ -954,9 +997,9 @@
                                             <Video size={32} />
                                         </div>
                                         <div>
-                                            <h3 className="text-2xl font-bold text-slate-900 mb-2 group-hover:text-red-700">Steve Jobs: The Best Marketing</h3>
+                                            <h3 className="text-2xl font-bold text-slate-900 mb-2 group-hover:text-red-700">Ben Thompson from Stratechery on AI ads, the end of SaaS, and the future of media</h3>
                                             <p className="text-slate-600 text-lg mb-1">YouTube</p>
-                                            <p className="text-slate-500 text-sm">Steve Jobs 談論品牌核心價值，以及為什麼要專注於產品本質。</p>
+                                            <p className="text-slate-500 text-sm">關於 AI 如何改變媒體商業模式與內容價值的深度對談。</p>
                                         </div>
                                     </div>
                                 </a>
