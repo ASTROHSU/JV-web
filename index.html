@@ -134,7 +134,7 @@
                         </div>
                     )
                 },
-                // Slide 2: Agenda (Updated)
+                // Slide 2: Agenda
                 {
                     id: 1,
                     type: 'content',
@@ -200,7 +200,7 @@
                         </div>
                     )
                 },
-                // Slide 4: The Problem (Current Status)
+                // Slide 4: The Problem
                 {
                     id: 3,
                     type: 'content',
@@ -247,8 +247,8 @@
                                 <div className="relative w-full max-w-3xl h-[400px] mx-auto flex items-center justify-center">
                                     {/* Top: AI */}
                                     <div className="absolute top-0 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-20">
-                                        <div className="bg-amber-50 border-4 border-amber-500 rounded-full w-56 h-56 flex flex-col items-center justify-center p-4 shadow-xl">
-                                            <Bot size={48} className="text-amber-600 mb-2" />
+                                        <div className="bg-amber-50 border-4 border-amber-500 rounded-full w-64 h-64 flex flex-col items-center justify-center p-4 shadow-xl">
+                                            <Bot size={56} className="text-amber-600 mb-2" />
                                             <h3 className="text-xl font-bold text-slate-800">AI 模型</h3>
                                             <p className="text-sm text-slate-500 font-bold mt-1 bg-amber-100 px-2 py-1 rounded">讀合成內容導致崩塌</p>
                                             <p className="text-base text-amber-700 font-medium mt-1">需讀人類原創數據</p>
@@ -257,8 +257,8 @@
 
                                     {/* Bottom Left: Reader */}
                                     <div className="absolute bottom-0 left-0 flex flex-col items-center z-20">
-                                        <div className="bg-blue-50 border-4 border-blue-500 rounded-full w-56 h-56 flex flex-col items-center justify-center p-4 shadow-xl">
-                                            <Users size={48} className="text-blue-600 mb-2" />
+                                        <div className="bg-blue-50 border-4 border-blue-500 rounded-full w-64 h-64 flex flex-col items-center justify-center p-4 shadow-xl">
+                                            <Users size={56} className="text-blue-600 mb-2" />
                                             <h3 className="text-xl font-bold text-slate-800">人類讀者</h3>
                                             <p className="text-sm text-slate-500 font-bold mt-1 bg-blue-100 px-2 py-1 rounded">讀原始資訊效率低</p>
                                             <p className="text-base text-blue-700 font-medium mt-1">需讀 AI 整理情報</p>
@@ -267,8 +267,8 @@
 
                                     {/* Bottom Right: Creator */}
                                     <div className="absolute bottom-0 right-0 flex flex-col items-center z-20">
-                                        <div className="bg-white border-4 border-slate-300 rounded-full w-56 h-56 flex flex-col items-center justify-center p-4 shadow-xl">
-                                            <PenTool size={48} className="text-slate-600 mb-2" />
+                                        <div className="bg-white border-4 border-slate-300 rounded-full w-64 h-64 flex flex-col items-center justify-center p-4 shadow-xl">
+                                            <PenTool size={56} className="text-slate-600 mb-2" />
                                             <h3 className="text-xl font-bold text-slate-800">人類創作者</h3>
                                             <p className="text-base text-slate-500 font-medium mt-1">為讀者服務 (本質)</p>
                                             <p className="text-sm text-slate-400 mt-1">透過 AI 傳遞價值</p>
@@ -631,7 +631,7 @@
                                             <h4 className="text-2xl font-bold text-slate-900">共同事實 (外層)</h4>
                                             <p className="text-lg text-slate-600 mt-1">即時資訊、多方觀點。</p>
                                             <div className="mt-3 flex gap-2">
-                                                <span className="text-sm font-bold bg-blue-100 text-blue-700 px-3 py-1 rounded">免費</span>
+                                                <span className="text-sm font-bold bg-blue-100 text-blue-700 px-3 py-1 rounded">免費閱讀</span>
                                                 <span className="text-sm font-bold bg-slate-100 text-slate-600 px-3 py-1 rounded">低人力 (仰賴系統)</span>
                                             </div>
                                         </div>
@@ -695,7 +695,7 @@
                                     </div>
                                     <h4 className="text-2xl font-bold text-slate-900 mb-4">市場驗證</h4>
                                     <p className="text-slate-600 text-lg leading-relaxed">
-                                        市場是唯一的老師。初期沒有品牌紅利，內容必須強到足以讓讀者掏錢訂閱，這是最直接的價值證明。
+                                        市場是最好的老師。內容必須強到足以讓讀者掏錢訂閱。
                                     </p>
                                 </div>
 
@@ -705,7 +705,7 @@
                                     </div>
                                     <h4 className="text-2xl font-bold text-slate-900 mb-4">建立品味</h4>
                                     <p className="text-slate-600 text-lg leading-relaxed">
-                                        唯有親手產製深度內容並接受市場檢驗，才能具備判斷市場訊號的眼光，這是 AI 時代不可被取代的核心能力。
+                                        唯有親手產製深度內容並接受市場檢驗，才能具備判斷市場訊號的眼光。
                                     </p>
                                 </div>
                             </div>
@@ -726,7 +726,7 @@
                                     <div>
                                         <h4 className="font-bold text-slate-900 text-2xl mb-2">文字原創</h4>
                                         <p className="text-lg text-slate-600 leading-relaxed">
-                                            文字是所有內容的靈魂與源代碼。記者與編輯的首要任務是產出高品質的文本。
+                                            文字是所有內容的源頭，記者與編輯的首要任務是產出高品質的文字。
                                         </p>
                                     </div>
                                 </div>
@@ -736,17 +736,7 @@
                                     <div>
                                         <h4 className="font-bold text-slate-900 text-2xl mb-2">集團槓桿</h4>
                                         <p className="text-lg text-slate-600 leading-relaxed">
-                                            影音與 Podcast 製作交由聯合報系既有專業團隊支援。我們出「腦（內容與講者）」，夥伴出「手（製作技術）」。
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-start gap-6 bg-white p-8 rounded-2xl border-l-8 border-emerald-500 shadow-sm">
-                                    <div className="shrink-0 pt-1"><Target size={40} className="text-emerald-500"/></div>
-                                    <div>
-                                        <h4 className="font-bold text-slate-900 text-2xl mb-2">回歸內容本質</h4>
-                                        <p className="text-lg text-slate-600 leading-relaxed">
-                                            讓總編輯與團隊專注於內容創作與核心觀點，不被技術製作流程綁架。
+                                            影音與 Podcast 製作交由聯合報系既有專業團隊支援。
                                         </p>
                                     </div>
                                 </div>
@@ -842,11 +832,11 @@
                                                 <span className="bg-amber-100 text-amber-800 text-sm px-3 py-1 rounded font-bold">資產注入</span>
                                                 <h4 className="font-bold text-slate-900 text-2xl">品牌結盟與授權</h4>
                                             </div>
-                                            <p className="text-base text-slate-500">獨家授權區塊勢內容，導入生產系統</p>
+                                            <p className="text-base text-slate-500">戰略入股區塊勢，取得內容獨家授權導入付費專區</p>
                                         </div>
                                         <div className="text-right">
-                                            <span className="font-black text-slate-900 block text-3xl">品牌授權金</span>
-                                            <span className="text-sm text-slate-400 font-bold">(Licensing Fee)</span>
+                                            <span className="font-black text-slate-900 block text-3xl">戰略投資</span>
+                                            <span className="text-sm text-slate-400 font-bold">(Equity Investment)</span>
                                         </div>
                                     </div>
 
@@ -861,7 +851,7 @@
                                         </div>
                                         <div className="text-right">
                                             <span className="font-black text-blue-700 block text-3xl">VP Level</span>
-                                            <span className="text-sm text-slate-400 font-bold">月薪 20-25萬 + 高管福利</span>
+                                            <span className="text-sm text-slate-400 font-bold">月薪 20-25萬 + 完整薪酬配套</span>
                                         </div>
                                     </div>
 
