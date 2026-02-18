@@ -95,10 +95,12 @@
             Compass: (p) => <IconBase {...p}><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></IconBase>,
             TrendingDown: (p) => <IconBase {...p}><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></IconBase>,
             MousePointerClick: (p) => <IconBase {...p}><path d="m9 9 5 12 1.8-5.2L21 14Z"/><path d="M7.2 2.2 8 5.1"/><path d="m5.1 8-2.9-.8"/><path d="M14 4.1 12 6"/><path d="m6 12-1.9 2"/></IconBase>,
-            Anchor: (p) => <IconBase {...p}><circle cx="12" cy="5" r="3"/><line x1="12" x2="12" y1="22" y2="8"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/></IconBase>
+            Anchor: (p) => <IconBase {...p}><circle cx="12" cy="5" r="3"/><line x1="12" x2="12" y1="22" y2="8"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/></IconBase>,
+            Rocket: (p) => <IconBase {...p}><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></IconBase>,
+            Briefcase: (p) => <IconBase {...p}><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></IconBase>
         };
 
-        const { ChevronRight, ChevronLeft, Users, User, ChefHat, DollarSign, Target, Layers, Zap, Crown, Shield, Bot, PenTool, Cpu, Newspaper, Search, Lock, HeartHandshake, Video, List, AlertCircle, Landmark, Building, Clock, Image, Compass, TrendingDown, MousePointerClick, Anchor } = Icons;
+        const { ChevronRight, ChevronLeft, Users, User, ChefHat, DollarSign, Target, Layers, Zap, Crown, Shield, Bot, PenTool, Cpu, Newspaper, Search, Lock, HeartHandshake, Video, List, AlertCircle, Landmark, Building, Clock, Image, Compass, TrendingDown, MousePointerClick, Anchor, Rocket, Briefcase } = Icons;
 
         // --- 2. Main Application ---
 
@@ -701,52 +703,54 @@
                 {
                     id: 9,
                     type: 'content',
-                    title: "營運配置：團隊與分工",
+                    title: "建構團隊：5 人精實戰隊",
                     icon: <Users size={40} className="text-blue-600" />,
                     content: (
                         <div className="space-y-6">
                             <div className="text-center mb-6">
-                                <h3 className="text-2xl font-bold text-slate-900">1 + 4 特種部隊架構</h3>
-                                <p className="text-slate-500 text-base">少於這個人數，產能將會因為行政內耗而下降</p>
+                                <h3 className="text-2xl font-bold text-slate-900">依據價值分層配置，初期重基礎建設，後期重核心價值</h3>
                             </div>
 
-                            <div className="relative p-8 border border-slate-200 rounded-xl bg-white shadow-sm h-[400px] flex items-center justify-center">
-                                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-px h-full bg-slate-100 hidden md:block"></div>
+                            <div className="flex flex-col md:flex-row gap-6 justify-center items-stretch h-[400px]">
                                 
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-16 w-full">
-                                    {/* Left: The Brain */}
-                                    <div className="text-center flex flex-col items-center justify-center">
-                                        <div className="bg-amber-100 p-6 rounded-full mb-4 ring-4 ring-amber-50">
-                                            <Crown size={48} className="text-amber-600" />
-                                        </div>
-                                        <h4 className="font-bold text-2xl text-slate-900">1 位 內容長 (主廚)</h4>
-                                        <p className="text-base text-slate-500 mt-1">負責：研發、品控、靈魂</p>
-                                    </div>
-
-                                    {/* Right: The Hands */}
-                                    <div className="grid grid-cols-2 gap-6">
-                                        <div className="bg-slate-50 p-4 rounded border border-slate-100">
-                                            <span className="block font-bold text-blue-600 text-sm mb-1">營運</span>
-                                            <h5 className="font-bold text-slate-800 text-base">營運經理 (PM)</h5>
-                                            <p className="text-xs text-slate-500 mt-1">流程與行政</p>
-                                        </div>
-                                        <div className="bg-slate-50 p-4 rounded border border-slate-100">
-                                            <span className="block font-bold text-blue-600 text-sm mb-1">內容</span>
-                                            <h5 className="font-bold text-slate-800 text-base">內容轉譯 (Editor)</h5>
-                                            <p className="text-xs text-slate-500 mt-1">改寫與多形式製作</p>
-                                        </div>
-                                        <div className="bg-slate-50 p-4 rounded border border-slate-100">
-                                            <span className="block font-bold text-emerald-600 text-sm mb-1">行銷</span>
-                                            <h5 className="font-bold text-slate-800 text-base">成長行銷</h5>
-                                            <p className="text-xs text-slate-500 mt-1">推廣與漏斗優化</p>
-                                        </div>
-                                        <div className="bg-slate-50 p-4 rounded border border-slate-100">
-                                            <span className="block font-bold text-emerald-600 text-sm mb-1">業務</span>
-                                            <h5 className="font-bold text-slate-800 text-base">商務開發 (BD)</h5>
-                                            <p className="text-xs text-slate-500 mt-1">B2B 銷售與變現</p>
-                                        </div>
+                                {/* Layer 1: Fact (Outer) */}
+                                <div className="flex-1 bg-blue-50 border-t-8 border-blue-500 rounded-2xl p-6 shadow-sm flex flex-col relative">
+                                    <div className="absolute top-4 right-4 bg-blue-200 text-blue-800 text-xs font-bold px-2 py-1 rounded">外層：共同事實</div>
+                                    <div className="mb-4 text-blue-600"><Bot size={40}/></div>
+                                    <h4 className="text-xl font-bold text-slate-900 mb-2">內容轉譯 (Editor)</h4>
+                                    <p className="text-sm text-slate-600 mb-4">負責 AI 自動化流的建置與監控，確保資訊源頭的準確性。</p>
+                                    <div className="mt-auto bg-white p-3 rounded-lg border border-blue-100 text-xs text-blue-700 font-bold">
+                                        ⚠️ 初期需高投入：<br/>建立自動化 S.O.P 與查核標準
                                     </div>
                                 </div>
+
+                                {/* Layer 2: Understanding (Middle) */}
+                                <div className="flex-1 bg-amber-50 border-t-8 border-amber-500 rounded-2xl p-6 shadow-md flex flex-col relative transform scale-105 z-10">
+                                    <div className="absolute top-4 right-4 bg-amber-200 text-amber-800 text-xs font-bold px-2 py-1 rounded">中層：共同理解</div>
+                                    <div className="mb-4 text-amber-600 flex gap-2">
+                                        <Crown size={40}/>
+                                        <Briefcase size={40}/>
+                                        <Rocket size={40}/>
+                                    </div>
+                                    <h4 className="text-xl font-bold text-slate-900 mb-2">內容長 + 成長 + 商務</h4>
+                                    <p className="text-sm text-slate-600 mb-4">
+                                        <strong>內容長 (Founder)</strong>：產出深度觀點。<br/>
+                                        <strong>成長 (Growth)</strong>：優化漏斗與電子報。<br/>
+                                        <strong>商務 (BD)</strong>：將影響力變現 (B2B)。
+                                    </p>
+                                </div>
+
+                                {/* Layer 3: Feeling (Inner) */}
+                                <div className="flex-1 bg-emerald-50 border-t-8 border-emerald-500 rounded-2xl p-6 shadow-sm flex flex-col relative">
+                                    <div className="absolute top-4 right-4 bg-emerald-200 text-emerald-800 text-xs font-bold px-2 py-1 rounded">核心：共同感受</div>
+                                    <div className="mb-4 text-emerald-600"><HeartHandshake size={40}/></div>
+                                    <h4 className="text-xl font-bold text-slate-900 mb-2">營運經理 (PM)</h4>
+                                    <p className="text-sm text-slate-600 mb-4">負責實體活動策劃、社群維護與行政防火牆。</p>
+                                    <div className="mt-auto bg-white p-3 rounded-lg border border-emerald-100 text-xs text-emerald-700 font-bold">
+                                        信任變現的關鍵推手
+                                    </div>
+                                </div>
+                                
                             </div>
                         </div>
                     )
