@@ -194,30 +194,26 @@
                  {
                     id: 2,
                     type: 'content',
-                    title: "幣圈媒體的現況",
+                    title: "幣圈媒體的現況：為散戶設計的流量遊戲",
                     icon: <Compass size={40} className="text-slate-600" />,
                     content: (
                         <div className="flex flex-col h-full justify-center px-4 md:px-0 gap-8">
-                             <div className="bg-slate-50 p-10 rounded-3xl border-t-8 border-red-400 shadow-lg flex flex-col justify-center relative overflow-hidden h-[450px]">
-                                <div className="flex items-center justify-center gap-3 mb-8">
-                                    <TrendingDown size={32} className="text-red-500" />
-                                    <h3 className="text-3xl font-black text-slate-800">流量陷阱與定位迷失</h3>
-                                </div>
+                             <div className="bg-slate-50 p-10 rounded-3xl border-t-8 border-red-400 shadow-lg flex flex-col justify-center relative overflow-hidden h-[500px]">
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                                     <div className="p-4">
-                                        <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm text-red-500 font-bold text-2xl">1</div>
-                                        <strong className="block text-xl text-slate-900 mb-2">廣告模式的詛咒</strong>
-                                        <span className="text-slate-600 text-base leading-relaxed">依賴流量生存，必須追逐熱點。<br/>市場冷淡時即面臨生存危機。</span>
+                                        <div className="bg-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm text-red-500 font-bold text-3xl">1</div>
+                                        <strong className="block text-2xl text-slate-900 mb-3">商業模式</strong>
+                                        <span className="text-slate-600 text-xl leading-relaxed">依靠廣告與導流，必須追逐熱點與情緒，市場冷淡即面臨危機。</span>
                                     </div>
                                     <div className="p-4 border-l border-r border-slate-200">
-                                        <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm text-red-500 font-bold text-2xl">2</div>
-                                        <strong className="block text-xl text-slate-900 mb-2">議題發散與失焦</strong>
-                                        <span className="text-slate-600 text-base leading-relaxed">為了流量開始寫 AI、泛科技、政治，<br/>導致品牌面目全非。</span>
+                                        <div className="bg-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm text-red-500 font-bold text-3xl">2</div>
+                                        <strong className="block text-2xl text-slate-900 mb-3">內容產出</strong>
+                                        <span className="text-slate-600 text-xl leading-relaxed">議題發散（AI、政治、泛科技），只求點擊，不求專業縱深。</span>
                                     </div>
                                     <div className="p-4">
-                                        <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm text-red-500 font-bold text-2xl">3</div>
-                                        <strong className="block text-xl text-slate-900 mb-2">糟糕的讀者體驗</strong>
-                                        <span className="text-slate-600 text-base leading-relaxed">想看加密貨幣的人被迫看無關的政治新聞。<br/>專業度被稀釋。</span>
+                                        <div className="bg-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm text-red-500 font-bold text-3xl">3</div>
+                                        <strong className="block text-2xl text-slate-900 mb-3">讀者體驗</strong>
+                                        <span className="text-slate-600 text-xl leading-relaxed">充滿雜訊與帶風向，缺乏查證的事實，讓專業讀者卻步。</span>
                                     </div>
                                 </div>
                             </div>
@@ -228,21 +224,22 @@
                 {
                     id: 3,
                     type: 'content',
-                    title: "現況：缺乏共同事實，更沒有理解框架",
+                    title: "缺乏共同事實，更沒有理解框架",
                     icon: <AlertCircle size={40} className="text-red-500" />,
                     content: (
-                        <div className="flex flex-col h-full justify-center px-4 md:px-0">
+                        <div className="flex flex-col h-full justify-center px-4 md:px-0 gap-6">
+                             <div className="text-center mb-4">
+                                <span className="bg-red-100 text-red-600 px-4 py-2 rounded-full font-bold text-lg">企業與監管者的痛點</span>
+                            </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                                 {/* Problem 1: No Common Fact */}
                                 <div className="bg-slate-50 p-8 rounded-2xl border border-slate-200 flex flex-col items-center text-center">
                                     <div className="bg-slate-200 p-6 rounded-full mb-6 text-slate-500">
                                         <Newspaper size={48} />
                                     </div>
-                                    <h3 className="text-2xl font-bold text-slate-800 mb-4">缺乏共同事實</h3>
-                                    <p className="text-lg text-slate-600 leading-relaxed">
-                                        資訊過載且碎片化。<br/>
-                                        每個人看到的「真相」都不一樣，<br/>
-                                        導致溝通成本極高，無法對齊基礎認知。
+                                    <h3 className="text-3xl font-bold text-slate-800 mb-4">缺乏共同事實</h3>
+                                    <p className="text-xl text-slate-600 leading-relaxed">
+                                        因為媒體只提供碎片化、未經查證的資訊，導致決策者無法對齊基礎認知。
                                     </p>
                                 </div>
 
@@ -251,17 +248,15 @@
                                     <div className="bg-slate-200 p-6 rounded-full mb-6 text-slate-500">
                                         <Layers size={48} />
                                     </div>
-                                    <h3 className="text-2xl font-bold text-slate-800 mb-4">缺乏理解框架</h3>
-                                    <p className="text-lg text-slate-600 leading-relaxed">
-                                        只有雜訊，沒有觀點。<br/>
-                                        在事件發生後，讀者不知道該如何解讀、<br/>
-                                        該採取什麼行動，缺乏價值的座標。
+                                    <h3 className="text-3xl font-bold text-slate-800 mb-4">缺乏理解框架</h3>
+                                    <p className="text-xl text-slate-600 leading-relaxed">
+                                        因為媒體只追逐價格波動，不談價值判斷，導致讀者沒有判斷方向的座標。
                                     </p>
                                 </div>
                             </div>
                             
                             <div className="text-center mt-12">
-                                <p className="text-xl text-slate-500 font-medium">這正是新媒體切入的最佳機會點。</p>
+                                <p className="text-2xl text-slate-500 font-medium">這正是新媒體切入的最佳機會點。</p>
                             </div>
                         </div>
                     )
