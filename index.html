@@ -224,7 +224,7 @@
                 {
                     id: 3,
                     type: 'content',
-                    title: "缺乏共同事實，更沒有理解框架",
+                    title: "現況：缺乏共同事實，更沒有理解框架",
                     icon: <AlertCircle size={40} className="text-red-500" />,
                     content: (
                         <div className="flex flex-col h-full justify-center px-4 md:px-0 gap-6">
@@ -328,16 +328,6 @@
                                             </marker>
                                         </defs>
                                     </svg>
-                                </div>
-
-                                <div className="bg-slate-800 text-white px-8 py-5 rounded-xl border border-slate-600 inline-flex flex-col items-center shadow-lg relative top-[-20px] z-30">
-                                    <div className="flex items-center gap-2 mb-1">
-                                        <Anchor size={20} className="text-blue-400"/>
-                                        <span className="font-bold text-lg">我們的角色：連結與賦能</span>
-                                    </div>
-                                    <p className="text-sm text-slate-300">
-                                        提供 AI <span className="text-amber-400 font-bold">不可或缺的數據</span>，為人類提供 <span className="text-blue-400 font-bold">高效率的判斷座標</span>
-                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -629,83 +619,78 @@
                         </div>
                     )
                 },
-                // Slide 8: Product Overview (Three Pillars) (Moved down)
+                // Slide 8: Product Overview (Three Pillars) (Concentric Circles)
                 {
                     id: 8,
                     type: 'content',
                     title: "產品全貌：事實、理解與感受",
                     icon: <Target size={40} className="text-emerald-600" />,
                     content: (
-                        <div className="flex flex-col h-full justify-center gap-8">
-                            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-8 shadow-sm flex-1 flex flex-col justify-center">
-                                <div className="mb-8 text-center md:text-left">
-                                    <h4 className="text-2xl font-black text-slate-900 mb-2">三大核心支柱</h4>
-                                    <p className="text-lg text-slate-600 leading-relaxed">
-                                        網站包含即時資訊與深度內容，加上實體活動，構成完整生態。
-                                    </p>
-                                </div>
-
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
-                                    {/* Layer 1 */}
-                                    <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:border-blue-400 transition-colors">
-                                        <div className="flex items-center gap-3 mb-4">
-                                            <div className="bg-blue-100 p-2 rounded-lg">
-                                                <Bot size={28} className="text-blue-700" />
-                                            </div>
-                                            <div className="font-bold text-xl text-slate-900">共同事實</div>
-                                        </div>
-                                        <div className="text-base text-slate-500 leading-relaxed space-y-4">
-                                            <p>即時資訊對齊、聚合摘要、基本脈絡。</p>
-                                            <div className="pt-3 border-t border-slate-100">
-                                                <span className="font-bold text-blue-700 text-lg block">免費 / 高頻</span>
-                                                <span className="text-sm text-slate-400">主要目的：流量入口</span>
-                                            </div>
-                                        </div>
+                        <div className="flex flex-col h-full justify-center gap-8 px-4 md:px-0">
+                            
+                            <div className="flex flex-col md:flex-row items-center justify-center gap-12 w-full max-w-6xl mx-auto">
+                                
+                                {/* Bullseye Graphic */}
+                                <div className="relative w-[500px] h-[500px] flex items-center justify-center flex-shrink-0">
+                                    {/* Outer Circle */}
+                                    <div className="absolute w-[500px] h-[500px] rounded-full bg-blue-50 border-4 border-blue-200 flex items-start justify-center pt-8 shadow-sm">
+                                        <span className="text-blue-600 font-bold text-xl uppercase tracking-wider">共同事實</span>
                                     </div>
-
-                                    {/* Layer 2 */}
-                                    <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:border-amber-400 transition-colors">
-                                        <div className="flex items-center gap-3 mb-4">
-                                            <div className="bg-amber-100 p-2 rounded-lg">
-                                                <PenTool size={28} className="text-amber-700" />
-                                            </div>
-                                            <div className="font-bold text-xl text-slate-900">共同理解</div>
-                                        </div>
-                                        <div className="text-base text-slate-500 leading-relaxed space-y-4">
-                                            <p>解釋意義、判斷價值、建立框架與價值觀。</p>
-                                            <div className="pt-3 border-t border-slate-100">
-                                                <span className="font-bold text-amber-800 text-lg block">付費 / 高信任</span>
-                                                <span className="text-sm text-slate-400">主要目的：變現與留存</span>
-                                            </div>
-                                        </div>
+                                    
+                                    {/* Middle Circle */}
+                                    <div className="absolute w-[340px] h-[340px] rounded-full bg-amber-50 border-4 border-amber-200 flex items-start justify-center pt-8 shadow-md">
+                                        <span className="text-amber-600 font-bold text-xl uppercase tracking-wider">共同理解</span>
                                     </div>
-
-                                    {/* Layer 3 */}
-                                    <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:border-emerald-400 transition-colors">
-                                        <div className="flex items-center gap-3 mb-4">
-                                            <div className="bg-emerald-100 p-2 rounded-lg">
-                                                <HeartHandshake size={28} className="text-emerald-700" />
-                                            </div>
-                                            <div className="font-bold text-xl text-slate-900">共同感受</div>
-                                        </div>
-                                        <div className="text-base text-slate-500 leading-relaxed space-y-4">
-                                            <p>開箱示範、第一手操作、<span className="font-bold text-emerald-700">實體活動</span>。</p>
-                                            <div className="pt-3 border-t border-slate-100">
-                                                <span className="font-bold text-emerald-700 text-lg block">信任護城河</span>
-                                                <span className="text-sm text-slate-400">主要目的：品牌溢價</span>
-                                            </div>
+                                    
+                                    {/* Inner Circle */}
+                                    <div className="absolute w-[180px] h-[180px] rounded-full bg-emerald-50 border-4 border-emerald-400 flex items-center justify-center shadow-lg">
+                                        <div className="text-center">
+                                            <span className="text-emerald-700 font-black text-2xl uppercase tracking-wider block">共同感受</span>
+                                            <HeartHandshake size={32} className="text-emerald-600 mx-auto mt-2" />
                                         </div>
                                     </div>
                                 </div>
 
-                                {/* Summary */}
-                                <div className="mt-8 flex items-center justify-between gap-4 flex-col md:flex-row bg-slate-100 p-5 rounded-lg">
-                                    <div className="text-lg font-bold text-slate-900">
-                                        總結：事實免費、理解付費、信任更值錢。
+                                {/* Legend / Explanation */}
+                                <div className="flex flex-col gap-6 w-full max-w-md">
+                                    <div className="flex items-start gap-4 p-4 rounded-xl border-l-4 border-blue-500 bg-white shadow-sm">
+                                        <div className="pt-1"><Bot size={24} className="text-blue-500"/></div>
+                                        <div>
+                                            <h4 className="text-lg font-bold text-slate-900">共同事實 (外層)</h4>
+                                            <p className="text-sm text-slate-500 mt-1">即時資訊、AI 摘要。</p>
+                                            <div className="mt-2 flex gap-2">
+                                                <span className="text-xs font-bold bg-blue-100 text-blue-700 px-2 py-1 rounded">免費</span>
+                                                <span className="text-xs font-bold bg-slate-100 text-slate-600 px-2 py-1 rounded">低投入</span>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className="flex items-center gap-2 text-sm text-slate-600">
-                                        <Video size={20} className="text-slate-500" />
-                                        <span>只在人類不可取代的地方用人</span>
+
+                                    <div className="flex items-start gap-4 p-4 rounded-xl border-l-4 border-amber-500 bg-white shadow-sm">
+                                        <div className="pt-1"><PenTool size={24} className="text-amber-500"/></div>
+                                        <div>
+                                            <h4 className="text-lg font-bold text-slate-900">共同理解 (中層)</h4>
+                                            <p className="text-sm text-slate-500 mt-1">深度報告、價值判斷。</p>
+                                            <div className="mt-2 flex gap-2">
+                                                <span className="text-xs font-bold bg-amber-100 text-amber-700 px-2 py-1 rounded">付費訂閱</span>
+                                                <span className="text-xs font-bold bg-slate-100 text-slate-600 px-2 py-1 rounded">中投入</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex items-start gap-4 p-4 rounded-xl border-l-4 border-emerald-500 bg-white shadow-md transform scale-105">
+                                        <div className="pt-1"><HeartHandshake size={24} className="text-emerald-500"/></div>
+                                        <div>
+                                            <h4 className="text-lg font-bold text-slate-900">共同感受 (核心)</h4>
+                                            <p className="text-sm text-slate-500 mt-1">實體活動、私密交流、信任。</p>
+                                            <div className="mt-2 flex gap-2">
+                                                <span className="text-xs font-bold bg-emerald-100 text-emerald-700 px-2 py-1 rounded">信任變現</span>
+                                                <span className="text-xs font-bold bg-slate-800 text-white px-2 py-1 rounded">高投入</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="mt-4 text-center text-slate-400 text-sm italic">
+                                        "越往核心，價值越高，我們投入的力氣也越多。"
                                     </div>
                                 </div>
                             </div>
