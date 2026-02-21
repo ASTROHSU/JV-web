@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,54 +11,114 @@
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <!-- Babel -->
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-    
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Roboto+Mono:wght@400;500&display=swap');
-        body { font-family: 'Noto Sans TC', sans-serif; }
-        
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+
         /* Slide Transitions */
-        .slide-container { position: relative; width: 100%; height: 100%; overflow: hidden; }
-        
+        .slide-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
         /* UDN & Techmeme Specific Styles */
-        .udn-red { background-color: #C8102E; }
-        .udn-text-red { color: #C8102E; }
-        .udn-border-red { border-color: #C8102E; }
-        
+        .udn-red {
+            background-color: #C8102E;
+        }
+
+        .udn-text-red {
+            color: #C8102E;
+        }
+
+        .udn-border-red {
+            border-color: #C8102E;
+        }
+
         /* group-hover 與自訂 class 相容 */
-        .group:hover .group-hover\:udn-text-red { color: #C8102E; }
-        
-        .techmeme-headline { color: #000000; font-weight: 700; font-family: sans-serif; }
-        .techmeme-headline:hover { text-decoration: underline; color: #0000AA; }
-        .techmeme-source { color: #545454; font-size: 0.75rem; }
-        .techmeme-summary { font-size: 0.9rem; line-height: 1.4; color: #000; }
-        .techmeme-cluster-label { color: #006400; font-weight: bold; font-size: 0.75rem; }
-        .techmeme-cluster-label-x { color: #545454; font-weight: bold; font-size: 0.75rem; }
-        .techmeme-link { color: #0000AA; text-decoration: none; font-size: 0.75rem; }
-        .techmeme-link:hover { text-decoration: underline; }
-        
+        .group:hover .group-hover\:udn-text-red {
+            color: #C8102E;
+        }
+
+        .techmeme-headline {
+            color: #000000;
+            font-weight: 700;
+            font-family: sans-serif;
+        }
+
+        .techmeme-headline:hover {
+            text-decoration: underline;
+            color: #0000AA;
+        }
+
+        .techmeme-source {
+            color: #545454;
+            font-size: 0.75rem;
+        }
+
+        .techmeme-summary {
+            font-size: 0.9rem;
+            line-height: 1.4;
+            color: #000;
+        }
+
+        .techmeme-cluster-label {
+            color: #006400;
+            font-weight: bold;
+            font-size: 0.75rem;
+        }
+
+        .techmeme-cluster-label-x {
+            color: #545454;
+            font-weight: bold;
+            font-size: 0.75rem;
+        }
+
+        .techmeme-link {
+            color: #0000AA;
+            text-decoration: none;
+            font-size: 0.75rem;
+        }
+
+        .techmeme-link:hover {
+            text-decoration: underline;
+        }
+
         /* Scrollbar hiding */
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
     </style>
 </head>
+
 <body class="bg-slate-50 text-slate-800 h-screen overflow-hidden">
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState, useEffect } = React;
-        
+        const {useState, useEffect} = React;
+
         // --- 1. Inline Icon System (Zero Dependency) ---
-        const IconBase = ({ size = 24, className = "", children, ...props }) => (
-            <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                width={size} 
-                height={size} 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                stroke="currentColor" 
-                strokeWidth="2" 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
+        const IconBase = ({size = 24, className = "", children, ...props}) => (
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width={size}
+                height={size}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 className={className}
                 {...props}
             >
@@ -67,45 +128,45 @@
 
         // Icon Definitions
         const Icons = {
-            ChevronLeft: (p) => <IconBase {...p}><path d="m15 18-6-6 6-6"/></IconBase>,
-            ChevronRight: (p) => <IconBase {...p}><path d="m9 18 6-6-6-6"/></IconBase>,
-            Crown: (p) => <IconBase {...p}><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"/></IconBase>,
-            Layers: (p) => <IconBase {...p}><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></IconBase>,
-            Cpu: (p) => <IconBase {...p}><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></IconBase>,
-            Bot: (p) => <IconBase {...p}><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></IconBase>,
-            PenTool: (p) => <IconBase {...p}><path d="m12 19 7-7 3 3-7 7-3-3z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="m2 2 7.586 7.586"/><circle cx="11" cy="11" r="2"/></IconBase>,
-            Newspaper: (p) => <IconBase {...p}><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></IconBase>,
-            Search: (p) => <IconBase {...p}><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></IconBase>,
-            Lock: (p) => <IconBase {...p}><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></IconBase>,
-            Users: (p) => <IconBase {...p}><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></IconBase>,
-            User: (p) => <IconBase {...p}><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></IconBase>,
-            ChefHat: (p) => <IconBase {...p}><path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z"/><line x1="6" x2="18" y1="17" y2="17"/></IconBase>,
-            Target: (p) => <IconBase {...p}><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></IconBase>,
-            Zap: (p) => <IconBase {...p}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></IconBase>,
-            Shield: (p) => <IconBase {...p}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></IconBase>,
-            DollarSign: (p) => <IconBase {...p}><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></IconBase>,
-            HeartHandshake: (p) => <IconBase {...p}><path d="M19.414 14.414C21 12.828 22 11.5 22 9.5a5.5 5.5 0 0 0-9.591-3.676.6.6 0 0 1-.818.001A5.5 5.5 0 0 0 2 9.5c0 2.3 1.5 4 3 5.5l5.535 5.362a2 2 0 0 0 2.879.052 2.12 2.12 0 0 0-.004-3 2.124 2.124 0 1 0 3-3 2.124 2.124 0 0 0 3.004 0 2 2 0 0 0 0-2.828l-1.881-1.882a2.41 2.41 0 0 0-3.409 0l-1.71 1.71a2 2 0 0 1-2.828 0 2 2 0 0 1 0-2.828l2.823-2.762"/></IconBase>,
-            Video: (p) => <IconBase {...p}><path d="m22 8-6 4 6 4V8Z"/><path d="M2 5v14c0 2 1 3 3 3h12c2 0 3-1 3-3V5c0-2-1-3-3-3H5C3 2 2 3 2 5Z"/></IconBase>,
-            List: (p) => <IconBase {...p}><line x1="8" x2="21" y1="6" y2="6"/><line x1="8" x2="21" y1="12" y2="12"/><line x1="8" x2="21" y1="18" y2="18"/><line x1="3" x2="3.01" y1="6" y2="6"/><line x1="3" x2="3.01" y1="12" y2="12"/><line x1="3" x2="3.01" y1="18" y2="18"/></IconBase>,
-            AlertCircle: (p) => <IconBase {...p}><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></IconBase>,
-            Landmark: (p) => <IconBase {...p}><line x1="3" x2="21" y1="22" y2="22"/><line x1="6" x2="6" y1="18" y2="11"/><line x1="10" x2="10" y1="18" y2="11"/><line x1="14" x2="14" y1="18" y2="11"/><line x1="18" x2="18" y1="18" y2="11"/><polygon points="12 2 20 7 4 7 12 2"/></IconBase>,
-            Building: (p) => <IconBase {...p}><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></IconBase>,
-            Clock: (p) => <IconBase {...p}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></IconBase>,
-            Image: (p) => <IconBase {...p}><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></IconBase>,
-            Compass: (p) => <IconBase {...p}><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></IconBase>,
-            TrendingDown: (p) => <IconBase {...p}><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></IconBase>,
-            MousePointerClick: (p) => <IconBase {...p}><path d="m9 9 5 12 1.8-5.2L21 14Z"/><path d="M7.2 2.2 8 5.1"/><path d="m5.1 8-2.9-.8"/><path d="M14 4.1 12 6"/><path d="m6 12-1.9 2"/></IconBase>,
-            Anchor: (p) => <IconBase {...p}><circle cx="12" cy="5" r="3"/><line x1="12" x2="12" y1="22" y2="8"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/></IconBase>,
-            Rocket: (p) => <IconBase {...p}><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></IconBase>,
-            Briefcase: (p) => <IconBase {...p}><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></IconBase>,
-            BookOpen: (p) => <IconBase {...p}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></IconBase>,
-            Cogs: (p) => <IconBase {...p}><path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z"/><path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path d="M12 2v2"/><path d="M12 22v-2"/><path d="m17 7-1.4 1.4"/><path d="M22 12h-2"/><path d="m17 17-1.4-1.4"/><path d="m7 7 1.4 1.4"/><path d="M2 12h2"/><path d="m7 17 1.4-1.4"/></IconBase>,
-            Mic: (p) => <IconBase {...p}><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></IconBase>,
-            ExternalLink: (p) => <IconBase {...p}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></IconBase>,
-            Workflow: (p) => <IconBase {...p}><rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/></IconBase>
+            ChevronLeft: (p) => <IconBase {...p}><path d="m15 18-6-6 6-6" /></IconBase>,
+            ChevronRight: (p) => <IconBase {...p}><path d="m9 18 6-6-6-6" /></IconBase>,
+            Crown: (p) => <IconBase {...p}><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14" /></IconBase>,
+            Layers: (p) => <IconBase {...p}><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z" /><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65" /><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65" /></IconBase>,
+            Cpu: (p) => <IconBase {...p}><rect x="4" y="4" width="16" height="16" rx="2" /><rect x="9" y="9" width="6" height="6" /><path d="M15 2v2" /><path d="M15 20v2" /><path d="M2 15h2" /><path d="M2 9h2" /><path d="M20 15h2" /><path d="M20 9h2" /><path d="M9 2v2" /><path d="M9 20v2" /></IconBase>,
+            Bot: (p) => <IconBase {...p}><path d="M12 8V4H8" /><rect width="16" height="12" x="4" y="8" rx="2" /><path d="M2 14h2" /><path d="M20 14h2" /><path d="M15 13v2" /><path d="M9 13v2" /></IconBase>,
+            PenTool: (p) => <IconBase {...p}><path d="m12 19 7-7 3 3-7 7-3-3z" /><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" /><path d="m2 2 7.586 7.586" /><circle cx="11" cy="11" r="2" /></IconBase>,
+            Newspaper: (p) => <IconBase {...p}><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2" /><path d="M18 14h-8" /><path d="M15 18h-5" /><path d="M10 6h8v4h-8V6Z" /></IconBase>,
+            Search: (p) => <IconBase {...p}><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></IconBase>,
+            Lock: (p) => <IconBase {...p}><rect width="18" height="11" x="3" y="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></IconBase>,
+            Users: (p) => <IconBase {...p}><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></IconBase>,
+            User: (p) => <IconBase {...p}><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></IconBase>,
+            ChefHat: (p) => <IconBase {...p}><path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z" /><line x1="6" x2="18" y1="17" y2="17" /></IconBase>,
+            Target: (p) => <IconBase {...p}><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /></IconBase>,
+            Zap: (p) => <IconBase {...p}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></IconBase>,
+            Shield: (p) => <IconBase {...p}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" /></IconBase>,
+            DollarSign: (p) => <IconBase {...p}><line x1="12" x2="12" y1="2" y2="22" /><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /></IconBase>,
+            HeartHandshake: (p) => <IconBase {...p}><path d="M19.414 14.414C21 12.828 22 11.5 22 9.5a5.5 5.5 0 0 0-9.591-3.676.6.6 0 0 1-.818.001A5.5 5.5 0 0 0 2 9.5c0 2.3 1.5 4 3 5.5l5.535 5.362a2 2 0 0 0 2.879.052 2.12 2.12 0 0 0-.004-3 2.124 2.124 0 1 0 3-3 2.124 2.124 0 0 0 3.004 0 2 2 0 0 0 0-2.828l-1.881-1.882a2.41 2.41 0 0 0-3.409 0l-1.71 1.71a2 2 0 0 1-2.828 0 2 2 0 0 1 0-2.828l2.823-2.762" /></IconBase>,
+            Video: (p) => <IconBase {...p}><path d="m22 8-6 4 6 4V8Z" /><path d="M2 5v14c0 2 1 3 3 3h12c2 0 3-1 3-3V5c0-2-1-3-3-3H5C3 2 2 3 2 5Z" /></IconBase>,
+            List: (p) => <IconBase {...p}><line x1="8" x2="21" y1="6" y2="6" /><line x1="8" x2="21" y1="12" y2="12" /><line x1="8" x2="21" y1="18" y2="18" /><line x1="3" x2="3.01" y1="6" y2="6" /><line x1="3" x2="3.01" y1="12" y2="12" /><line x1="3" x2="3.01" y1="18" y2="18" /></IconBase>,
+            AlertCircle: (p) => <IconBase {...p}><circle cx="12" cy="12" r="10" /><line x1="12" x2="12" y1="8" y2="12" /><line x1="12" x2="12.01" y1="16" y2="16" /></IconBase>,
+            Landmark: (p) => <IconBase {...p}><line x1="3" x2="21" y1="22" y2="22" /><line x1="6" x2="6" y1="18" y2="11" /><line x1="10" x2="10" y1="18" y2="11" /><line x1="14" x2="14" y1="18" y2="11" /><line x1="18" x2="18" y1="18" y2="11" /><polygon points="12 2 20 7 4 7 12 2" /></IconBase>,
+            Building: (p) => <IconBase {...p}><rect width="16" height="20" x="4" y="2" rx="2" ry="2" /><path d="M9 22v-4h6v4" /><path d="M8 6h.01" /><path d="M16 6h.01" /><path d="M12 6h.01" /><path d="M12 10h.01" /><path d="M12 14h.01" /><path d="M16 10h.01" /><path d="M16 14h.01" /><path d="M8 10h.01" /><path d="M8 14h.01" /></IconBase>,
+            Clock: (p) => <IconBase {...p}><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></IconBase>,
+            Image: (p) => <IconBase {...p}><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /><circle cx="9" cy="9" r="2" /><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" /></IconBase>,
+            Compass: (p) => <IconBase {...p}><circle cx="12" cy="12" r="10" /><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" /></IconBase>,
+            TrendingDown: (p) => <IconBase {...p}><polyline points="22 17 13.5 8.5 8.5 13.5 2 7" /><polyline points="16 17 22 17 22 11" /></IconBase>,
+            MousePointerClick: (p) => <IconBase {...p}><path d="m9 9 5 12 1.8-5.2L21 14Z" /><path d="M7.2 2.2 8 5.1" /><path d="m5.1 8-2.9-.8" /><path d="M14 4.1 12 6" /><path d="m6 12-1.9 2" /></IconBase>,
+            Anchor: (p) => <IconBase {...p}><circle cx="12" cy="5" r="3" /><line x1="12" x2="12" y1="22" y2="8" /><path d="M5 12H2a10 10 0 0 0 20 0h-3" /></IconBase>,
+            Rocket: (p) => <IconBase {...p}><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" /><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" /><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" /><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" /></IconBase>,
+            Briefcase: (p) => <IconBase {...p}><rect width="20" height="14" x="2" y="7" rx="2" ry="2" /><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" /></IconBase>,
+            BookOpen: (p) => <IconBase {...p}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" /><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" /></IconBase>,
+            Cogs: (p) => <IconBase {...p}><path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z" /><path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" /><path d="M12 2v2" /><path d="M12 22v-2" /><path d="m17 7-1.4 1.4" /><path d="M22 12h-2" /><path d="m17 17-1.4-1.4" /><path d="m7 7 1.4 1.4" /><path d="M2 12h2" /><path d="m7 17 1.4-1.4" /></IconBase>,
+            Mic: (p) => <IconBase {...p}><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><line x1="12" x2="12" y1="19" y2="22" /></IconBase>,
+            ExternalLink: (p) => <IconBase {...p}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" x2="21" y1="14" y2="3" /></IconBase>,
+            Workflow: (p) => <IconBase {...p}><rect width="8" height="8" x="3" y="3" rx="2" /><path d="M7 11v4a2 2 0 0 0 2 2h4" /><rect width="8" height="8" x="13" y="13" rx="2" /></IconBase>
         };
 
-        const { ChevronRight, ChevronLeft, Users, User, ChefHat, DollarSign, Target, Layers, Zap, Crown, Shield, Bot, PenTool, Cpu, Newspaper, Search, Lock, HeartHandshake, Video, List, AlertCircle, Landmark, Building, Clock, Image, Compass, TrendingDown, MousePointerClick, Anchor, Rocket, Briefcase, BookOpen, Cogs, Mic, ExternalLink, Workflow } = Icons;
+        const {ChevronRight, ChevronLeft, Users, User, ChefHat, DollarSign, Target, Layers, Zap, Crown, Shield, Bot, PenTool, Cpu, Newspaper, Search, Lock, HeartHandshake, Video, List, AlertCircle, Landmark, Building, Clock, Image, Compass, TrendingDown, MousePointerClick, Anchor, Rocket, Briefcase, BookOpen, Cogs, Mic, ExternalLink, Workflow} = Icons;
 
         // --- 2. Main Application ---
 
@@ -171,15 +232,15 @@
                         </div>
                     )
                 },
-                 // Slide 3: Competitor Analysis
-                 {
+                // Slide 3: Competitor Analysis
+                {
                     id: 2,
                     type: 'content',
                     title: "幣圈媒體的現況",
                     icon: <Compass size={40} className="text-slate-600" />,
                     content: (
                         <div className="flex flex-col h-full justify-center px-4 md:px-0 gap-8">
-                             <div className="bg-slate-50 p-10 rounded-3xl border-t-8 border-red-400 shadow-lg flex flex-col justify-center relative overflow-hidden h-auto py-12">
+                            <div className="bg-slate-50 p-10 rounded-3xl border-t-8 border-red-400 shadow-lg flex flex-col justify-center relative overflow-hidden h-auto py-12">
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                                     <div className="p-4">
                                         <div className="bg-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm text-red-500 font-bold text-3xl">1</div>
@@ -244,7 +305,7 @@
                     content: (
                         <div className="flex flex-col h-full justify-center items-center px-4">
                             <div className="max-w-5xl w-full text-center space-y-8">
-                                
+
                                 <div className="relative w-full max-w-3xl h-[400px] mx-auto flex items-center justify-center">
                                     {/* Top: AI */}
                                     <div className="absolute top-0 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-20">
@@ -315,7 +376,7 @@
                     icon: <Cpu size={40} className="text-blue-600" />,
                     content: (
                         <div className="flex flex-col h-full justify-center px-4 md:px-0 gap-8">
-                            
+
                             {/* Dual Engine */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 flex-1">
                                 {/* Left: AI / Breadth / Free */}
@@ -373,8 +434,8 @@
                         </div>
                     )
                 },
-                 // Slide 7: Visual Mockup (Moved up)
-                 {
+                // Slide 7: Visual Mockup (Moved up)
+                {
                     id: 6,
                     type: 'mockup',
                     title: "產品視覺模擬",
@@ -404,7 +465,7 @@
                                     <div className="flex gap-4 items-center">
                                         <div className="relative">
                                             <input type="text" placeholder="搜尋..." className="bg-gray-100 rounded-full px-3 py-1 text-xs w-32 focus:w-48 transition-all outline-none" />
-                                            <Search size={14} className="absolute right-2 top-1.5 text-gray-400"/>
+                                            <Search size={14} className="absolute right-2 top-1.5 text-gray-400" />
                                         </div>
                                         <button className="udn-red text-white text-xs font-bold px-3 py-1.5 rounded hover:bg-red-700">訂閱會員</button>
                                     </div>
@@ -427,7 +488,7 @@
                                         <h2 className="text-lg font-bold text-slate-800">即時情報</h2>
                                         <span className="bg-gray-200 text-gray-600 text-[10px] px-1.5 py-0.5 rounded">Techmeme 模式</span>
                                     </div>
-                                    
+
                                     {/* News Item 1: Fact-Based */}
                                     <div className="mb-6 group border-b border-slate-100 pb-4">
                                         <div className="flex gap-4">
@@ -602,19 +663,19 @@
                     content: (
                         <div className="flex flex-col h-full justify-center gap-8 px-4 md:px-0">
                             <div className="flex flex-col md:flex-row items-center justify-center gap-12 w-full max-w-6xl mx-auto">
-                                
+
                                 {/* Bullseye Graphic */}
                                 <div className="relative w-[420px] h-[420px] flex items-center justify-center flex-shrink-0">
                                     {/* Outer Circle */}
                                     <div className="absolute w-[420px] h-[420px] rounded-full bg-blue-50 border-4 border-blue-200 flex items-start justify-center pt-8 shadow-sm">
                                         <span className="text-blue-600 font-bold text-xl uppercase tracking-wider">共同事實</span>
                                     </div>
-                                    
+
                                     {/* Middle Circle */}
                                     <div className="absolute w-[290px] h-[290px] rounded-full bg-amber-50 border-4 border-amber-200 flex items-start justify-center pt-8 shadow-md">
                                         <span className="text-amber-600 font-bold text-xl uppercase tracking-wider">共同理解</span>
                                     </div>
-                                    
+
                                     {/* Inner Circle */}
                                     <div className="absolute w-[160px] h-[160px] rounded-full bg-emerald-50 border-4 border-emerald-400 flex items-center justify-center shadow-lg">
                                         <div className="text-center">
@@ -627,7 +688,7 @@
                                 {/* Legend / Explanation */}
                                 <div className="flex flex-col gap-8 w-full max-w-lg">
                                     <div className="flex items-start gap-4 p-5 rounded-xl border-l-8 border-blue-500 bg-white shadow-sm">
-                                        <div className="pt-1"><Bot size={32} className="text-blue-500"/></div>
+                                        <div className="pt-1"><Bot size={32} className="text-blue-500" /></div>
                                         <div>
                                             <h4 className="text-2xl font-bold text-slate-900">共同事實 (外層)</h4>
                                             <p className="text-lg text-slate-600 mt-1">即時資訊、多方觀點。</p>
@@ -639,7 +700,7 @@
                                     </div>
 
                                     <div className="flex items-start gap-4 p-5 rounded-xl border-l-8 border-amber-500 bg-white shadow-sm">
-                                        <div className="pt-1"><PenTool size={32} className="text-amber-500"/></div>
+                                        <div className="pt-1"><PenTool size={32} className="text-amber-500" /></div>
                                         <div>
                                             <h4 className="text-2xl font-bold text-slate-900">共同理解 (中層)</h4>
                                             <p className="text-lg text-slate-600 mt-1">親身體驗、價值判斷。</p>
@@ -651,7 +712,7 @@
                                     </div>
 
                                     <div className="flex items-start gap-4 p-5 rounded-xl border-l-8 border-emerald-500 bg-white shadow-md transform scale-105">
-                                        <div className="pt-1"><HeartHandshake size={32} className="text-emerald-500"/></div>
+                                        <div className="pt-1"><HeartHandshake size={32} className="text-emerald-500" /></div>
                                         <div>
                                             <h4 className="text-2xl font-bold text-slate-900">共同感受 (核心)</h4>
                                             <p className="text-lg text-slate-600 mt-1">實體活動、私密交流。</p>
@@ -661,7 +722,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <div className="mt-4 text-center text-slate-400 text-base italic">
                                         "越往核心，價值越高。"
                                     </div>
@@ -678,7 +739,7 @@
                     icon: <PenTool size={40} className="text-slate-600" />,
                     content: (
                         <div className="flex flex-col h-full justify-center px-4 md:px-0">
-                            
+
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 h-[400px] items-center">
                                 <div className="bg-blue-50 p-12 rounded-3xl border border-blue-500 shadow-sm text-center flex flex-col justify-center h-full">
                                     <div className="bg-white w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-8 text-blue-600 shadow-sm">
@@ -722,14 +783,14 @@
                     content: (
                         <div className="space-y-6">
                             <div className="flex flex-col md:flex-row gap-8 justify-center items-stretch h-[450px]">
-                                
+
                                 {/* Chief */}
                                 <div className="flex-1 bg-amber-50 border-t-8 border-amber-500 rounded-2xl p-8 shadow-md flex flex-col relative transform scale-105 z-10">
                                     <div className="mb-6 text-amber-600 flex gap-2">
-                                        <Crown size={48}/>
+                                        <Crown size={48} />
                                     </div>
                                     <h4 className="text-3xl font-bold text-slate-900 mb-4">總編輯</h4>
-                                    
+
                                     <div className="space-y-6 flex-1">
                                         <div>
                                             <h5 className="font-bold text-amber-800 mb-1 text-lg">角色</h5>
@@ -744,7 +805,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    
+
                                     <div className="mt-auto bg-white p-4 rounded-xl border border-amber-100 text-sm text-amber-700 font-bold text-center">
                                         品牌靈魂與商業核心
                                     </div>
@@ -753,10 +814,10 @@
                                 {/* Team */}
                                 <div className="flex-1 bg-blue-50 border-t-8 border-blue-500 rounded-2xl p-8 shadow-sm flex flex-col relative">
                                     <div className="mb-6 text-blue-600 flex gap-2">
-                                        <Users size={48}/>
+                                        <Users size={48} />
                                     </div>
                                     <h4 className="text-3xl font-bold text-slate-900 mb-4">編輯團隊</h4>
-                                    
+
                                     <div className="space-y-6 flex-1">
                                         <div>
                                             <h5 className="font-bold text-blue-800 mb-1 text-lg">角色</h5>
@@ -771,14 +832,14 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    
+
                                     <div className="mt-auto bg-white p-4 rounded-xl border border-blue-100 text-sm text-blue-700 font-bold text-center">
                                         主要戰力與產出來源
                                     </div>
                                 </div>
-                                
+
                             </div>
-                             <div className="text-center text-sm text-slate-400">
+                            <div className="text-center text-sm text-slate-400">
                                 * 營運支援 (Ops) 為初期次要配置，視需求彈性加入。
                             </div>
                         </div>
@@ -797,7 +858,7 @@
                                 <div className="bg-white p-10 rounded-2xl border-t-8 border-slate-800 shadow-lg flex flex-col h-full relative">
                                     <div className="absolute top-4 right-4 bg-slate-800 text-white text-xs font-bold px-3 py-1 rounded-full">40% 時間</div>
                                     <div className="mb-6 text-slate-800 flex items-center gap-3">
-                                        <PenTool size={40}/>
+                                        <PenTool size={40} />
                                         <h4 className="text-3xl font-black">核心產能</h4>
                                     </div>
                                     <div className="flex-1">
@@ -826,7 +887,7 @@
                                 <div className="bg-slate-50 p-10 rounded-2xl border-t-8 border-amber-500 shadow-sm flex flex-col h-full relative">
                                     <div className="absolute top-4 right-4 bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full">60% 時間</div>
                                     <div className="mb-6 text-amber-600 flex items-center gap-3">
-                                        <Mic size={40}/>
+                                        <Mic size={40} />
                                         <h4 className="text-3xl font-black">多元產出</h4>
                                     </div>
                                     <div className="flex-1">
@@ -933,7 +994,7 @@
                                         </div>
                                     </div>
                                 </a>
-                                
+
                                 <a href="https://www.youtube.com/watch?v=oUSWtLu2RCE" target="_blank" rel="noopener noreferrer" className="block bg-white p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md hover:border-red-400 transition-all group">
                                     <div className="flex items-start gap-6">
                                         <div className="bg-slate-100 p-4 rounded-full text-slate-600 group-hover:text-red-600 group-hover:bg-red-50 transition-colors">
@@ -954,9 +1015,9 @@
 
             // 三大段：與第 2 頁提案大綱對應
             const sectionRanges = [
-                { start: 0, end: 5, label: "市場洞察與核心策略", color: "blue" },
-                { start: 6, end: 9, label: "產品樣貌與價值主張", color: "amber" },
-                { start: 10, end: slides.length - 1, label: "營運配置與合作方案", color: "emerald" }
+                {start: 0, end: 5, label: "市場洞察與核心策略", color: "blue"},
+                {start: 6, end: 9, label: "產品樣貌與價值主張", color: "amber"},
+                {start: 10, end: slides.length - 1, label: "營運配置與合作方案", color: "emerald"}
             ];
             const getCurrentSectionIndex = () => {
                 for (let i = 0; i < sectionRanges.length; i++) {
@@ -986,7 +1047,7 @@
             return (
                 <div className="flex flex-col h-screen w-full bg-slate-50">
                     {/* Slide Render Container */}
-                    <div className="flex-1 flex items-center justify-center p-4 pb-16 relative">
+                    <div className="flex-1 flex items-center justify-center p-4 pb-16 relative cursor-pointer" onClick={nextSlide}>
                         <div className="w-full max-w-[95%] h-full md:h-[90vh] transition-all duration-500 ease-in-out">
                             {slides[currentSlide].type === 'cover' ? (
                                 slides[currentSlide].content
@@ -1013,28 +1074,28 @@
                                     </div>
                                 </div>
                             ) : (
-                                <div className="bg-white border border-slate-200 shadow-2xl rounded-2xl p-8 md:p-12 w-full h-full flex flex-col relative overflow-hidden">
-                                    {/* Header */}
-                                    <div className="flex items-center gap-4 mb-8 border-b border-slate-100 pb-6 shrink-0">
-                                        <div className="p-3 bg-slate-50 rounded-lg border border-slate-100">
-                                            {slides[currentSlide].icon}
+                                        <div className="bg-white border border-slate-200 shadow-2xl rounded-2xl p-8 md:p-12 w-full h-full flex flex-col relative overflow-hidden">
+                                            {/* Header */}
+                                            <div className="flex items-center gap-4 mb-8 border-b border-slate-100 pb-6 shrink-0">
+                                                <div className="p-3 bg-slate-50 rounded-lg border border-slate-100">
+                                                    {slides[currentSlide].icon}
+                                                </div>
+                                                <div>
+                                                    <h1 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
+                                                        {slides[currentSlide].title}
+                                                    </h1>
+                                                </div>
+                                            </div>
+                                            {/* Content */}
+                                            <div className="flex-1 flex flex-col justify-center">
+                                                {slides[currentSlide].content}
+                                            </div>
+                                            {/* Page Number */}
+                                            <div className="absolute bottom-6 right-8 text-slate-400 text-sm font-mono font-medium bg-white/90 px-3 py-1 rounded shadow-sm border border-slate-100">
+                                                {currentSlide + 1} <span className="text-slate-300">/</span> {slides.length}
+                                            </div>
                                         </div>
-                                        <div>
-                                            <h1 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
-                                                {slides[currentSlide].title}
-                                            </h1>
-                                        </div>
-                                    </div>
-                                    {/* Content */}
-                                    <div className="flex-1 flex flex-col justify-center">
-                                        {slides[currentSlide].content}
-                                    </div>
-                                    {/* Page Number */}
-                                    <div className="absolute bottom-6 right-8 text-slate-400 text-sm font-mono font-medium bg-white/90 px-3 py-1 rounded shadow-sm border border-slate-100">
-                                        {currentSlide + 1} <span className="text-slate-300">/</span> {slides.length}
-                                    </div>
-                                </div>
-                            )}
+                                    )}
                         </div>
                     </div>
                     {/* Progress Bar: 三大段，每段內依頁數切小格 */}
@@ -1042,15 +1103,15 @@
                         <div className="h-2.5 w-full flex shrink-0">
                             {sectionRanges.map((section, idx) => {
                                 const colorMap = {
-                                    blue: { active: 'bg-blue-600', past: 'bg-blue-400', future: 'bg-slate-200' },
-                                    amber: { active: 'bg-amber-500', past: 'bg-amber-400', future: 'bg-slate-200' },
-                                    emerald: { active: 'bg-emerald-600', past: 'bg-emerald-400', future: 'bg-slate-200' }
+                                    blue: {active: 'bg-blue-600', past: 'bg-blue-400', future: 'bg-slate-200'},
+                                    amber: {active: 'bg-amber-500', past: 'bg-amber-400', future: 'bg-slate-200'},
+                                    emerald: {active: 'bg-emerald-600', past: 'bg-emerald-400', future: 'bg-slate-200'}
                                 };
                                 const colors = colorMap[section.color];
                                 const slideCount = section.end - section.start + 1;
                                 return (
-                                    <div key={idx} className={`flex gap-px flex-1 min-w-0 ${idx < 2 ? 'border-r-2 border-slate-300/50 mr-px' : ''}`} style={{ flex: slideCount }}>
-                                        {Array.from({ length: slideCount }, (_, i) => {
+                                    <div key={idx} className={`flex gap-px flex-1 min-w-0 ${idx < 2 ? 'border-r-2 border-slate-300/50 mr-px' : ''}`} style={{flex: slideCount}}>
+                                        {Array.from({length: slideCount}, (_, i) => {
                                             const slideIndex = section.start + i;
                                             const isPast = currentSlide > slideIndex;
                                             const isCurrent = currentSlide === slideIndex;
@@ -1086,4 +1147,5 @@
         root.render(<StrategyDeck />);
     </script>
 </body>
+
 </html>
