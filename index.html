@@ -1,1151 +1,426 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blocktrend JV Proposal</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- React & ReactDOM -->
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <!-- Babel -->
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Roboto+Mono:wght@400;500&display=swap');
-
-        body {
-            font-family: 'Noto Sans TC', sans-serif;
-        }
-
-        /* Slide Transitions */
-        .slide-container {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-
-        /* UDN & Techmeme Specific Styles */
-        .udn-red {
-            background-color: #C8102E;
-        }
-
-        .udn-text-red {
-            color: #C8102E;
-        }
-
-        .udn-border-red {
-            border-color: #C8102E;
-        }
-
-        /* group-hover 與自訂 class 相容 */
-        .group:hover .group-hover\:udn-text-red {
-            color: #C8102E;
-        }
-
-        .techmeme-headline {
-            color: #000000;
-            font-weight: 700;
-            font-family: sans-serif;
-        }
-
-        .techmeme-headline:hover {
-            text-decoration: underline;
-            color: #0000AA;
-        }
-
-        .techmeme-source {
-            color: #545454;
-            font-size: 0.75rem;
-        }
-
-        .techmeme-summary {
-            font-size: 0.9rem;
-            line-height: 1.4;
-            color: #000;
-        }
-
-        .techmeme-cluster-label {
-            color: #006400;
-            font-weight: bold;
-            font-size: 0.75rem;
-        }
-
-        .techmeme-cluster-label-x {
-            color: #545454;
-            font-weight: bold;
-            font-size: 0.75rem;
-        }
-
-        .techmeme-link {
-            color: #0000AA;
-            text-decoration: none;
-            font-size: 0.75rem;
-        }
-
-        .techmeme-link:hover {
-            text-decoration: underline;
-        }
-
-        /* Scrollbar hiding */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Web3 媒體執行計畫｜許明恩</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧭</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Urbanist:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{--brand-blue:#48AAE0;--brand-blue-light:#6BC0F0;--brand-dark-blue:#2A68A0;--brand-orange:#E07C38;--brand-dark-gray:#1a1d23;--brand-white:#FFF;--bg-color:var(--brand-dark-gray);--glass-bg:rgba(255,255,255,0.07);--glass-border:rgba(255,255,255,0.12);--text-primary:var(--brand-white);--text-secondary:rgba(255,255,255,0.72);--risk-color:var(--brand-orange);--shadow:0 8px 32px rgba(0,0,0,0.3)}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:auto}body{background-color:var(--bg-color);color:var(--text-primary);font-family:'Noto Sans TC',sans-serif;margin:0;overflow:hidden;height:100vh}
+.bg-effects{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden}.bg-effects .orb{position:absolute;border-radius:50%;filter:blur(120px);opacity:.22;animation:orbFloat 20s ease-in-out infinite}.orb-1{width:600px;height:600px;background:radial-gradient(circle,rgba(72,170,224,.4),transparent 70%);top:-10%;right:-10%}.orb-2{width:500px;height:500px;background:radial-gradient(circle,rgba(224,124,56,.3),transparent 70%);bottom:-15%;left:-5%;animation-delay:-7s}.orb-3{width:400px;height:400px;background:radial-gradient(circle,rgba(42,104,160,.35),transparent 70%);top:40%;left:50%;animation-delay:-14s}@keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-30px) scale(1.05)}66%{transform:translate(-30px,20px) scale(.95)}}
+.bg-grid{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 40%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 40%,transparent 100%)}
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--brand-blue),var(--brand-blue-light));z-index:200;transition:width .4s cubic-bezier(.4,0,.2,1);box-shadow:0 0 12px rgba(72,170,224,.5)}
+.slides-container{position:relative;z-index:2;height:100vh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth;-ms-overflow-style:none;scrollbar-width:none}.slides-container::-webkit-scrollbar{display:none}
+.slide{width:100%;height:100vh;min-height:100vh;padding:60px 80px;display:flex;flex-direction:column;justify-content:center;scroll-snap-align:start;scroll-snap-stop:always;overflow-y:hidden;position:relative}
+h1{font-size:64px;line-height:1.2;margin-bottom:20px;background:linear-gradient(135deg,var(--brand-white) 0%,var(--brand-blue-light) 50%,var(--brand-blue) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-.02em}
+h2{font-size:44px;color:var(--brand-blue);margin-bottom:36px;border-left:5px solid;border-image:linear-gradient(to bottom,var(--brand-blue-light),var(--brand-dark-blue)) 1;padding-left:28px;font-weight:700}
+h3{font-size:30px;color:var(--brand-white);margin-bottom:18px;font-weight:600}p,li{font-size:23px;line-height:1.7;color:var(--text-secondary);margin-bottom:18px}strong{color:var(--brand-white);font-weight:700}
+.diagram-box{background:var(--glass-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:16px;padding:36px;margin-top:20px;box-shadow:var(--shadow)}
+.flow-row{display:flex;justify-content:space-between;align-items:center;gap:20px}.flow-card{background:var(--glass-bg);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:28px;border-radius:16px;border:1px solid var(--glass-border);box-shadow:var(--shadow);flex:1;text-align:center;transition:transform .3s ease}.flow-card:hover{transform:translateY(-3px);border-color:rgba(72,170,224,.3)}
+.arrow-right{font-size:28px;color:var(--brand-blue);opacity:.6}
+.page-number{position:fixed;bottom:38px;left:40px;color:rgba(255,255,255,.35);font-family:'Urbanist',sans-serif;font-size:15px;font-weight:500;letter-spacing:2px;z-index:100}
+.side-nav{position:fixed;right:24px;top:50%;transform:translateY(-50%);z-index:150;display:flex;flex-direction:column;gap:14px;align-items:center}.nav-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.25);cursor:pointer;transition:all .3s ease;position:relative}.nav-dot:hover{background:rgba(72,170,224,.5);border-color:var(--brand-blue);transform:scale(1.3)}.nav-dot.active{background:var(--brand-blue);border-color:var(--brand-blue);box-shadow:0 0 10px rgba(72,170,224,.5);transform:scale(1.2)}.nav-dot .nav-tooltip{position:absolute;right:22px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.85);backdrop-filter:blur(10px);color:var(--brand-white);font-size:13px;padding:5px 10px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .25s ease}.nav-dot:hover .nav-tooltip{opacity:1}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:20px}.stat-card{background:var(--glass-bg);backdrop-filter:blur(16px);border:1px solid var(--glass-border);border-radius:16px;padding:28px;text-align:center}.stat-num{font-size:48px;font-weight:700;font-family:'Urbanist',sans-serif}.stat-label{font-size:16px;color:var(--text-secondary);margin-top:8px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}.highlight-box{background:rgba(72,170,224,.08);border:1px solid rgba(72,170,224,.25);border-radius:12px;padding:24px;margin-bottom:16px}
+.math-table{width:100%;border-collapse:separate;border-spacing:0;margin-top:10px;font-size:20px;border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}.math-table th{background:linear-gradient(135deg,var(--brand-dark-blue),var(--brand-blue));color:var(--brand-white);padding:14px 12px;text-align:center;font-weight:600;font-size:18px}.math-table td{background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.06);padding:13px 12px;text-align:center;color:var(--text-secondary)}.math-table tr:hover td{background:rgba(255,255,255,.08)}.math-table tr:last-child td{border-bottom:none;font-weight:bold;color:var(--brand-white);background:rgba(72,170,224,.15)}
+@media(max-width:1024px){.slide{padding:40px 30px;overflow-y:auto}h1{font-size:42px!important}h2{font-size:32px!important}.flow-row{flex-direction:column}.stat-grid{grid-template-columns:1fr!important}.two-col{grid-template-columns:1fr!important}div[style*="grid-template-columns"]{grid-template-columns:1fr!important}.side-nav{display:none}.bg-effects .orb{opacity:.15}}
+</style>
 </head>
+<body>
+<div class="bg-effects"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
+<div class="bg-grid"></div>
+<div class="progress-bar" id="progress-bar"></div>
+<div class="side-nav" id="side-nav">
+<div class="nav-dot" data-slide="1"><span class="nav-tooltip">痛點</span></div>
+<div class="nav-dot" data-slide="3"><span class="nav-tooltip">產品</span></div>
+<div class="nav-dot" data-slide="10"><span class="nav-tooltip">商業計畫</span></div>
+<div class="nav-dot" data-slide="13"><span class="nav-tooltip">條件</span></div>
+</div>
+<div class="slides-container" id="slides-container">
+<div class="slide"><div style="font-family:'Urbanist',sans-serif;letter-spacing:4px;color:var(--brand-blue);margin-bottom:20px;font-weight:700;font-size:24px">EXECUTION PLAN</div><h1 style="font-size:64px">Web3 媒體<br>執行計畫</h1><div style="font-size:32px;font-weight:700;color:var(--text-primary);margin-bottom:60px;line-height:1.4">產品 ・ 組織 ・ 提案</div><div style="font-size:28px;color:var(--text-secondary);border-left:6px solid var(--brand-blue);padding-left:30px">許明恩｜區塊勢創辦人</div><div style="font-size:18px;color:rgba(255,255,255,.3);margin-top:40px">僅供內部討論 ・ 2026 年 4 月</div></div>
+<div class="slide"><h2>企業現在怎麼跟上區塊鏈？</h2><div class="two-col" style="margin-top:10px;"><div class="diagram-box" style="margin-top:0;border-top:3px solid var(--brand-orange);"><h3 style="font-size:24px;color:var(--brand-orange);">找人蒐集新聞</h3><p style="font-size:17px;">但篩選標準是什麼？來源品質誰把關？執行者對領域若不夠熟悉，產出難以引起團隊重視。</p><div style="margin-top:14px;"><span style="display:inline-block;padding:4px 12px;background:rgba(224,124,56,0.12);border-radius:20px;font-size:14px;color:var(--brand-orange);margin:3px;">#缺乏專業篩選</span><span style="display:inline-block;padding:4px 12px;background:rgba(224,124,56,0.12);border-radius:20px;font-size:14px;color:var(--brand-orange);margin:3px;">#來源品質參差</span></div></div><div class="diagram-box" style="margin-top:0;border-top:3px solid var(--brand-orange);"><h3 style="font-size:24px;color:var(--brand-orange);">定期聽大神演講</h3><p style="font-size:17px;">但主題與頻率該如何規劃？太專業的受眾有限，太通識的缺乏實用性。知識吸收憑運氣，哪場研討會才值得參與？</p><div style="margin-top:14px;"><span style="display:inline-block;padding:4px 12px;background:rgba(224,124,56,0.12);border-radius:20px;font-size:14px;color:var(--brand-orange);margin:3px;">#低頻率</span><span style="display:inline-block;padding:4px 12px;background:rgba(224,124,56,0.12);border-radius:20px;font-size:14px;color:var(--brand-orange);margin:3px;">#一次性知識</span><span style="display:inline-block;padding:4px 12px;background:rgba(224,124,56,0.12);border-radius:20px;font-size:14px;color:var(--brand-orange);margin:3px;">#難以持續</span></div></div></div><div style="margin-top:18px;padding:16px;background:rgba(224,124,56,0.08);border-radius:12px;text-align:center;"><p style="font-size:19px;margin:0;">多數團隊缺乏共同的事實基礎。光是釐清「現在發生什麼事」就耗費不少精力，難以深入討論。</p></div></div>
+<div class="slide"><h2>缺乏可信的專家</h2><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-top:10px;"><div class="diagram-box" style="margin-top:0;border-left:4px solid var(--brand-orange);"><h3 style="font-size:20px;color:var(--brand-orange);">但問題是</h3><p style="font-size:17px;margin:0;">這樣的人去哪找？他的利益是否與企業一致？如果真的夠專業，成本是否負擔得起？</p></div><div class="diagram-box" style="margin-top:0;border-left:4px solid var(--text-secondary);"><h3 style="font-size:20px;">現實是</h3><p style="font-size:17px;margin:0;">關心區塊鏈的人不少，但多數從個人投資角度切入。能講代幣的人不難找，但同時具備技術背景、又關心企業應用如何實際落地的人，非常稀缺。</p></div><div class="diagram-box" style="margin-top:0;border-left:4px solid var(--brand-blue);"><h3 style="font-size:20px;color:var(--brand-blue);">所以需要</h3><p style="font-size:17px;margin:0;">一套與企業利益一致的機制。提供專業且穩定的服務，同時滿足多家企業需求。成為那個值得被信任的角色。</p></div></div><div style="margin-top:18px;padding:16px;background:rgba(72,170,224,0.06);border-radius:12px;text-align:center;"><p style="font-size:19px;margin:0;">光是為企業建立共同的事實基礎，就很有價值。因為多數媒體的商業模式，不是服務讀者。</p></div></div>
 
-<body class="bg-slate-50 text-slate-800 h-screen overflow-hidden">
-    <div id="root"></div>
+<!-- Website Mockup - Verge-inspired dark -->
+<div class="slide" style="padding:30px 50px;">
+<h2 style="font-size:36px;margin-bottom:16px;">新聞網站示意圖</h2>
+<div style="background:#000;border-radius:10px;overflow:hidden;box-shadow:0 4px 40px rgba(0,0,0,0.7);height:68vh;display:flex;flex-direction:column;border:1px solid #222;">
+<!-- Top nav bar -->
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 20px;border-bottom:1px solid #222;flex-shrink:0;">
+<div style="display:flex;align-items:center;gap:20px;">
+<div style="font-size:24px;font-weight:900;color:#fff;font-family:system-ui,sans-serif;letter-spacing:-1px;">W3M</div>
+<div style="display:flex;gap:16px;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;font-family:system-ui,sans-serif;"><span style="color:#fff;">首頁</span><span style="color:#666;">週報</span><span style="color:#666;">工作坊</span><span style="color:#666;">活動</span></div>
+</div>
+<div style="display:flex;gap:14px;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;font-family:system-ui,sans-serif;"><span style="color:#666;">關於</span><span style="color:#48AAE0;">訂閱</span></div>
+</div>
+<!-- Main content area -->
+<div style="display:grid;grid-template-columns:1.5fr 1fr;flex:1;overflow:hidden;">
+<!-- Left: Hero story with image -->
+<div style="position:relative;overflow:hidden;">
+<img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&q=80" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.4);display:block;" alt="">
+<!-- Overlay content -->
+<div style="position:absolute;bottom:0;left:0;right:0;padding:28px;background:linear-gradient(transparent,rgba(0,0,0,0.85) 40%);">
+<div style="font-size:11px;color:#48AAE0;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;font-family:system-ui,sans-serif;">支付</div>
+<div style="font-size:28px;font-weight:900;color:#fff;line-height:1.2;font-family:'Noto Sans TC',sans-serif;margin-bottom:12px;">Stripe 宣布收購嵌入式錢包 Privy，擴大加密貨幣基礎設施佈局</div>
+<div style="font-size:12px;font-family:system-ui,sans-serif;"><span style="color:#48AAE0;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">許明恩</span><span style="color:#555;margin-left:10px;">2 小時前</span></div>
+</div>
+</div>
+<!-- Right: Top Stories -->
+<div style="padding:20px;overflow-y:auto;border-left:1px solid #222;">
+<div style="font-size:14px;font-weight:700;color:#48AAE0;margin-bottom:18px;font-family:system-ui,sans-serif;">Top Stories</div>
+<!-- Story 1 -->
+<div style="display:flex;gap:12px;padding-bottom:16px;margin-bottom:16px;border-bottom:1px solid #1a1a1a;">
+<div style="color:#48AAE0;font-size:18px;font-weight:900;font-family:system-ui;min-width:20px;padding-top:2px;">1</div>
+<div style="flex:1;">
+<div style="font-size:15px;font-weight:700;color:#fff;line-height:1.3;font-family:'Noto Sans TC',sans-serif;">兆豐金控完成首筆穩定幣跨境支付測試</div>
+<div style="font-size:10px;margin-top:6px;font-family:system-ui;"><span style="color:#48AAE0;text-transform:uppercase;letter-spacing:0.5px;font-weight:600;">許明恩</span><span style="color:#444;margin-left:8px;">5 小時前</span></div>
+</div>
+<img src="https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=120&q=80" style="width:56px;height:56px;object-fit:cover;border-radius:4px;flex-shrink:0;" alt="">
+</div>
+<!-- Story 2 -->
+<div style="display:flex;gap:12px;padding-bottom:16px;margin-bottom:16px;border-bottom:1px solid #1a1a1a;">
+<div style="color:#48AAE0;font-size:18px;font-weight:900;font-family:system-ui;min-width:20px;padding-top:2px;">2</div>
+<div style="flex:1;">
+<div style="font-size:15px;font-weight:700;color:#fff;line-height:1.3;font-family:'Noto Sans TC',sans-serif;">歐盟 MiCA 法規正式生效，交易所合規期限倒數</div>
+<div style="font-size:10px;margin-top:6px;font-family:system-ui;"><span style="color:#48AAE0;text-transform:uppercase;letter-spacing:0.5px;font-weight:600;">許明恩</span><span style="color:#444;margin-left:8px;">8 小時前</span></div>
+</div>
+<img src="https://images.unsplash.com/photo-1607434472257-d9f8e57a643d?w=120&q=80" style="width:56px;height:56px;object-fit:cover;border-radius:4px;flex-shrink:0;" alt="">
+</div>
+<!-- Story 3 -->
+<div style="display:flex;gap:12px;padding-bottom:16px;margin-bottom:16px;border-bottom:1px solid #1a1a1a;">
+<div style="color:#48AAE0;font-size:18px;font-weight:900;font-family:system-ui;min-width:20px;padding-top:2px;">3</div>
+<div style="flex:1;">
+<div style="font-size:15px;font-weight:700;color:#fff;line-height:1.3;font-family:'Noto Sans TC',sans-serif;">Ethereum Foundation 公佈新治理架構</div>
+<div style="font-size:10px;margin-top:6px;font-family:system-ui;"><span style="color:#48AAE0;text-transform:uppercase;letter-spacing:0.5px;font-weight:600;">林宜萱</span><span style="color:#444;margin-left:8px;">6 小時前</span></div>
+</div>
+<img src="https://images.unsplash.com/photo-1622630998477-20aa696ecb05?w=120&q=80" style="width:56px;height:56px;object-fit:cover;border-radius:4px;flex-shrink:0;" alt="">
+</div>
+<!-- Story 4 -->
+<div style="display:flex;gap:12px;padding-bottom:16px;margin-bottom:16px;border-bottom:1px solid #1a1a1a;">
+<div style="color:#48AAE0;font-size:18px;font-weight:900;font-family:system-ui;min-width:20px;padding-top:2px;">4</div>
+<div style="flex:1;">
+<div style="font-size:15px;font-weight:700;color:#fff;line-height:1.3;font-family:'Noto Sans TC',sans-serif;">Circle 提交 IPO 申請</div>
+<div style="font-size:10px;margin-top:6px;font-family:system-ui;"><span style="color:#48AAE0;text-transform:uppercase;letter-spacing:0.5px;font-weight:600;">許明恩</span><span style="color:#444;margin-left:8px;">10 小時前</span></div>
+</div>
+<img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=120&q=80" style="width:56px;height:56px;object-fit:cover;border-radius:4px;flex-shrink:0;" alt="">
+</div>
+<!-- Story 5 -->
+<div style="display:flex;gap:12px;">
+<div style="color:#48AAE0;font-size:18px;font-weight:900;font-family:system-ui;min-width:20px;padding-top:2px;">5</div>
+<div style="flex:1;">
+<div style="font-size:15px;font-weight:700;color:#fff;line-height:1.3;font-family:'Noto Sans TC',sans-serif;">日本三大銀行聯合測試區塊鏈貿易融資</div>
+<div style="font-size:10px;margin-top:6px;font-family:system-ui;"><span style="color:#48AAE0;text-transform:uppercase;letter-spacing:0.5px;font-weight:600;">林宜萱</span><span style="color:#444;margin-left:8px;">12 小時前</span></div>
+</div>
+<img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=120&q=80" style="width:56px;height:56px;object-fit:cover;border-radius:4px;flex-shrink:0;" alt="">
+</div>
+</div>
+</div>
+</div>
+</div>
 
-    <script type="text/babel">
-        const {useState, useEffect} = React;
+<!-- Article Detail View -->
+<div class="slide" style="padding:30px 50px;">
+<h2 style="font-size:36px;margin-bottom:16px;">點進去看到什麼</h2>
+<div style="background:#000;border-radius:10px;overflow:hidden;box-shadow:0 4px 40px rgba(0,0,0,0.7);height:68vh;display:flex;flex-direction:column;border:1px solid #222;">
+<!-- Nav -->
+<div style="display:flex;align-items:center;padding:10px 20px;border-bottom:1px solid #222;flex-shrink:0;">
+<div style="font-size:20px;font-weight:900;color:#fff;font-family:system-ui,sans-serif;letter-spacing:-1px;">W3M</div>
+<div style="margin-left:16px;font-size:11px;color:#48AAE0;font-family:system-ui;">← 回首頁</div>
+</div>
+<!-- Article content -->
+<div style="flex:1;overflow-y:auto;display:grid;grid-template-columns:1.4fr 1fr;">
+<!-- Left: Article body -->
+<div style="padding:24px;border-right:1px solid #222;">
+<!-- Category -->
+<div style="font-size:10px;color:#48AAE0;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;font-family:system-ui;">支付</div>
+<!-- Headline -->
+<div style="font-size:24px;font-weight:900;color:#fff;line-height:1.25;font-family:'Noto Sans TC',sans-serif;margin-bottom:10px;">Stripe 宣布收購嵌入式錢包 Privy</div>
+<!-- Author + time -->
+<div style="font-size:10px;margin-bottom:16px;font-family:system-ui;"><span style="color:#48AAE0;font-weight:600;">許明恩</span><span style="color:#444;margin-left:10px;">2026 年 3 月 31 日</span></div>
+<!-- Key facts box - first thing readers see -->
+<div style="background:#111;border-radius:8px;padding:14px;margin-bottom:16px;border-left:3px solid #48AAE0;">
+<div style="font-size:10px;color:#48AAE0;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-family:system-ui;">關鍵事實</div>
+<div style="font-size:12px;color:rgba(255,255,255,0.65);line-height:1.8;font-family:'Noto Sans TC',sans-serif;">
+• Stripe 收購嵌入式錢包開發商 Privy，收購金額未公開<br>
+• Privy 的 SDK 讓 App 用戶無需理解私鑰即可使用鏈上功能<br>
+• Stripe 去年以 11 億美元收購穩定幣 API 新創 Bridge<br>
+• Privy 目前面臨 Magic Labs 的專利侵權訴訟
+</div>
+</div>
+<!-- Hero image -->
+<img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=700&q=80" style="width:100%;height:120px;object-fit:cover;border-radius:6px;margin-bottom:16px;" alt="">
+<!-- Full article body -->
+<div style="font-size:12px;color:rgba(255,255,255,0.6);line-height:1.8;font-family:'Noto Sans TC',sans-serif;">
+<p style="margin:0 0 10px;font-size:12px;">支付巨頭 Stripe 週一宣布收購加密貨幣錢包新創 Privy。Privy 提供白牌的用戶註冊與錢包服務，讓開發者能將其整合進各類加密貨幣應用。這家成立僅三年的公司成長迅速——去年 3 月募資時對外表示支援 5,000 萬個錢包，如今已成長至 7,500 萬個，服務超過 1,000 款應用程式，累計獲得 4,000 萬美元融資。</p>
+<p style="margin:0 0 10px;font-size:12px;">這筆交易是 Stripe 近期一連串區塊鏈佈局的延伸。上個月 Stripe 才剛推出穩定幣金融帳戶服務，而更早之前的 2024 年 10 月，Stripe 以 11 億美元收購穩定幣基礎設施公司 Bridge，震動市場。</p>
+<p style="margin:0 0 10px;font-size:12px;">事實上，Stripe 對區塊鏈的興趣並非突然。自 2021 年 11 月起，加密貨幣創投機構 Paradigm 的共同創辦人 Matt Huang 便加入了 Stripe 的董事會。值得注意的是，Stripe 的董事會規模極小，僅有七名成員，包含兩位創辦人及兩位來自 Sequoia 的代表。而 Paradigm 與 Sequoia 恰好都是 Privy 的投資人。</p>
+<p style="margin:0;font-size:12px;">這次收購也反映了 Stripe 從傳統支付向更廣泛金融基礎設施擴張的策略。Stripe 起初專注於電商支付，至今仍是核心業務，但 2018 年推出實體 POS 終端後便開始跨足線下場景。而 Privy 同樣在其錢包中內建了感應支付功能，目前的客戶涵蓋 NFT 平台 OpenSea、社群網路 Farcaster 和 Zora 等。</p>
+</div>
+</div>
+<!-- Right: Reports + Social - FULL VERSION -->
+<div style="padding:20px;overflow-y:auto;">
+<!-- Reports & sources -->
+<div style="margin-bottom:16px;">
+<div style="font-size:11px;color:#48AAE0;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;font-family:system-ui;">相關報導與觀點</div>
+<div style="display:flex;flex-direction:column;gap:6px;">
+<div style="background:#111;border-radius:6px;padding:9px 12px;">
+<div style="font-size:11px;color:#fff;font-weight:600;line-height:1.35;font-family:'Noto Sans TC',sans-serif;">Privy 宣布加入 Stripe</div>
+<div style="font-size:9px;color:#555;margin-top:3px;font-family:system-ui;">Privy Blog — 官方公告</div>
+</div>
+<div style="background:#111;border-radius:6px;padding:9px 12px;">
+<div style="font-size:11px;color:#fff;font-weight:600;line-height:1.35;font-family:'Noto Sans TC',sans-serif;">Stripe 收購 Privy，加速加密貨幣基礎設施佈局</div>
+<div style="font-size:9px;color:#555;margin-top:3px;font-family:system-ui;">Stripe Blog — 官方公告</div>
+</div>
+<div style="background:#111;border-radius:6px;padding:9px 12px;">
+<div style="font-size:11px;color:#fff;font-weight:600;line-height:1.35;font-family:'Noto Sans TC',sans-serif;">我們對 Privy 的投資：下一個篇章</div>
+<div style="font-size:9px;color:#555;margin-top:3px;font-family:system-ui;">Sequoia — 投資人觀點</div>
+</div>
+<div style="background:#111;border-radius:6px;padding:9px 12px;">
+<div style="font-size:11px;color:#fff;font-weight:600;line-height:1.35;font-family:'Noto Sans TC',sans-serif;">Stripe 收購加密錢包新創 Privy</div>
+<div style="font-size:9px;color:#555;margin-top:3px;font-family:system-ui;">Bloomberg</div>
+</div>
+<div style="background:#111;border-radius:6px;padding:9px 12px;">
+<div style="font-size:11px;color:#fff;font-weight:600;line-height:1.35;font-family:'Noto Sans TC',sans-serif;">Stripe 二度出手收購，釋出基礎設施佈局訊號</div>
+<div style="font-size:9px;color:#555;margin-top:3px;font-family:system-ui;">The Block</div>
+</div>
+<div style="background:#111;border-radius:6px;padding:9px 12px;">
+<div style="font-size:11px;color:#fff;font-weight:600;line-height:1.35;font-family:'Noto Sans TC',sans-serif;">Privy 被收購對嵌入式錢包市場意味著什麼</div>
+<div style="font-size:9px;color:#555;margin-top:3px;font-family:system-ui;">CoinDesk</div>
+</div>
+</div>
+</div>
+<!-- Social discussions -->
+<div>
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+<div style="font-size:11px;color:#E8913A;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;font-family:system-ui;">社群討論</div>
+<div style="font-size:9px;color:#444;font-family:system-ui;">持續更新中</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:6px;">
+<div style="background:#111;border-radius:6px;padding:9px 12px;border-left:3px solid #E8913A;">
+<div style="font-size:10px;color:rgba(255,255,255,0.65);line-height:1.5;font-family:'Noto Sans TC',sans-serif;">「加密貨幣的使用者體驗還停留在撥接時代。Privy 讓我們能從根本改變這件事。」</div>
+<div style="font-size:9px;color:#E8913A;margin-top:3px;font-family:system-ui;">Patrick Collison（Stripe 共同創辦人）— X</div>
+</div>
+<div style="background:#111;border-radius:6px;padding:9px 12px;border-left:3px solid #E8913A;">
+<div style="font-size:10px;color:rgba(255,255,255,0.65);line-height:1.5;font-family:'Noto Sans TC',sans-serif;">「加入 Stripe 讓我們能把嵌入式錢包帶給全球數百萬開發者。」</div>
+<div style="font-size:9px;color:#E8913A;margin-top:3px;font-family:system-ui;">Henri Stern（Privy 共同創辦人）— X</div>
+</div>
+<div style="background:#111;border-radius:6px;padding:9px 12px;border-left:3px solid #E8913A;">
+<div style="font-size:10px;color:rgba(255,255,255,0.65);line-height:1.5;font-family:'Noto Sans TC',sans-serif;">「Bridge 做後端、Privy 做前端，Stripe 的加密拼圖快完成了。」</div>
+<div style="font-size:9px;color:#E8913A;margin-top:3px;font-family:system-ui;">@balajis — X</div>
+</div>
+<div style="background:#111;border-radius:6px;padding:9px 12px;border-left:3px solid #E8913A;">
+<div style="font-size:10px;color:rgba(255,255,255,0.65);line-height:1.5;font-family:'Noto Sans TC',sans-serif;">「嵌入式錢包的護城河到底有多深？Magic Labs 的專利訴訟還在打。」</div>
+<div style="font-size:9px;color:#E8913A;margin-top:3px;font-family:system-ui;">@lex_node — X</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 
-        // --- 1. Inline Icon System (Zero Dependency) ---
-        const IconBase = ({size = 24, className = "", children, ...props}) => (
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width={size}
-                height={size}
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className={className}
-                {...props}
-            >
-                {children}
-            </svg>
-        );
+<div class="slide"><h2>商業模式：信任</h2><p style="font-size:22px;margin-bottom:6px;">與讀者站在一起。內容不搶快，搶定義權。把每件事寫完整、驗證真實性，替讀者省時間。</p><div class="flow-row" style="margin-top:24px;"><div class="flow-card" style="border-bottom:3px solid #27ae60;padding:24px 20px;"><i class="fa-solid fa-newspaper" style="font-size:32px;color:#27ae60;display:block;margin-bottom:16px;"></i><strong style="font-size:20px;display:block;margin-bottom:14px;">事實｜免費（廣告）</strong><div style="font-size:16px;color:var(--text-secondary);line-height:1.7;text-align:left;">以事件為核心的新聞網站。每一則事件，附上各方相關報導與觀點，並寫出經過查核的客觀事實。</div></div><div class="arrow-right"><i class="fa-solid fa-arrow-right"></i></div><div class="flow-card" style="border-bottom:3px solid var(--brand-blue);padding:24px 20px;"><i class="fa-solid fa-brain" style="font-size:32px;color:var(--brand-blue);display:block;margin-bottom:16px;"></i><strong style="font-size:20px;display:block;margin-bottom:14px;">觀點與週報｜付費</strong><div style="font-size:16px;color:var(--text-secondary);line-height:1.7;text-align:left;">幫讀者省時間——從一週的事件中篩選出最重要的，梳理前因後果，提供專業判斷。</div></div><div class="arrow-right"><i class="fa-solid fa-arrow-right"></i></div><div class="flow-card" style="border-bottom:3px solid var(--brand-orange);padding:24px 20px;"><i class="fa-solid fa-chalkboard-user" style="font-size:32px;color:var(--brand-orange);display:block;margin-bottom:16px;"></i><strong style="font-size:20px;display:block;margin-bottom:14px;">工作坊｜付費</strong><div style="font-size:16px;color:var(--text-secondary);line-height:1.7;text-align:left;">開課滿足企業的實務需求，例如穩定幣收付、法律、會計等面向。</div></div></div><div style="margin-top:24px;padding:16px;background:rgba(72,170,224,.06);border-radius:12px;text-align:center;"><p style="font-size:19px;margin:0;">成為讀者信任的錨點——在資訊過載的時代，一個值得長期依賴的來源。</p></div></div>
 
-        // Icon Definitions
-        const Icons = {
-            ChevronLeft: (p) => <IconBase {...p}><path d="m15 18-6-6 6-6" /></IconBase>,
-            ChevronRight: (p) => <IconBase {...p}><path d="m9 18 6-6-6-6" /></IconBase>,
-            Crown: (p) => <IconBase {...p}><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14" /></IconBase>,
-            Layers: (p) => <IconBase {...p}><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z" /><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65" /><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65" /></IconBase>,
-            Cpu: (p) => <IconBase {...p}><rect x="4" y="4" width="16" height="16" rx="2" /><rect x="9" y="9" width="6" height="6" /><path d="M15 2v2" /><path d="M15 20v2" /><path d="M2 15h2" /><path d="M2 9h2" /><path d="M20 15h2" /><path d="M20 9h2" /><path d="M9 2v2" /><path d="M9 20v2" /></IconBase>,
-            Bot: (p) => <IconBase {...p}><path d="M12 8V4H8" /><rect width="16" height="12" x="4" y="8" rx="2" /><path d="M2 14h2" /><path d="M20 14h2" /><path d="M15 13v2" /><path d="M9 13v2" /></IconBase>,
-            PenTool: (p) => <IconBase {...p}><path d="m12 19 7-7 3 3-7 7-3-3z" /><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" /><path d="m2 2 7.586 7.586" /><circle cx="11" cy="11" r="2" /></IconBase>,
-            Newspaper: (p) => <IconBase {...p}><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2" /><path d="M18 14h-8" /><path d="M15 18h-5" /><path d="M10 6h8v4h-8V6Z" /></IconBase>,
-            Search: (p) => <IconBase {...p}><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></IconBase>,
-            Lock: (p) => <IconBase {...p}><rect width="18" height="11" x="3" y="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></IconBase>,
-            Users: (p) => <IconBase {...p}><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></IconBase>,
-            User: (p) => <IconBase {...p}><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></IconBase>,
-            ChefHat: (p) => <IconBase {...p}><path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z" /><line x1="6" x2="18" y1="17" y2="17" /></IconBase>,
-            Target: (p) => <IconBase {...p}><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /></IconBase>,
-            Zap: (p) => <IconBase {...p}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></IconBase>,
-            Shield: (p) => <IconBase {...p}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" /></IconBase>,
-            DollarSign: (p) => <IconBase {...p}><line x1="12" x2="12" y1="2" y2="22" /><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /></IconBase>,
-            HeartHandshake: (p) => <IconBase {...p}><path d="M19.414 14.414C21 12.828 22 11.5 22 9.5a5.5 5.5 0 0 0-9.591-3.676.6.6 0 0 1-.818.001A5.5 5.5 0 0 0 2 9.5c0 2.3 1.5 4 3 5.5l5.535 5.362a2 2 0 0 0 2.879.052 2.12 2.12 0 0 0-.004-3 2.124 2.124 0 1 0 3-3 2.124 2.124 0 0 0 3.004 0 2 2 0 0 0 0-2.828l-1.881-1.882a2.41 2.41 0 0 0-3.409 0l-1.71 1.71a2 2 0 0 1-2.828 0 2 2 0 0 1 0-2.828l2.823-2.762" /></IconBase>,
-            Video: (p) => <IconBase {...p}><path d="m22 8-6 4 6 4V8Z" /><path d="M2 5v14c0 2 1 3 3 3h12c2 0 3-1 3-3V5c0-2-1-3-3-3H5C3 2 2 3 2 5Z" /></IconBase>,
-            List: (p) => <IconBase {...p}><line x1="8" x2="21" y1="6" y2="6" /><line x1="8" x2="21" y1="12" y2="12" /><line x1="8" x2="21" y1="18" y2="18" /><line x1="3" x2="3.01" y1="6" y2="6" /><line x1="3" x2="3.01" y1="12" y2="12" /><line x1="3" x2="3.01" y1="18" y2="18" /></IconBase>,
-            AlertCircle: (p) => <IconBase {...p}><circle cx="12" cy="12" r="10" /><line x1="12" x2="12" y1="8" y2="12" /><line x1="12" x2="12.01" y1="16" y2="16" /></IconBase>,
-            Landmark: (p) => <IconBase {...p}><line x1="3" x2="21" y1="22" y2="22" /><line x1="6" x2="6" y1="18" y2="11" /><line x1="10" x2="10" y1="18" y2="11" /><line x1="14" x2="14" y1="18" y2="11" /><line x1="18" x2="18" y1="18" y2="11" /><polygon points="12 2 20 7 4 7 12 2" /></IconBase>,
-            Building: (p) => <IconBase {...p}><rect width="16" height="20" x="4" y="2" rx="2" ry="2" /><path d="M9 22v-4h6v4" /><path d="M8 6h.01" /><path d="M16 6h.01" /><path d="M12 6h.01" /><path d="M12 10h.01" /><path d="M12 14h.01" /><path d="M16 10h.01" /><path d="M16 14h.01" /><path d="M8 10h.01" /><path d="M8 14h.01" /></IconBase>,
-            Clock: (p) => <IconBase {...p}><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></IconBase>,
-            Image: (p) => <IconBase {...p}><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /><circle cx="9" cy="9" r="2" /><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" /></IconBase>,
-            Compass: (p) => <IconBase {...p}><circle cx="12" cy="12" r="10" /><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" /></IconBase>,
-            TrendingDown: (p) => <IconBase {...p}><polyline points="22 17 13.5 8.5 8.5 13.5 2 7" /><polyline points="16 17 22 17 22 11" /></IconBase>,
-            MousePointerClick: (p) => <IconBase {...p}><path d="m9 9 5 12 1.8-5.2L21 14Z" /><path d="M7.2 2.2 8 5.1" /><path d="m5.1 8-2.9-.8" /><path d="M14 4.1 12 6" /><path d="m6 12-1.9 2" /></IconBase>,
-            Anchor: (p) => <IconBase {...p}><circle cx="12" cy="5" r="3" /><line x1="12" x2="12" y1="22" y2="8" /><path d="M5 12H2a10 10 0 0 0 20 0h-3" /></IconBase>,
-            Rocket: (p) => <IconBase {...p}><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" /><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" /><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" /><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" /></IconBase>,
-            Briefcase: (p) => <IconBase {...p}><rect width="20" height="14" x="2" y="7" rx="2" ry="2" /><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" /></IconBase>,
-            BookOpen: (p) => <IconBase {...p}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" /><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" /></IconBase>,
-            Cogs: (p) => <IconBase {...p}><path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z" /><path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" /><path d="M12 2v2" /><path d="M12 22v-2" /><path d="m17 7-1.4 1.4" /><path d="M22 12h-2" /><path d="m17 17-1.4-1.4" /><path d="m7 7 1.4 1.4" /><path d="M2 12h2" /><path d="m7 17 1.4-1.4" /></IconBase>,
-            Mic: (p) => <IconBase {...p}><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><line x1="12" x2="12" y1="19" y2="22" /></IconBase>,
-            ExternalLink: (p) => <IconBase {...p}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" x2="21" y1="14" y2="3" /></IconBase>,
-            Workflow: (p) => <IconBase {...p}><rect width="8" height="8" x="3" y="3" rx="2" /><path d="M7 11v4a2 2 0 0 0 2 2h4" /><rect width="8" height="8" x="13" y="13" rx="2" /></IconBase>
-        };
+<!-- Paywall version of article -->
+<div class="slide" style="padding:30px 50px;">
+<h2 style="font-size:36px;margin-bottom:16px;">事實免費，省時付費</h2>
+<div style="background:#000;border-radius:10px;overflow:hidden;box-shadow:0 4px 40px rgba(0,0,0,0.7);height:68vh;display:flex;flex-direction:column;border:1px solid #222;">
+<div style="display:flex;align-items:center;padding:10px 20px;border-bottom:1px solid #222;flex-shrink:0;">
+<div style="font-size:20px;font-weight:900;color:#fff;font-family:system-ui,sans-serif;letter-spacing:-1px;">W3M</div>
+<div style="margin-left:16px;font-size:11px;color:#48AAE0;font-family:system-ui;">← 回首頁</div>
+</div>
+<div style="flex:1;overflow-y:auto;display:grid;grid-template-columns:1.4fr 1fr;">
+<!-- Left: same article body -->
+<div style="padding:24px;border-right:1px solid #222;">
+<div style="font-size:10px;color:#48AAE0;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;font-family:system-ui;">支付</div>
+<div style="font-size:24px;font-weight:900;color:#fff;line-height:1.25;font-family:'Noto Sans TC',sans-serif;margin-bottom:10px;">Stripe 宣布收購嵌入式錢包 Privy</div>
+<div style="font-size:10px;margin-bottom:16px;font-family:system-ui;"><span style="color:#48AAE0;font-weight:600;">許明恩</span><span style="color:#444;margin-left:10px;">2026 年 3 月 31 日</span></div>
+<div style="background:#111;border-radius:8px;padding:14px;margin-bottom:16px;border-left:3px solid #48AAE0;">
+<div style="font-size:10px;color:#48AAE0;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-family:system-ui;">關鍵事實</div>
+<div style="font-size:12px;color:rgba(255,255,255,0.65);line-height:1.8;font-family:'Noto Sans TC',sans-serif;">
+• Stripe 收購嵌入式錢包開發商 Privy，收購金額未公開<br>
+• Privy 的 SDK 讓 App 用戶無需理解私鑰即可使用鏈上功能<br>
+• Stripe 去年以 11 億美元收購穩定幣 API 新創 Bridge<br>
+• Privy 目前面臨 Magic Labs 的專利侵權訴訟
+</div>
+</div>
+<img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=700&q=80" style="width:100%;height:120px;object-fit:cover;border-radius:6px;margin-bottom:16px;" alt="">
+<div style="font-size:12px;color:rgba(255,255,255,0.6);line-height:1.8;font-family:'Noto Sans TC',sans-serif;">
+<p style="margin:0 0 10px;font-size:12px;">支付巨頭 Stripe 週一宣布收購加密貨幣錢包新創 Privy。Privy 提供白牌的用戶註冊與錢包服務，讓開發者能將其整合進各類加密貨幣應用。這家成立僅三年的公司成長迅速——去年 3 月募資時對外表示支援 5,000 萬個錢包，如今已成長至 7,500 萬個，服務超過 1,000 款應用程式，累計獲得 4,000 萬美元融資。</p>
+<p style="margin:0 0 10px;font-size:12px;">這筆交易是 Stripe 近期一連串區塊鏈佈局的延伸。上個月 Stripe 才剛推出穩定幣金融帳戶服務，而更早之前的 2024 年 10 月，Stripe 以 11 億美元收購穩定幣基礎設施公司 Bridge，震動市場。</p>
+<p style="margin:0 0 10px;font-size:12px;">事實上，Stripe 對區塊鏈的興趣並非突然。自 2021 年 11 月起，加密貨幣創投機構 Paradigm 的共同創辦人 Matt Huang 便加入了 Stripe 的董事會。值得注意的是，Stripe 的董事會規模極小，僅有七名成員，包含兩位創辦人及兩位來自 Sequoia 的代表。而 Paradigm 與 Sequoia 恰好都是 Privy 的投資人。</p>
+<p style="margin:0;font-size:12px;">這次收購也反映了 Stripe 從傳統支付向更廣泛金融基礎設施擴張的策略。Stripe 起初專注於電商支付，至今仍是核心業務，但 2018 年推出實體 POS 終端後便開始跨足線下場景。而 Privy 同樣在其錢包中內建了感應支付功能，目前的客戶涵蓋 NFT 平台 OpenSea、社群網路 Farcaster 和 Zora 等。</p>
+</div>
+</div>
+<!-- Right: with paywall -->
+<div style="padding:20px;overflow-y:auto;">
+<div style="margin-bottom:16px;">
+<div style="font-size:11px;color:#48AAE0;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;font-family:system-ui;">相關報導與觀點<span style="font-size:9px;color:#555;font-weight:400;text-transform:none;letter-spacing:0;margin-left:8px;">共 6 篇</span></div>
+<div style="display:flex;flex-direction:column;gap:6px;">
+<div style="background:#111;border-radius:6px;padding:9px 12px;">
+<div style="font-size:11px;color:#fff;font-weight:600;line-height:1.35;font-family:'Noto Sans TC',sans-serif;">Privy 宣布加入 Stripe</div>
+<div style="font-size:9px;color:#555;margin-top:3px;font-family:system-ui;">Privy Blog — 官方公告</div>
+</div>
+<div style="background:#111;border-radius:6px;padding:9px 12px;">
+<div style="font-size:11px;color:#fff;font-weight:600;line-height:1.35;font-family:'Noto Sans TC',sans-serif;">Stripe 收購 Privy，加速加密貨幣基礎設施佈局</div>
+<div style="font-size:9px;color:#555;margin-top:3px;font-family:system-ui;">Stripe Blog — 官方公告</div>
+</div>
+<div style="background:#111;border-radius:6px;padding:9px 12px;">
+<div style="font-size:11px;color:#fff;font-weight:600;line-height:1.35;font-family:'Noto Sans TC',sans-serif;">我們對 Privy 的投資：下一個篇章</div>
+<div style="font-size:9px;color:#555;margin-top:3px;font-family:system-ui;">Sequoia — 投資人觀點</div>
+</div>
+<div style="position:relative;height:80px;overflow:hidden;">
+<div style="opacity:0.4;">
+<div style="background:#111;border-radius:6px;padding:9px 12px;margin-bottom:6px;">
+<div style="font-size:11px;color:#fff;font-weight:600;font-family:'Noto Sans TC',sans-serif;">Stripe 收購加密錢包新創 Privy</div>
+<div style="font-size:9px;color:#555;margin-top:3px;">Bloomberg</div>
+</div>
+<div style="background:#111;border-radius:6px;padding:9px 12px;">
+<div style="font-size:11px;color:#fff;font-weight:600;font-family:'Noto Sans TC',sans-serif;">Stripe 二度出手收購，釋出基礎設施佈局訊號</div>
+<div style="font-size:9px;color:#555;margin-top:3px;">The Block</div>
+</div>
+</div>
+<div style="position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(180deg,transparent 0%,rgba(0,0,0,0.95) 100%);"></div>
+</div>
+</div>
+</div>
+<div>
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+<div style="font-size:11px;color:#E8913A;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;font-family:system-ui;">社群討論<span style="font-size:9px;color:#555;font-weight:400;text-transform:none;letter-spacing:0;margin-left:8px;">共 4 則</span></div>
+<div style="font-size:9px;color:#444;font-family:system-ui;">持續更新中</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:6px;">
+<div style="background:#111;border-radius:6px;padding:9px 12px;border-left:3px solid #E8913A;">
+<div style="font-size:10px;color:rgba(255,255,255,0.65);line-height:1.5;font-family:'Noto Sans TC',sans-serif;">「加密貨幣的使用者體驗還停留在撥接時代。Privy 讓我們能從根本改變這件事。」</div>
+<div style="font-size:9px;color:#E8913A;margin-top:3px;font-family:system-ui;">Patrick Collison（Stripe 共同創辦人）— X</div>
+</div>
+<div style="background:#111;border-radius:6px;padding:9px 12px;border-left:3px solid #E8913A;">
+<div style="font-size:10px;color:rgba(255,255,255,0.65);line-height:1.5;font-family:'Noto Sans TC',sans-serif;">「加入 Stripe 讓我們能把嵌入式錢包帶給全球數百萬開發者。」</div>
+<div style="font-size:9px;color:#E8913A;margin-top:3px;font-family:system-ui;">Henri Stern（Privy 共同創辦人）— X</div>
+</div>
+<div style="background:#111;border-radius:6px;padding:9px 12px;border-left:3px solid #E8913A;">
+<div style="font-size:10px;color:rgba(255,255,255,0.65);line-height:1.5;font-family:'Noto Sans TC',sans-serif;">「Bridge 做後端、Privy 做前端，Stripe 的加密拼圖快完成了。」</div>
+<div style="font-size:9px;color:#E8913A;margin-top:3px;font-family:system-ui;">@balajis — X</div>
+</div>
+<div style="position:relative;height:44px;overflow:hidden;">
+<div style="opacity:0.4;">
+<div style="background:#111;border-radius:6px;padding:9px 12px;border-left:3px solid #E8913A;">
+<div style="font-size:10px;color:rgba(255,255,255,0.65);line-height:1.5;font-family:'Noto Sans TC',sans-serif;">「嵌入式錢包的護城河到底有多深？」</div>
+<div style="font-size:9px;color:#E8913A;margin-top:3px;">@lex_node — X</div>
+</div>
+</div>
+<div style="position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(180deg,transparent 0%,rgba(0,0,0,0.95) 100%);"></div>
+</div>
+</div>
+</div>
+<!-- Paywall CTA -->
+<div style="margin-top:14px;text-align:center;">
+<div style="font-size:12px;color:#fff;font-weight:700;font-family:'Noto Sans TC',sans-serif;margin-bottom:4px;">解鎖完整報導與社群討論</div>
+<div style="font-size:10px;color:#888;margin-bottom:10px;font-family:'Noto Sans TC',sans-serif;">事實免費閱讀。省時間，付費解鎖全貌。</div>
+<div style="display:inline-block;background:#48AAE0;color:#fff;font-size:12px;font-weight:700;padding:10px 28px;border-radius:6px;font-family:'Noto Sans TC',sans-serif;cursor:pointer;">立即訂閱</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 
-        const {ChevronRight, ChevronLeft, Users, User, ChefHat, DollarSign, Target, Layers, Zap, Crown, Shield, Bot, PenTool, Cpu, Newspaper, Search, Lock, HeartHandshake, Video, List, AlertCircle, Landmark, Building, Clock, Image, Compass, TrendingDown, MousePointerClick, Anchor, Rocket, Briefcase, BookOpen, Cogs, Mic, ExternalLink, Workflow} = Icons;
+<!-- International reference -->
+<div class="slide">
+<h2>國際參考：Ledger Insights</h2>
+<p style="font-size:20px;margin-bottom:24px;">付費訂閱制的區塊鏈媒體，在國際市場已有先例。</p>
+<div class="two-col">
+<div>
+<div class="diagram-box" style="margin-top:0;">
+<h3 style="font-size:22px;">定位</h3>
+<p style="font-size:18px;">專注機構級區塊鏈應用，涵蓋代幣化證券、機構 DLT、數位資產監管框架。不寫加密貨幣投資，只寫企業需要的內容。</p>
+</div>
+<div class="diagram-box">
+<h3 style="font-size:22px;">定價參考</h3>
+<div style="font-size:18px;line-height:2.2;">
+<div style="display:flex;justify-content:space-between;">個人月費<strong style="color:var(--brand-blue);">€50／月</strong></div>
+<div style="display:flex;justify-content:space-between;">個人年費<strong style="color:var(--brand-blue);">€500／年</strong></div>
+<div style="display:flex;justify-content:space-between;">換算台幣<strong style="color:var(--text-secondary);">約 NT$1,700／月</strong></div>
+</div>
+</div>
+</div>
+<div>
+<div class="diagram-box" style="margin-top:0;">
+<h3 style="font-size:22px;">訂閱機構（部分）</h3>
+<div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;">
+<span style="padding:8px 16px;background:rgba(255,255,255,0.06);border:1px solid var(--glass-border);border-radius:8px;font-size:16px;color:var(--text-primary);font-weight:600;">J.P. Morgan</span>
+<span style="padding:8px 16px;background:rgba(255,255,255,0.06);border:1px solid var(--glass-border);border-radius:8px;font-size:16px;color:var(--text-primary);font-weight:600;">Euroclear</span>
+<span style="padding:8px 16px;background:rgba(255,255,255,0.06);border:1px solid var(--glass-border);border-radius:8px;font-size:16px;color:var(--text-primary);font-weight:600;">KBC</span>
+<span style="padding:8px 16px;background:rgba(255,255,255,0.06);border:1px solid var(--glass-border);border-radius:8px;font-size:16px;color:var(--text-primary);font-weight:600;">Ava Labs</span>
+<span style="padding:8px 16px;background:rgba(255,255,255,0.06);border:1px solid var(--glass-border);border-radius:8px;font-size:16px;color:var(--text-primary);font-weight:600;">Simmons & Simmons</span>
+<span style="padding:8px 16px;background:rgba(255,255,255,0.06);border:1px solid var(--glass-border);border-radius:8px;font-size:16px;color:var(--text-primary);font-weight:600;">rwa.xyz</span>
+<span style="padding:8px 16px;background:rgba(255,255,255,0.06);border:1px solid var(--glass-border);border-radius:8px;font-size:16px;color:var(--text-primary);font-weight:600;">G7 & G20 央行</span>
+</div>
+</div>
+<div style="margin-top:16px;padding:16px;background:rgba(72,170,224,0.06);border-radius:12px;">
+<p style="font-size:17px;margin:0;">這個模式在國際市場已有先例。定價策略可參考此案例，再根據台灣市場調整。</p>
+</div>
+</div>
+</div>
+</div>
 
-        // --- 2. Main Application ---
+<!-- Platform + 區塊勢 relationship -->
+<div class="slide">
+<h2>新媒體 × 區塊勢</h2>
+<p style="font-size:20px;margin-bottom:24px;">同一個平台，兩種內容，各自獨立。就像 Bloomberg 與 Matt Levine 的 Money Stuff。</p>
+<div class="two-col">
+<div class="diagram-box" style="margin-top:0;border-top:3px solid #27ae60;">
+<h3 style="font-size:22px;color:#27ae60;">新媒體｜事實</h3>
+<p style="font-size:17px;">以事件為核心的新聞網站。客觀整理、來源透明、經過查核。做深，不做廣——不追求每天填滿版面，而是每一則都做到全貌。</p>
+<p style="font-size:15px;color:var(--text-secondary);margin:0;">相當於 Bloomberg 的新聞平台。</p>
+</div>
+<div class="diagram-box" style="margin-top:0;border-top:3px solid var(--brand-blue);">
+<h3 style="font-size:22px;color:var(--brand-blue);">區塊勢｜觀點</h3>
+<p style="font-size:17px;">許明恩的深度分析與判斷。有自己的語氣、風格和讀者群。住在同一個平台上，但一看就知道是誰寫的。</p>
+<p style="font-size:15px;color:var(--text-secondary);margin:0;">相當於 Matt Levine 的 Money Stuff。</p>
+</div>
+</div>
+<div style="margin-top:20px;padding:18px;background:rgba(72,170,224,0.06);border-radius:12px;">
+<p style="font-size:17px;color:var(--text-secondary);margin:0;text-align:center;">事實與觀點必須分開。事實需要客觀，觀點需要立場。<br>分開才能各自建立信任，合在一起才能創造綜效。</p>
+</div>
+</div>
 
-        const StrategyDeck = () => {
-            const [currentSlide, setCurrentSlide] = useState(0);
+<div class="slide"><h2>組織：3 人 × AI</h2><div class="two-col"><div><div class="diagram-box" style="margin-top:0;border-left:4px solid #27ae60;"><h3 style="font-size:18px;color:#27ae60;">每天</h3><p style="font-size:16px;margin:0;">AI 監控全球來源，標記潛在事件。人決定哪些值得報導、哪些不寫——<strong>不寫什麼，比寫什麼更重要</strong>。選定後，透過標準流程將事件整理成完整報導，呈現在讀者面前。</p></div><div class="diagram-box" style="border-left:4px solid var(--brand-blue);"><h3 style="font-size:18px;color:var(--brand-blue);">每週</h3><p style="font-size:16px;margin:0;">付費週報：從一週事件中篩選最重要的，撰寫深度分析。影音週報：5-10 分鐘，講解本週關鍵事件。</p></div><div class="diagram-box" style="border-left:4px solid var(--brand-orange);"><h3 style="font-size:18px;color:var(--brand-orange);">不定期</h3><p style="font-size:16px;margin:0;">工作坊策劃與執行、企業客戶關係維護、外部活動出席。</p></div></div><div><div class="stat-card" style="margin-bottom:16px;border:2px solid var(--brand-blue);"><div class="stat-num" style="color:var(--brand-blue);font-size:56px;">3 人</div><div class="stat-label" style="font-size:16px;">社長 + 2 位內容營運<br>三人皆具備內容生產能力<br>初期通才，隨規模發展守備範圍</div></div><div class="diagram-box" style="margin-top:0;padding:20px;"><p style="font-size:15px;color:var(--text-secondary);margin:0 0 10px;">🤖 AI 監控、翻譯、初步整理</p><p style="font-size:15px;color:var(--text-secondary);margin:0 0 10px;">🧑 人負責選題、撰寫、品質把關</p><p style="font-size:15px;color:var(--text-secondary);margin:0 0 10px;">🎨 視覺識別系統：外部建立，團隊維護</p><p style="font-size:15px;color:var(--text-secondary);margin:0;">🎬 影音為固定產出，不是額外工作</p></div></div></div></div>
+<div class="slide"><h2>營收基礎</h2><div class="two-col"><div><h3 style="font-size:22px;">已確認的定價</h3><div class="diagram-box" style="margin-top:0;"><div style="font-size:18px;line-height:2.4;"><div style="display:flex;justify-content:space-between;">企業訂閱（100 人份）<strong style="color:var(--brand-blue);">15 萬/年</strong></div><div style="display:flex;justify-content:space-between;">個人訂閱（月費）<strong>10 美元/月</strong></div><div style="display:flex;justify-content:space-between;">個人訂閱（年費）<strong>100 美元/年</strong></div><div style="display:flex;justify-content:space-between;">工作坊<strong>約 10 萬/場</strong></div></div></div></div><div><h3 style="font-size:22px;">未來可探索的方向</h3><div class="diagram-box" style="margin-top:0;"><p style="font-size:18px;margin:0 0 12px;">以下為可能的延伸服務，具體規模待驗證：</p><div style="font-size:17px;color:var(--text-secondary);line-height:2.2;"><div>🎓 企業專屬工作坊，協助媒合適合的講師</div><div>✈️ 組團參加國際展會（Token2049 等）</div><div>🎤 舉辦實體產業論壇</div><div>📊 進階產業報告與風險預警</div><div>🤝 閉門交流與企業社群</div></div></div></div></div></div>
+<div class="slide"><h2>三年時程</h2><div class="flow-row"><div class="flow-card" style="border-top:3px solid #27ae60;"><div style="font-size:16px;color:#27ae60;font-weight:700;margin-bottom:10px;">YEAR 1</div><strong style="font-size:18px;">三件事做好</strong><div style="font-size:15px;margin-top:12px;color:var(--text-secondary);line-height:1.6;text-align:left;">事實・觀點・工作坊<br>企業客戶 5→20-30 家<br>免費新聞層上線<br>損益接近兩平</div></div><div class="arrow-right"><i class="fa-solid fa-arrow-right"></i></div><div class="flow-card" style="border-top:3px solid var(--brand-blue);"><div style="font-size:16px;color:var(--brand-blue);font-weight:700;margin-bottom:10px;">YEAR 2</div><strong style="font-size:18px;">看需求延伸</strong><div style="font-size:15px;margin-top:12px;color:var(--text-secondary);line-height:1.6;text-align:left;">培訓標準化<br>考察團・閉門社群<br>視需求逐步展開<br>營收 1,500-2,000 萬</div></div><div class="arrow-right"><i class="fa-solid fa-arrow-right"></i></div><div class="flow-card" style="border-top:3px solid var(--brand-orange);"><div style="font-size:16px;color:var(--brand-orange);font-weight:700;margin-bottom:10px;">YEAR 3</div><strong style="font-size:18px;">產業入口</strong><div style="font-size:15px;margin-top:12px;color:var(--text-secondary);line-height:1.6;text-align:left;">企業需要什麼就做什麼<br>探索廣告並行<br>營收 3,000 萬+</div></div></div></div>
+<div class="slide"><h2>我帶來什麼</h2><div class="two-col"><div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;"><div class="stat-card"><div class="stat-num" style="color:var(--brand-blue);font-size:40px;">750+</div><div class="stat-label">篇原創文章</div></div><div class="stat-card"><div class="stat-num" style="color:var(--brand-blue);font-size:40px;">2 萬</div><div class="stat-label">訂閱者</div></div><div class="stat-card"><div class="stat-num" style="color:var(--brand-blue);font-size:40px;">5 家</div><div class="stat-label">企業客戶（含金管會）</div></div><div class="stat-card"><div class="stat-num" style="color:var(--brand-blue);font-size:40px;">8 年</div><div class="stat-label">持續經營</div></div></div><div><div class="diagram-box" style="margin-top:0;border-left:4px solid var(--brand-orange);"><h3 style="font-size:22px;color:var(--brand-orange);">終身會員 100+ 人</h3><p style="font-size:18px;">佔付費訂戶 20%。在區塊勢還很小時，一次付 400-700 美金。</p><p style="font-size:18px;">內容邊際成本接近零，不影響營運。但代表極罕見的讀者忠誠度。</p><p style="font-size:17px;color:var(--brand-blue);margin:0;"><strong>完整轉移至新公司，不可妥協。</strong></p></div></div></div></div>
+<div class="slide"><h2>品牌與編輯原則</h2><p style="font-size:21px;margin-bottom:24px;">企業客戶訂閱的是<strong>一個人的判斷力</strong>，不是機構的名字。品牌建設要反映這個事實。</p><div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;"><div class="diagram-box" style="padding:24px;margin:0;"><i class="fa-solid fa-link" style="color:var(--brand-blue);font-size:24px;display:block;margin-bottom:12px;"></i><h3 style="font-size:20px;margin-bottom:8px;">創辦人 × 品牌綁定</h3><p style="font-size:17px;margin:0;">對外介紹、公關露出，許明恩與媒體品牌共同出現。讀者認的是人。</p></div><div class="diagram-box" style="padding:24px;margin:0;"><i class="fa-solid fa-pen-nib" style="color:var(--brand-blue);font-size:24px;display:block;margin-bottom:12px;"></i><h3 style="font-size:20px;margin-bottom:8px;">內容掛名</h3><p style="font-size:17px;margin:0;">文章和 podcast 以個人名義發出。讓讀者知道誰為這些判斷負責。</p></div><div class="diagram-box" style="padding:24px;margin:0;"><i class="fa-solid fa-microphone" style="color:var(--brand-blue);font-size:24px;display:block;margin-bottom:12px;"></i><h3 style="font-size:20px;margin-bottom:8px;">對外代表</h3><p style="font-size:17px;margin:0;">產業論壇、媒體採訪、企業拜訪，由社長代表出席。</p></div><div class="diagram-box" style="padding:24px;margin:0;"><i class="fa-solid fa-shield-halved" style="color:var(--brand-blue);font-size:24px;display:block;margin-bottom:12px;"></i><h3 style="font-size:20px;margin-bottom:8px;">編採獨立</h3><p style="font-size:17px;margin:0;">內容選題最終決定權歸社長，股東不介入編輯判斷。</p></div></div></div>
+<div class="slide"><h2>收購區塊勢</h2><div class="two-col"><div><h3 style="font-size:22px;">標的</h3><p style="font-size:18px;line-height:1.8;">品牌・750+ 篇版權・2 萬訂閱者・5 家企業客戶・podcast・域名</p><h3 style="font-size:22px;margin-top:16px;">建議價格</h3><div style="font-size:52px;font-weight:800;color:var(--brand-blue);font-family:'Urbanist',sans-serif;margin:10px 0;">1,200-1,500萬</div><p style="font-size:16px;color:var(--text-secondary);">PS 4-5x + 策略溢價</p></div><div><h3 style="font-size:22px;">支付方案</h3><div class="diagram-box" style="padding:18px;margin-top:0;margin-bottom:10px;"><strong style="font-size:16px;">A 分期現金</strong><span style="font-size:15px;color:var(--text-secondary);"> — 簽約 60% / 達標 40%</span></div><div class="diagram-box" style="padding:18px;margin-top:0;margin-bottom:10px;"><strong style="font-size:16px;">B 現金+股權</strong><span style="font-size:15px;color:var(--text-secondary);"> — 50% 現金 / 50% JV 股份</span></div><div class="diagram-box" style="padding:18px;margin-top:0;"><strong style="font-size:16px;">C Earn-out</strong><span style="font-size:15px;color:var(--text-secondary);"> — 40% 現金 / 60% 績效分期</span></div><p style="font-size:16px;color:var(--text-secondary);margin-top:14px;">支付結構以降低雙方稅務負擔為原則設計</p></div></div></div>
+<div class="slide"><h2>個人 Package</h2><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:10px;"><div class="stat-card" style="border-top:3px solid var(--brand-blue);"><i class="fa-solid fa-wallet" style="font-size:28px;color:var(--brand-blue);display:block;margin-bottom:16px;"></i><strong style="font-size:20px;display:block;margin-bottom:12px;">底薪</strong><div class="stat-num" style="color:var(--brand-blue);font-size:36px;margin:8px 0 12px;">28-32萬</div><div class="stat-label">月薪・已預留議價空間</div></div><div class="stat-card" style="border-top:3px solid var(--brand-orange);"><i class="fa-solid fa-chart-line" style="font-size:28px;color:var(--brand-orange);display:block;margin-bottom:16px;"></i><strong style="font-size:20px;display:block;margin-bottom:12px;">績效獎金</strong><div style="font-size:24px;font-weight:700;color:var(--brand-orange);margin:8px 0 12px;">營收連動</div><div class="stat-label">達標按比例發放</div></div><div class="stat-card" style="border-top:3px solid #27ae60;"><i class="fa-solid fa-gift" style="font-size:28px;color:#27ae60;display:block;margin-bottom:16px;"></i><strong style="font-size:20px;display:block;margin-bottom:12px;">簽約金</strong><div style="font-size:24px;font-weight:700;color:#27ae60;margin:8px 0 12px;">100-200萬</div><div class="stat-label">一次性・轉換成本</div></div></div><div style="margin-top:24px;padding:16px;background:rgba(72,170,224,.06);border-radius:12px;text-align:center;"><p style="font-size:18px;margin:0;">帶著 8 年經營成果加入，Package 應反映創辦人角色與轉換成本。</p></div></div>
+<div class="slide"><h2>結構性保障</h2><div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;"><div class="diagram-box" style="padding:24px;margin:0;"><i class="fa-solid fa-shield-halved" style="color:var(--brand-blue);font-size:24px;display:block;margin-bottom:12px;"></i><h3 style="font-size:20px;">編採獨立</h3><p style="font-size:17px;margin:0;">選題最終決定權歸社長<br>股東不介入編輯判斷</p></div><div class="diagram-box" style="padding:24px;margin:0;"><i class="fa-solid fa-calendar-check" style="color:var(--brand-blue);font-size:24px;display:block;margin-bottom:12px;"></i><h3 style="font-size:20px;">合約保障 3 年</h3><p style="font-size:17px;margin:0;">非因重大過失不得解約</p></div><div class="diagram-box" style="padding:24px;margin:0;"><i class="fa-solid fa-rotate-left" style="color:var(--brand-orange);font-size:24px;display:block;margin-bottom:12px;"></i><h3 style="font-size:20px;">品牌回購條款</h3><p style="font-size:17px;margin:0;">JV 結束營運時<br>區塊勢品牌優先回歸創辦人</p></div><div class="diagram-box" style="padding:24px;margin:0;"><i class="fa-solid fa-house-laptop" style="color:#27ae60;font-size:24px;display:block;margin-bottom:12px;"></i><h3 style="font-size:20px;">生活彈性</h3><p style="font-size:17px;margin:0;">不要求固定坐班<br>以產出為導向</p></div></div></div>
+<div class="slide"><div style="max-width:800px;"><h2 style="font-size:48px;">條件到位，百分之百投入。</h2><p style="font-size:24px;line-height:1.9;">過去 8 年，一個人從零做到今天。<br>現在有了你們的資源，<br>我有信心做到比任何人預期的都好。</p><div style="margin-top:40px;padding:30px;border:2px solid var(--brand-blue);border-radius:16px;background:rgba(72,170,224,0.05);"><p style="font-size:24px;margin:0;line-height:1.8;text-align:center;">如果合作架構能讓我充分發揮，<br><strong style="color:var(--brand-blue);font-size:28px;">這個媒體會拿到最好的結果。</strong></p></div></div></div>
 
-            const slides = [
-                // Slide 1: Cover
-                {
-                    id: 0,
-                    type: 'cover',
-                    content: (
-                        <div className="flex flex-col items-center justify-center h-full text-center space-y-8">
-                            <div className="p-6 bg-white rounded-2xl shadow-xl border border-slate-100 mb-4">
-                                <Crown size={80} className="text-amber-600" />
-                            </div>
-                            <h1 className="text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-tight">
-                                JV 營運計畫
-                            </h1>
-                            <div className="h-1 w-32 bg-slate-900 rounded-full"></div>
-                            <p className="text-2xl text-slate-500 font-light tracking-wide">
-                                定義 2026 區塊鏈媒體的新標準
-                            </p>
-                            <p className="text-sm text-slate-400 mt-12 font-mono tracking-wider">
-                                區塊勢
-                            </p>
-                        </div>
-                    )
-                },
-                // Slide 2: Agenda (Updated)
-                {
-                    id: 1,
-                    type: 'content',
-                    title: "提案大綱",
-                    icon: <List size={40} className="text-slate-600" />,
-                    content: (
-                        <div className="flex flex-col h-full justify-center px-4 md:px-12">
-                            <div className="flex flex-col gap-6 w-full max-w-4xl mx-auto">
-                                <div className="flex items-center gap-6 bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all">
-                                    <div className="w-16 h-16 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-2xl shrink-0">1</div>
-                                    <div>
-                                        <h3 className="text-2xl font-bold text-slate-900 mb-2">市場洞察與核心策略</h3>
-                                        <p className="text-slate-500">媒體現況、痛點、AI 趨勢與雙引擎架構。</p>
-                                    </div>
-                                </div>
+<!-- Reading List - hidden past the ending -->
+<div class="slide" style="justify-content:flex-start;padding-top:80px;">
+<div style="font-size:14px;color:rgba(255,255,255,0.2);letter-spacing:2px;font-family:'Urbanist',sans-serif;margin-bottom:30px;">READING LIST</div>
+<div style="display:flex;flex-direction:column;gap:20px;max-width:700px;">
+<a href="https://www.edge.org/conversation/kevin_kelly-better-than-free" target="_blank" style="text-decoration:none;display:block;">
+<div class="diagram-box" style="margin:0;padding:20px;cursor:pointer;transition:border-color 0.3s;">
+<div style="font-size:18px;color:var(--brand-blue);font-weight:700;font-family:'Noto Sans TC',sans-serif;">Better Than Free</div>
+<div style="font-size:14px;color:var(--text-secondary);margin-top:6px;">Kevin Kelly, 2008 — 當複製成本趨近零，值錢的是無法複製的 generatives：Trust、Interpretation、Findability、Authenticity、Personalization。</div>
+</div>
+</a>
+<a href="https://www.goodreads.com/quotes/8502027-in-an-information-rich-world-the-wealth-of-information-means-a" target="_blank" style="text-decoration:none;display:block;">
+<div class="diagram-box" style="margin:0;padding:20px;cursor:pointer;transition:border-color 0.3s;">
+<div style="font-size:18px;color:var(--brand-blue);font-weight:700;font-family:'Noto Sans TC',sans-serif;">The Wealth of Information</div>
+<div style="font-size:14px;color:var(--text-secondary);margin-top:6px;">Herbert Simon — 「資訊豐富的世界裡，資訊的充裕意味著其他東西的匱乏：接收資訊的人的注意力。」</div>
+</div>
+</a>
+</div>
+</div>
 
-                                <div className="flex items-center gap-6 bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all">
-                                    <div className="w-16 h-16 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-2xl shrink-0">2</div>
-                                    <div>
-                                        <h3 className="text-2xl font-bold text-slate-900 mb-2">產品樣貌與價值主張</h3>
-                                        <p className="text-slate-500">視覺模擬、目標受眾與同心圓價值體系。</p>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-center gap-6 bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all">
-                                    <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-2xl shrink-0">3</div>
-                                    <div>
-                                        <h3 className="text-2xl font-bold text-slate-900 mb-2">營運配置與合作方案</h3>
-                                        <p className="text-slate-500">團隊哲學、生產系統、人力配置與投資報價。</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )
-                },
-                // Slide 3: Competitor Analysis
-                {
-                    id: 2,
-                    type: 'content',
-                    title: "幣圈媒體的現況",
-                    icon: <Compass size={40} className="text-slate-600" />,
-                    content: (
-                        <div className="flex flex-col h-full justify-center px-4 md:px-0 gap-8">
-                            <div className="bg-slate-50 p-10 rounded-3xl border-t-8 border-red-400 shadow-lg flex flex-col justify-center relative overflow-hidden h-auto py-12">
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                                    <div className="p-4">
-                                        <div className="bg-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm text-red-500 font-bold text-3xl">1</div>
-                                        <strong className="block text-2xl text-slate-900 mb-3">商業模式</strong>
-                                        <span className="text-slate-600 text-xl leading-relaxed">依靠廣告與導流，必須追逐熱點與情緒，市場冷淡即面臨危機。</span>
-                                    </div>
-                                    <div className="p-4 border-l border-r border-slate-200">
-                                        <div className="bg-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm text-red-500 font-bold text-3xl">2</div>
-                                        <strong className="block text-2xl text-slate-900 mb-3">內容產出</strong>
-                                        <span className="text-slate-600 text-xl leading-relaxed">議題發散（AI、政治、泛科技），只求點擊，不求專業縱深。</span>
-                                    </div>
-                                    <div className="p-4">
-                                        <div className="bg-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm text-red-500 font-bold text-3xl">3</div>
-                                        <strong className="block text-2xl text-slate-900 mb-3">讀者體驗</strong>
-                                        <span className="text-slate-600 text-xl leading-relaxed">充滿雜訊與帶風向，缺乏查證的事實，讓專業讀者卻步。</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )
-                },
-                // Slide 4: The Problem (Current Status)
-                {
-                    id: 3,
-                    type: 'content',
-                    title: "幣圈產業的現況",
-                    icon: <AlertCircle size={40} className="text-red-500" />,
-                    content: (
-                        <div className="flex flex-col h-full justify-center px-4 md:px-0 gap-6">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 h-[450px]">
-                                {/* Problem 1: No Common Fact */}
-                                <div className="bg-blue-50 p-10 rounded-3xl border-t-8 border-blue-600 shadow-xl flex flex-col items-center justify-center text-center">
-                                    <div className="bg-blue-100 p-6 rounded-full mb-6 text-blue-600">
-                                        <Newspaper size={56} />
-                                    </div>
-                                    <h3 className="text-3xl font-bold text-slate-900 mb-4">缺乏共同事實</h3>
-                                    <p className="text-xl text-slate-600 leading-relaxed px-4">
-                                        因為媒體提供碎片化的資訊，導致決策者無法對齊基礎認知。
-                                    </p>
-                                </div>
-
-                                {/* Problem 2: No Framework */}
-                                <div className="bg-amber-50 p-10 rounded-3xl border-t-8 border-amber-500 shadow-xl flex flex-col items-center justify-center text-center">
-                                    <div className="bg-amber-100 p-6 rounded-full mb-6 text-amber-600">
-                                        <Layers size={56} />
-                                    </div>
-                                    <h3 className="text-3xl font-bold text-slate-800 mb-4">缺乏理解框架</h3>
-                                    <p className="text-xl text-slate-600 leading-relaxed px-4">
-                                        因為媒體偏好追逐價格波動，較少討論價值判斷，導致讀者缺乏判斷方向的座標。
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    )
-                },
-                // Slide 5: The 2026 Shift (Triangle Revised)
-                {
-                    id: 4,
-                    type: 'content',
-                    title: "AI 改變資訊與價值的傳遞邏輯",
-                    icon: <Zap size={40} className="text-amber-500" />,
-                    content: (
-                        <div className="flex flex-col h-full justify-center items-center px-4">
-                            <div className="max-w-5xl w-full text-center space-y-8">
-
-                                <div className="relative w-full max-w-3xl h-[400px] mx-auto flex items-center justify-center">
-                                    {/* Top: AI */}
-                                    <div className="absolute top-0 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-20">
-                                        <div className="bg-amber-50 border-4 border-amber-500 rounded-full w-48 h-48 flex flex-col items-center justify-center p-4 shadow-xl">
-                                            <Bot size={40} className="text-amber-600 mb-2" />
-                                            <h3 className="text-lg font-bold text-slate-800">AI 模型</h3>
-                                            <p className="text-xs text-slate-500 font-bold mt-1 bg-amber-100 px-2 py-1 rounded">讀合成內容導致崩塌</p>
-                                            <p className="text-sm text-amber-700 font-medium mt-1">需讀人類原創數據</p>
-                                        </div>
-                                    </div>
-
-                                    {/* Bottom Left: Reader */}
-                                    <div className="absolute bottom-0 left-0 flex flex-col items-center z-20">
-                                        <div className="bg-blue-50 border-4 border-blue-500 rounded-full w-48 h-48 flex flex-col items-center justify-center p-4 shadow-xl">
-                                            <Users size={40} className="text-blue-600 mb-2" />
-                                            <h3 className="text-lg font-bold text-slate-800">人類讀者</h3>
-                                            <p className="text-xs text-slate-500 font-bold mt-1 bg-blue-100 px-2 py-1 rounded">讀原始資訊效率低</p>
-                                            <p className="text-sm text-blue-700 font-medium mt-1">需讀 AI 整理情報</p>
-                                        </div>
-                                    </div>
-
-                                    {/* Bottom Right: Creator */}
-                                    <div className="absolute bottom-0 right-0 flex flex-col items-center z-20">
-                                        <div className="bg-white border-4 border-slate-300 rounded-full w-48 h-48 flex flex-col items-center justify-center p-4 shadow-xl">
-                                            <PenTool size={40} className="text-slate-600 mb-2" />
-                                            <h3 className="text-lg font-bold text-slate-800">人類創作者</h3>
-                                            <p className="text-sm text-slate-500 font-medium mt-1">為讀者服務 (本質)</p>
-                                            <p className="text-xs text-slate-400 mt-1">透過 AI 傳遞價值</p>
-                                        </div>
-                                    </div>
-
-                                    {/* Connections (SVG Lines) */}
-                                    <svg className="absolute inset-0 w-full h-full z-0 pointer-events-none" viewBox="0 0 768 400" style={{overflow: 'visible'}}>
-                                        {/* 1. AI (Top) to Reader (Left) - Blue Solid */}
-                                        <path d="M 320 150 Q 200 180 150 240" fill="none" stroke="#3b82f6" strokeWidth="4" markerEnd="url(#arrow-blue)" />
-                                        <text x="180" y="180" className="text-sm font-bold fill-blue-600 bg-white" textAnchor="middle">整理情報</text>
-
-                                        {/* 2. Creator (Right) to AI (Top) - Grey Solid */}
-                                        <path d="M 618 240 Q 568 180 448 150" fill="none" stroke="#94a3b8" strokeWidth="4" markerEnd="url(#arrow-grey)" />
-                                        <text x="580" y="180" className="text-sm font-bold fill-slate-500 bg-white" textAnchor="middle">原創觀點</text>
-
-                                        {/* 3. Reader (Left) to Creator (Right) - Green Dashed */}
-                                        <path d="M 192 304 L 560 304" fill="none" stroke="#10b981" strokeWidth="4" strokeDasharray="8 8" markerEnd="url(#arrow-green)" />
-                                        <text x="384" y="290" className="text-sm font-bold fill-emerald-600 bg-white" textAnchor="middle">價值回流 (信任/付費/廣告)</text>
-
-                                        <defs>
-                                            <marker id="arrow-grey" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
-                                                <path d="M0,0 L0,6 L9,3 z" fill="#94a3b8" />
-                                            </marker>
-                                            <marker id="arrow-blue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
-                                                <path d="M0,0 L0,6 L9,3 z" fill="#3b82f6" />
-                                            </marker>
-                                            <marker id="arrow-green" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
-                                                <path d="M0,0 L0,6 L9,3 z" fill="#10b981" />
-                                            </marker>
-                                        </defs>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                    )
-                },
-                // Slide 6: Dual Engine Solution
-                {
-                    id: 5,
-                    type: 'content',
-                    title: "JV 的核心解法",
-                    icon: <Cpu size={40} className="text-blue-600" />,
-                    content: (
-                        <div className="flex flex-col h-full justify-center px-4 md:px-0 gap-8">
-
-                            {/* Dual Engine */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 flex-1">
-                                {/* Left: AI / Breadth / Free */}
-                                <div className="bg-white p-8 rounded-2xl border-t-8 border-blue-600 shadow-xl flex flex-col relative overflow-hidden">
-                                    <div className="absolute top-0 right-0 p-4 opacity-10">
-                                        <Bot size={140} />
-                                    </div>
-                                    <div className="flex items-center gap-4 mb-8">
-                                        <div className="bg-blue-100 p-4 rounded-full">
-                                            <Bot size={48} className="text-blue-600" />
-                                        </div>
-                                        <div>
-                                            <h3 className="text-3xl font-black text-slate-900">AI 負責「共同事實」</h3>
-                                        </div>
-                                    </div>
-
-                                    <div className="flex-1 space-y-8">
-                                        <div className="bg-slate-50 p-6 rounded-lg border border-slate-100">
-                                            <h4 className="font-bold text-slate-700 mb-2 text-xl">任務</h4>
-                                            <p className="text-lg text-slate-600 leading-relaxed">用即時資訊建立所有人都能對齊的「共同事實基礎」。</p>
-                                        </div>
-                                        <div className="bg-slate-50 p-6 rounded-lg border border-slate-100">
-                                            <h4 className="font-bold text-slate-700 mb-2 text-xl">形式</h4>
-                                            <p className="text-lg text-slate-600 leading-relaxed">整理各家媒體的第一手報導與不同社群的重要討論，拼湊出完整事實。</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Right: Human / Depth / Paid */}
-                                <div className="bg-white p-8 rounded-2xl border-t-8 border-amber-500 shadow-xl flex flex-col relative overflow-hidden">
-                                    <div className="absolute top-0 right-0 p-4 opacity-10">
-                                        <PenTool size={140} />
-                                    </div>
-                                    <div className="flex items-center gap-4 mb-8">
-                                        <div className="bg-amber-100 p-4 rounded-full">
-                                            <PenTool size={48} className="text-amber-600" />
-                                        </div>
-                                        <div>
-                                            <h3 className="text-3xl font-black text-slate-900">人類負責「共同框架」</h3>
-                                        </div>
-                                    </div>
-
-                                    <div className="flex-1 space-y-8">
-                                        <div className="bg-slate-50 p-6 rounded-lg border border-slate-100">
-                                            <h4 className="font-bold text-slate-700 mb-2 text-xl">任務</h4>
-                                            <p className="text-lg text-slate-600 leading-relaxed">把雜訊變成判斷，把事件變成框架：你該怎麼看、怎麼做。</p>
-                                        </div>
-                                        <div className="bg-slate-50 p-6 rounded-lg border border-slate-100">
-                                            <h4 className="font-bold text-slate-700 mb-2 text-xl">形式</h4>
-                                            <p className="text-lg text-slate-600 leading-relaxed">第一手體驗、獨特觀點，以及結合生活經驗的價值判斷框架。</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )
-                },
-                // Slide 7: Visual Mockup (Moved up)
-                {
-                    id: 6,
-                    type: 'mockup',
-                    title: "產品視覺模擬",
-                    icon: <Newspaper size={40} className="text-slate-700" />,
-                    content: (
-                        <div className="w-full h-full flex flex-col bg-white rounded-lg shadow-2xl border border-slate-300 font-sans text-slate-900 overflow-hidden relative">
-                            {/* 1. UDN Header */}
-                            <header className="bg-white shrink-0">
-                                <div className="flex justify-between items-center px-4 py-1 border-b border-gray-100 text-[11px] text-gray-500">
-                                    <div className="flex gap-4">
-                                        <span>2026年2月17日 星期二</span>
-                                        <span>台北股市 ▲ 24,500</span>
-                                        <span className="text-amber-600 font-bold">BTC $102,000</span>
-                                    </div>
-                                    <div className="flex gap-3">
-                                        <span>登入</span>
-                                        <span>註冊</span>
-                                    </div>
-                                </div>
-                                <div className="px-4 py-3 flex justify-between items-end border-b border-gray-100">
-                                    <div className="flex items-end gap-2">
-                                        <h1 className="text-4xl font-bold udn-text-red tracking-tight leading-none" style={{fontFamily: '"Times New Roman", serif'}}>
-                                            經濟日報
-                                        </h1>
-                                        <span className="text-2xl font-bold text-slate-800 leading-none mb-0.5">Web3</span>
-                                    </div>
-                                    <div className="flex gap-4 items-center">
-                                        <div className="relative">
-                                            <input type="text" placeholder="搜尋..." className="bg-gray-100 rounded-full px-3 py-1 text-xs w-32 focus:w-48 transition-all outline-none" />
-                                            <Search size={14} className="absolute right-2 top-1.5 text-gray-400" />
-                                        </div>
-                                        <button className="udn-red text-white text-xs font-bold px-3 py-1.5 rounded hover:bg-red-700">訂閱會員</button>
-                                    </div>
-                                </div>
-                                <nav className="flex px-4 py-2 gap-6 text-sm font-bold text-slate-700 border-b-2 udn-border-red">
-                                    <a href="#" className="udn-text-red">首頁</a>
-                                    <a href="#" className="hover:text-red-700">即時</a>
-                                    <a href="#" className="hover:text-red-700">深度</a>
-                                    <a href="#" className="hover:text-red-700">法規</a>
-                                    <a href="#" className="hover:text-red-700">企業</a>
-                                    <a href="#" className="hover:text-red-700">技術</a>
-                                    <a href="#" className="hover:text-red-700">行情</a>
-                                </nav>
-                            </header>
-
-                            {/* 2. Main Layout */}
-                            <div className="flex flex-1 overflow-hidden">
-                                <div className="flex-1 overflow-y-auto p-4 bg-[#FDFDFD]">
-                                    <div className="flex items-center gap-2 mb-4 border-b border-gray-200 pb-2">
-                                        <h2 className="text-lg font-bold text-slate-800">即時情報</h2>
-                                        <span className="bg-gray-200 text-gray-600 text-[10px] px-1.5 py-0.5 rounded">Techmeme 模式</span>
-                                    </div>
-
-                                    {/* News Item 1: Fact-Based */}
-                                    <div className="mb-6 group border-b border-slate-100 pb-4">
-                                        <div className="flex gap-4">
-                                            <div className="flex-1">
-                                                <a href="#" className="techmeme-headline text-lg leading-tight block mb-1">
-                                                    川普政府傳將於下週發布加密貨幣行政命令，重點關注穩定幣與託管
-                                                </a>
-                                                <div className="techmeme-source mb-1">
-                                                    彭博社 <span className="mx-1 text-gray-300">|</span> 1 小時前
-                                                </div>
-                                                <p className="techmeme-summary mb-2">
-                                                    據知情人士透露，新政府正草擬一份全面的數位資產框架，可能包括賦予 CFTC 更多權力，並明確定義數位資產的證券屬性...
-                                                </p>
-                                                <div className="pl-3 border-l-2 border-slate-200 text-xs space-y-1.5">
-                                                    <div className="flex flex-wrap gap-1 items-baseline">
-                                                        <span className="techmeme-cluster-label">更多來源:</span>
-                                                        <a href="#" className="techmeme-link">CoinDesk</a>,
-                                                        <a href="#" className="techmeme-link">The Block</a>,
-                                                        <a href="#" className="techmeme-link">華爾街日報</a>
-                                                    </div>
-                                                    <div className="flex flex-wrap gap-1 items-baseline">
-                                                        <span className="techmeme-cluster-label-x">社群熱議:</span>
-                                                        <a href="#" className="techmeme-link text-gray-500">@cameron (X)</a>,
-                                                        <a href="#" className="techmeme-link text-gray-500">@balajis (X)</a>,
-                                                        <a href="#" className="techmeme-link text-purple-600">/us_policy (Farcaster)</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            {/* Image Thumbnail */}
-                                            <div className="w-32 h-20 bg-slate-100 rounded-lg shrink-0 hidden md:flex items-center justify-center border border-slate-200">
-                                                <Image size={24} className="text-slate-300" />
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    {/* News Item 2: Fact-Based */}
-                                    <div className="mb-6 group">
-                                        <div className="flex gap-4">
-                                            <div className="flex-1">
-                                                <a href="#" className="techmeme-headline text-lg leading-tight block mb-1">
-                                                    RWA 賽道增溫：高盛與摩根大通傳正測試代幣化抵押品網路
-                                                </a>
-                                                <div className="techmeme-source mb-1">
-                                                    金融時報 <span className="mx-1 text-gray-300">|</span> 2 小時前
-                                                </div>
-                                                <p className="techmeme-summary mb-2">
-                                                    華爾街巨頭正在推進其區塊鏈試點項目，旨在透過代幣化資產實現即時的日內回購交易，預計將大幅降低結算風險與資本成本...
-                                                </p>
-                                                <div className="pl-3 border-l-2 border-slate-200 text-xs space-y-1.5">
-                                                    <div className="flex flex-wrap gap-1 items-baseline">
-                                                        <span className="techmeme-cluster-label">更多來源:</span>
-                                                        <a href="#" className="techmeme-link">路透社</a>,
-                                                        <a href="#" className="techmeme-link">日經亞洲</a>
-                                                    </div>
-                                                    <div className="flex flex-wrap gap-1 items-baseline">
-                                                        <span className="techmeme-cluster-label-x">社群熱議:</span>
-                                                        <a href="#" className="techmeme-link text-gray-500">@stablekwon (X)</a>,
-                                                        <a href="#" className="techmeme-link text-purple-600">/defi_pro (Warpcast)</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            {/* Image Thumbnail */}
-                                            <div className="w-32 h-20 bg-slate-100 rounded-lg shrink-0 hidden md:flex items-center justify-center border border-slate-200">
-                                                <Image size={24} className="text-slate-300" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="w-[320px] bg-white border-l border-gray-200 flex flex-col shrink-0">
-                                    <div className="udn-red text-white px-4 py-2 flex items-center justify-between">
-                                        <div className="font-bold flex items-center gap-2">
-                                            <Crown size={16} />
-                                            <span>經濟 VIP 專區</span>
-                                        </div>
-                                        <span className="text-[10px] bg-red-800 px-1.5 py-0.5 rounded text-red-100">Blocktrend</span>
-                                    </div>
-                                    <div className="p-4 space-y-6 overflow-y-auto">
-                                        <div className="group cursor-pointer">
-                                            <div className="relative aspect-video bg-slate-800 rounded mb-3 overflow-hidden">
-                                                <div className="absolute top-2 left-2 bg-amber-500 text-white text-[10px] font-bold px-2 py-0.5 rounded">深度報告</div>
-                                                <div className="w-full h-full flex items-center justify-center text-slate-600 font-mono text-4xl opacity-20">VIP</div>
-                                            </div>
-                                            <h3 className="font-bold text-lg text-slate-800 leading-snug mb-2 group-hover:udn-text-red transition-colors">
-                                                深度解析：為什麼 RWA 是下一個牛市的真實引擎？
-                                            </h3>
-                                            <div className="flex items-center gap-2 text-xs text-gray-500">
-                                                <span className="font-medium text-slate-700">許明恩</span>
-                                                <span>·</span>
-                                                <span>需閱讀 6 分鐘</span>
-                                                <Lock size={12} className="text-amber-600" />
-                                            </div>
-                                        </div>
-                                        <hr className="border-gray-100" />
-                                        <div className="group cursor-pointer">
-                                            <h3 className="font-bold text-base text-slate-800 leading-snug mb-2 group-hover:udn-text-red transition-colors">
-                                                專訪：台灣 VASP 公會的下一步，監管沙盒成關鍵？
-                                            </h3>
-                                            <div className="flex items-center gap-2 text-xs text-gray-500">
-                                                <span className="bg-gray-100 px-1 rounded text-[10px] text-gray-600">會員專屬</span>
-                                                <Lock size={12} className="text-amber-600" />
-                                            </div>
-                                        </div>
-                                        <div className="bg-amber-50 border border-amber-200 rounded p-3 text-center mt-4">
-                                            <p className="text-xs text-amber-900 mb-2 font-medium">訂閱解鎖所有深度內容</p>
-                                            <button className="w-full bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold py-2 rounded transition-colors">
-                                                立即升級
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )
-                },
-                // Slide 8: Target Audience (Moved down)
-                {
-                    id: 7,
-                    type: 'content',
-                    title: "我們賣「時間」與「判斷」",
-                    icon: <Target size={40} className="text-purple-600" />,
-                    content: (
-                        <div className="flex flex-col h-full justify-center px-4 md:px-0">
-                            <div className="text-center mb-10">
-                                <h3 className="text-4xl font-black text-slate-900 mb-4">
-                                    打造區塊鏈領域裡<span className="text-amber-600 font-bold mx-3 bg-amber-50 px-3 py-1 rounded-lg">最有價值的 10 分鐘</span>
-                                </h3>
-                            </div>
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-8 flex-1">
-                                {/* Audience A */}
-                                <div className="bg-white p-10 rounded-3xl border-t-8 border-purple-600 shadow-xl flex flex-col relative overflow-hidden group hover:-translate-y-1 transition-transform">
-                                    <div className="flex items-center gap-6 mb-6">
-                                        <div className="bg-purple-100 p-4 rounded-2xl text-purple-600">
-                                            <Landmark size={48} />
-                                        </div>
-                                        <div>
-                                            <h4 className="text-3xl font-bold text-slate-900">監管與政府單位</h4>
-                                            <p className="text-base text-purple-600 font-bold uppercase tracking-wider mt-1">高影響力</p>
-                                        </div>
-                                    </div>
-                                    <p className="text-slate-600 text-xl leading-relaxed">
-                                        制定法律、標準與政策的人。他們不需要雜訊，他們需要精準的產業脈絡與風險評估，以做出影響全市場的決策。
-                                    </p>
-                                </div>
-
-                                {/* Audience B */}
-                                <div className="bg-white p-10 rounded-3xl border-t-8 border-blue-600 shadow-xl flex flex-col relative overflow-hidden group hover:-translate-y-1 transition-transform">
-                                    <div className="flex items-center gap-6 mb-6">
-                                        <div className="bg-blue-100 p-4 rounded-2xl text-blue-600">
-                                            <Building size={48} />
-                                        </div>
-                                        <div>
-                                            <h4 className="text-3xl font-bold text-slate-900">企業與機構決策者</h4>
-                                            <p className="text-base text-blue-600 font-bold uppercase tracking-wider mt-1">高資本價值</p>
-                                        </div>
-                                    </div>
-                                    <p className="text-slate-600 text-xl leading-relaxed">
-                                        掌握預算與商業方向的人。他們時間最貴，需要快速掌握競爭態勢與技術趨勢，以避免錯失機會。
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    )
-                },
-                // Slide 9: Product Overview (Three Pillars) (Concentric Circles)
-                {
-                    id: 8,
-                    type: 'content',
-                    title: "AI 越客製，共同性越稀缺",
-                    icon: <Target size={40} className="text-emerald-600" />,
-                    content: (
-                        <div className="flex flex-col h-full justify-center gap-8 px-4 md:px-0">
-                            <div className="flex flex-col md:flex-row items-center justify-center gap-12 w-full max-w-6xl mx-auto">
-
-                                {/* Bullseye Graphic */}
-                                <div className="relative w-[420px] h-[420px] flex items-center justify-center flex-shrink-0">
-                                    {/* Outer Circle */}
-                                    <div className="absolute w-[420px] h-[420px] rounded-full bg-blue-50 border-4 border-blue-200 flex items-start justify-center pt-8 shadow-sm">
-                                        <span className="text-blue-600 font-bold text-xl uppercase tracking-wider">共同事實</span>
-                                    </div>
-
-                                    {/* Middle Circle */}
-                                    <div className="absolute w-[290px] h-[290px] rounded-full bg-amber-50 border-4 border-amber-200 flex items-start justify-center pt-8 shadow-md">
-                                        <span className="text-amber-600 font-bold text-xl uppercase tracking-wider">共同理解</span>
-                                    </div>
-
-                                    {/* Inner Circle */}
-                                    <div className="absolute w-[160px] h-[160px] rounded-full bg-emerald-50 border-4 border-emerald-400 flex items-center justify-center shadow-lg">
-                                        <div className="text-center">
-                                            <span className="text-emerald-700 font-black text-xl uppercase tracking-wider block">共同感受</span>
-                                            <HeartHandshake size={28} className="text-emerald-600 mx-auto mt-2" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Legend / Explanation */}
-                                <div className="flex flex-col gap-8 w-full max-w-lg">
-                                    <div className="flex items-start gap-4 p-5 rounded-xl border-l-8 border-blue-500 bg-white shadow-sm">
-                                        <div className="pt-1"><Bot size={32} className="text-blue-500" /></div>
-                                        <div>
-                                            <h4 className="text-2xl font-bold text-slate-900">共同事實 (外層)</h4>
-                                            <p className="text-lg text-slate-600 mt-1">即時資訊、多方觀點。</p>
-                                            <div className="mt-3 flex gap-2">
-                                                <span className="text-sm font-bold bg-blue-100 text-blue-700 px-3 py-1 rounded">免費閱讀</span>
-                                                <span className="text-sm font-bold bg-slate-100 text-slate-600 px-3 py-1 rounded">低人力 (仰賴系統)</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="flex items-start gap-4 p-5 rounded-xl border-l-8 border-amber-500 bg-white shadow-sm">
-                                        <div className="pt-1"><PenTool size={32} className="text-amber-500" /></div>
-                                        <div>
-                                            <h4 className="text-2xl font-bold text-slate-900">共同理解 (中層)</h4>
-                                            <p className="text-lg text-slate-600 mt-1">親身體驗、價值判斷。</p>
-                                            <div className="mt-3 flex gap-2">
-                                                <span className="text-sm font-bold bg-amber-100 text-amber-700 px-3 py-1 rounded">付費訂閱</span>
-                                                <span className="text-sm font-bold bg-slate-100 text-slate-600 px-3 py-1 rounded">中人力 (人機協作)</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="flex items-start gap-4 p-5 rounded-xl border-l-8 border-emerald-500 bg-white shadow-md transform scale-105">
-                                        <div className="pt-1"><HeartHandshake size={32} className="text-emerald-500" /></div>
-                                        <div>
-                                            <h4 className="text-2xl font-bold text-slate-900">共同感受 (核心)</h4>
-                                            <p className="text-lg text-slate-600 mt-1">實體活動、私密交流。</p>
-                                            <div className="mt-3 flex gap-2">
-                                                <span className="text-sm font-bold bg-emerald-100 text-emerald-700 px-3 py-1 rounded">信任變現</span>
-                                                <span className="text-sm font-bold bg-slate-800 text-white px-3 py-1 rounded">高人力 (實體互動)</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="mt-4 text-center text-slate-400 text-base italic">
-                                        "越往核心，價值越高。"
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )
-                },
-                // Slide 10: Team Philosophy (NEW)
-                {
-                    id: 9,
-                    type: 'content',
-                    title: "以寫作建立品味",
-                    icon: <PenTool size={40} className="text-slate-600" />,
-                    content: (
-                        <div className="flex flex-col h-full justify-center px-4 md:px-0">
-
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 h-[400px] items-center">
-                                <div className="bg-blue-50 p-12 rounded-3xl border border-blue-500 shadow-sm text-center flex flex-col justify-center h-full">
-                                    <div className="bg-white w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-8 text-blue-600 shadow-sm">
-                                        <Users size={48} />
-                                    </div>
-                                    <h4 className="text-3xl font-bold text-slate-900 mb-4">人人都是創作者</h4>
-                                    <p className="text-slate-600 text-xl leading-relaxed">
-                                        在這個團隊裡，所有人都必須具備產製長文的能力。
-                                    </p>
-                                </div>
-
-                                <div className="bg-amber-50 p-12 rounded-3xl border border-amber-500 shadow-sm text-center flex flex-col justify-center h-full">
-                                    <div className="bg-white w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-8 text-amber-600 shadow-sm">
-                                        <Target size={48} />
-                                    </div>
-                                    <h4 className="text-3xl font-bold text-slate-900 mb-4">市場驗證</h4>
-                                    <p className="text-slate-600 text-xl leading-relaxed">
-                                        市場是最好的老師。內容必須強到足以讓讀者掏錢訂閱。
-                                    </p>
-                                </div>
-
-                                <div className="bg-emerald-50 p-12 rounded-3xl border border-emerald-500 shadow-sm text-center flex flex-col justify-center h-full">
-                                    <div className="bg-white w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-8 text-emerald-600 shadow-sm">
-                                        <BookOpen size={48} />
-                                    </div>
-                                    <h4 className="text-3xl font-bold text-slate-900 mb-4">建立品味</h4>
-                                    <p className="text-slate-600 text-xl leading-relaxed">
-                                        唯有親手產製深度內容並接受市場檢驗，才能具備判斷市場訊號的眼光。
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    )
-                },
-                // Slide 11: Team Allocation
-                {
-                    id: 11,
-                    type: 'content',
-                    title: "營運配置",
-                    icon: <Users size={40} className="text-blue-600" />,
-                    content: (
-                        <div className="space-y-6">
-                            <div className="flex flex-col md:flex-row gap-8 justify-center items-stretch h-[450px]">
-
-                                {/* Chief */}
-                                <div className="flex-1 bg-amber-50 border-t-8 border-amber-500 rounded-2xl p-8 shadow-md flex flex-col relative transform scale-105 z-10">
-                                    <div className="mb-6 text-amber-600 flex gap-2">
-                                        <Crown size={48} />
-                                    </div>
-                                    <h4 className="text-3xl font-bold text-slate-900 mb-4">總編輯</h4>
-
-                                    <div className="space-y-6 flex-1">
-                                        <div>
-                                            <h5 className="font-bold text-amber-800 mb-1 text-lg">角色</h5>
-                                            <p className="text-base text-slate-600">系統建構者</p>
-                                        </div>
-                                        <div>
-                                            <h5 className="font-bold text-amber-800 mb-1 text-lg">職責</h5>
-                                            <ul className="list-disc list-inside text-base text-slate-600 space-y-1">
-                                                <li>建構內容生產 S.O.P.</li>
-                                                <li>傳遞內容品味</li>
-                                                <li>將個人能力規模化為團隊能力</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <div className="mt-auto bg-white p-4 rounded-xl border border-amber-100 text-sm text-amber-700 font-bold text-center">
-                                        品牌靈魂與商業核心
-                                    </div>
-                                </div>
-
-                                {/* Team */}
-                                <div className="flex-1 bg-blue-50 border-t-8 border-blue-500 rounded-2xl p-8 shadow-sm flex flex-col relative">
-                                    <div className="mb-6 text-blue-600 flex gap-2">
-                                        <Users size={48} />
-                                    </div>
-                                    <h4 className="text-3xl font-bold text-slate-900 mb-4">編輯團隊</h4>
-
-                                    <div className="space-y-6 flex-1">
-                                        <div>
-                                            <h5 className="font-bold text-blue-800 mb-1 text-lg">角色</h5>
-                                            <p className="text-base text-slate-600">全員創作者</p>
-                                        </div>
-                                        <div>
-                                            <h5 className="font-bold text-blue-800 mb-1 text-lg">職責</h5>
-                                            <ul className="list-disc list-inside text-base text-slate-600 space-y-1">
-                                                <li>核心：撰寫深度長文</li>
-                                                <li>日常：社群海巡</li>
-                                                <li>延伸：多媒體策展</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <div className="mt-auto bg-white p-4 rounded-xl border border-blue-100 text-sm text-blue-700 font-bold text-center">
-                                        主要戰力與產出來源
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div className="text-center text-sm text-slate-400">
-                                * 營運支援 (Ops) 為初期次要配置，視需求彈性加入。
-                            </div>
-                        </div>
-                    )
-                },
-                // Slide 12: Systematization
-                {
-                    id: 10,
-                    type: 'content',
-                    title: "內容生產系統",
-                    icon: <Layers size={40} className="text-slate-600" />,
-                    content: (
-                        <div className="flex flex-col h-full justify-center px-4 md:px-0">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto w-full">
-                                {/* Left: Core (40%) */}
-                                <div className="bg-white p-10 rounded-2xl border-t-8 border-slate-800 shadow-lg flex flex-col h-full relative">
-                                    <div className="absolute top-4 right-4 bg-slate-800 text-white text-xs font-bold px-3 py-1 rounded-full">40% 時間</div>
-                                    <div className="mb-6 text-slate-800 flex items-center gap-3">
-                                        <PenTool size={40} />
-                                        <h4 className="text-3xl font-black">核心產能</h4>
-                                    </div>
-                                    <div className="flex-1">
-                                        <p className="text-xl font-bold text-slate-900 mb-4">每週產出一篇深度長文</p>
-                                        <ul className="space-y-4 text-slate-600 text-lg">
-                                            <li className="flex gap-3">
-                                                <span className="text-slate-400 font-bold">•</span>
-                                                <span>這是不可妥協的基石。</span>
-                                            </li>
-                                            <li className="flex gap-3">
-                                                <span className="text-slate-400 font-bold">•</span>
-                                                <span>建立媒體的品味與觀點。</span>
-                                            </li>
-                                            <li className="flex gap-3">
-                                                <span className="text-slate-400 font-bold">•</span>
-                                                <span>確保內容足以讓讀者付費。</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div className="mt-8 pt-6 border-t border-slate-100 text-center">
-                                        <span className="text-sm font-bold text-slate-400 uppercase tracking-widest">約 2 個工作天</span>
-                                    </div>
-                                </div>
-
-                                {/* Right: Extension (60%) */}
-                                <div className="bg-slate-50 p-10 rounded-2xl border-t-8 border-amber-500 shadow-sm flex flex-col h-full relative">
-                                    <div className="absolute top-4 right-4 bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full">60% 時間</div>
-                                    <div className="mb-6 text-amber-600 flex items-center gap-3">
-                                        <Mic size={40} />
-                                        <h4 className="text-3xl font-black">多元產出</h4>
-                                    </div>
-                                    <div className="flex-1">
-                                        <p className="text-xl font-bold text-slate-900 mb-4">核心能力的延伸</p>
-                                        <ul className="space-y-4 text-slate-600 text-lg">
-                                            <li className="flex gap-3">
-                                                <span className="text-amber-400 font-bold">•</span>
-                                                <span>Podcast / 影音錄製。</span>
-                                            </li>
-                                            <li className="flex gap-3">
-                                                <span className="text-amber-400 font-bold">•</span>
-                                                <span>社群海巡與即時資訊篩選。</span>
-                                            </li>
-                                            <li className="flex gap-3">
-                                                <span className="text-amber-400 font-bold">•</span>
-                                                <span>教育內容、深度報告、活動參與。</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div className="mt-8 pt-6 border-t border-slate-200 text-center">
-                                        <span className="text-sm font-bold text-slate-400 uppercase tracking-widest">約 3 個工作天</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )
-                },
-                // Slide 13: 整體薪酬
-                {
-                    id: 12,
-                    type: 'content',
-                    title: "整體薪酬",
-                    icon: <DollarSign size={40} className="text-slate-700" />,
-                    content: (
-                        <div className="space-y-6">
-                            <div className="bg-white rounded-xl border border-slate-300 shadow-lg overflow-hidden">
-                                <div className="divide-y divide-slate-100">
-                                    {/* Asset */}
-                                    <div className="p-8 flex flex-col md:flex-row justify-between items-center hover:bg-slate-50 gap-6">
-                                        <div>
-                                            <div className="flex items-center gap-3 mb-2">
-                                                <span className="bg-amber-100 text-amber-800 text-sm px-3 py-1 rounded font-bold">資產注入</span>
-                                                <h4 className="font-bold text-slate-900 text-2xl">品牌結盟與授權</h4>
-                                            </div>
-                                            <p className="text-base text-slate-500">戰略入股區塊勢，取得內容獨家授權導入付費專區</p>
-                                        </div>
-                                        <div className="text-right">
-                                            <span className="font-black text-slate-900 block text-3xl">股權投資</span>
-                                        </div>
-                                    </div>
-
-                                    {/* Salary */}
-                                    <div className="p-8 flex flex-col md:flex-row justify-between items-center hover:bg-slate-50 gap-6">
-                                        <div>
-                                            <div className="flex items-center gap-3 mb-2">
-                                                <span className="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded font-bold">執行薪酬</span>
-                                                <h4 className="font-bold text-slate-900 text-2xl">總編輯薪資</h4>
-                                            </div>
-                                            <p className="text-base text-slate-500">創辦人暨總編輯 全職投入</p>
-                                        </div>
-                                        <div className="text-right">
-                                            <span className="font-black text-blue-700 block text-3xl">VP Level</span>
-                                            <span className="text-sm text-slate-400 font-bold">月薪 20-25萬 + 完整薪酬配套</span>
-                                        </div>
-                                    </div>
-
-                                    {/* Bonus */}
-                                    <div className="p-8 flex flex-col md:flex-row justify-between items-center hover:bg-slate-50 bg-emerald-50/40 gap-6">
-                                        <div>
-                                            <div className="flex items-center gap-3 mb-2">
-                                                <span className="bg-emerald-100 text-emerald-800 text-sm px-3 py-1 rounded font-bold">成長激勵</span>
-                                                <h4 className="font-bold text-slate-900 text-2xl">績效分潤</h4>
-                                            </div>
-                                            <p className="text-base text-slate-500">新增訂閱與活動營收抽成</p>
-                                        </div>
-                                        <div className="text-right">
-                                            <span className="font-black text-emerald-600 block text-3xl">10-15% 營收</span>
-                                            <span className="text-sm text-slate-400 font-bold">連動營收成長 (不扣成本)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )
-                },
-                // Slide 15: Reference
-                {
-                    id: 14,
-                    type: 'content',
-                    title: "延伸閱讀",
-                    icon: <ExternalLink size={40} className="text-slate-600" />,
-                    content: (
-                        <div className="flex flex-col h-full justify-center px-4 md:px-12">
-                            <div className="space-y-8 max-w-4xl w-full mx-auto">
-                                <a href="https://paulgraham.com/taste.html" target="_blank" rel="noopener noreferrer" className="block bg-white p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md hover:border-blue-400 transition-all group">
-                                    <div className="flex items-start gap-6">
-                                        <div className="bg-slate-100 p-4 rounded-full text-slate-600 group-hover:text-blue-600 group-hover:bg-blue-50 transition-colors">
-                                            <BookOpen size={32} />
-                                        </div>
-                                        <div>
-                                            <h3 className="text-2xl font-bold text-slate-900 mb-2 group-hover:text-blue-700">Taste for Makers</h3>
-                                            <p className="text-slate-600 text-lg mb-1">Paul Graham</p>
-                                            <p className="text-slate-500 text-sm">關於品味如何建立，以及為什麼這在創造好產品時至關重要。</p>
-                                        </div>
-                                    </div>
-                                </a>
-
-                                <a href="https://www.youtube.com/watch?v=oUSWtLu2RCE" target="_blank" rel="noopener noreferrer" className="block bg-white p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md hover:border-red-400 transition-all group">
-                                    <div className="flex items-start gap-6">
-                                        <div className="bg-slate-100 p-4 rounded-full text-slate-600 group-hover:text-red-600 group-hover:bg-red-50 transition-colors">
-                                            <Video size={32} />
-                                        </div>
-                                        <div>
-                                            <h3 className="text-2xl font-bold text-slate-900 mb-2 group-hover:text-red-700">Ben Thompson from Stratechery on AI ads, the end of SaaS, and the future of media</h3>
-                                            <p className="text-slate-600 text-lg mb-1">YouTube</p>
-                                            <p className="text-slate-500 text-sm">關於 AI 如何改變媒體商業模式與內容價值的深度對談。</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    )
-                }
-            ];
-
-            // 三大段：與第 2 頁提案大綱對應
-            const sectionRanges = [
-                {start: 0, end: 5, label: "市場洞察與核心策略", color: "blue"},
-                {start: 6, end: 9, label: "產品樣貌與價值主張", color: "amber"},
-                {start: 10, end: slides.length - 1, label: "營運配置與合作方案", color: "emerald"}
-            ];
-            const getCurrentSectionIndex = () => {
-                for (let i = 0; i < sectionRanges.length; i++) {
-                    if (currentSlide >= sectionRanges[i].start && currentSlide <= sectionRanges[i].end) return i;
-                }
-                return 0;
-            };
-            const currentSection = getCurrentSectionIndex();
-
-            const nextSlide = () => {
-                setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
-            };
-
-            const prevSlide = () => {
-                setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
-            };
-
-            useEffect(() => {
-                const handleKeyDown = (e) => {
-                    if (e.key === 'ArrowRight') nextSlide();
-                    if (e.key === 'ArrowLeft') prevSlide();
-                };
-                window.addEventListener('keydown', handleKeyDown);
-                return () => window.removeEventListener('keydown', handleKeyDown);
-            }, []);
-
-            return (
-                <div className="flex flex-col h-screen w-full bg-slate-50">
-                    {/* Slide Render Container */}
-                    <div className="flex-1 flex items-center justify-center p-4 pb-16 relative cursor-pointer" onClick={nextSlide}>
-                        <div className="w-full max-w-[95%] h-full md:h-[90vh] transition-all duration-500 ease-in-out">
-                            {slides[currentSlide].type === 'cover' ? (
-                                slides[currentSlide].content
-                            ) : slides[currentSlide].type === 'mockup' ? (
-                                <div className="bg-white border border-slate-200 shadow-2xl rounded-2xl p-6 md:p-10 w-full h-full flex flex-col relative overflow-hidden">
-                                    {/* Header */}
-                                    <div className="flex items-center gap-4 mb-6 border-b border-slate-100 pb-4 shrink-0">
-                                        <div className="p-3 bg-slate-50 rounded-lg border border-slate-100">
-                                            {slides[currentSlide].icon}
-                                        </div>
-                                        <div>
-                                            <h1 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
-                                                {slides[currentSlide].title}
-                                            </h1>
-                                        </div>
-                                    </div>
-                                    {/* Content */}
-                                    <div className="flex-1 overflow-hidden">
-                                        {slides[currentSlide].content}
-                                    </div>
-                                    {/* Page Number */}
-                                    <div className="absolute bottom-6 right-8 text-slate-400 text-sm font-mono font-medium bg-white/90 px-3 py-1 rounded shadow-sm border border-slate-100">
-                                        {currentSlide + 1} <span className="text-slate-300">/</span> {slides.length}
-                                    </div>
-                                </div>
-                            ) : (
-                                        <div className="bg-white border border-slate-200 shadow-2xl rounded-2xl p-8 md:p-12 w-full h-full flex flex-col relative overflow-hidden">
-                                            {/* Header */}
-                                            <div className="flex items-center gap-4 mb-8 border-b border-slate-100 pb-6 shrink-0">
-                                                <div className="p-3 bg-slate-50 rounded-lg border border-slate-100">
-                                                    {slides[currentSlide].icon}
-                                                </div>
-                                                <div>
-                                                    <h1 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
-                                                        {slides[currentSlide].title}
-                                                    </h1>
-                                                </div>
-                                            </div>
-                                            {/* Content */}
-                                            <div className="flex-1 flex flex-col justify-center">
-                                                {slides[currentSlide].content}
-                                            </div>
-                                            {/* Page Number */}
-                                            <div className="absolute bottom-6 right-8 text-slate-400 text-sm font-mono font-medium bg-white/90 px-3 py-1 rounded shadow-sm border border-slate-100">
-                                                {currentSlide + 1} <span className="text-slate-300">/</span> {slides.length}
-                                            </div>
-                                        </div>
-                                    )}
-                        </div>
-                    </div>
-                    {/* Progress Bar: 三大段，每段內依頁數切小格 */}
-                    <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-t border-slate-200 shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
-                        <div className="h-2.5 w-full flex shrink-0">
-                            {sectionRanges.map((section, idx) => {
-                                const colorMap = {
-                                    blue: {active: 'bg-blue-600', past: 'bg-blue-400', future: 'bg-slate-200'},
-                                    amber: {active: 'bg-amber-500', past: 'bg-amber-400', future: 'bg-slate-200'},
-                                    emerald: {active: 'bg-emerald-600', past: 'bg-emerald-400', future: 'bg-slate-200'}
-                                };
-                                const colors = colorMap[section.color];
-                                const slideCount = section.end - section.start + 1;
-                                return (
-                                    <div key={idx} className={`flex gap-px flex-1 min-w-0 ${idx < 2 ? 'border-r-2 border-slate-300/50 mr-px' : ''}`} style={{flex: slideCount}}>
-                                        {Array.from({length: slideCount}, (_, i) => {
-                                            const slideIndex = section.start + i;
-                                            const isPast = currentSlide > slideIndex;
-                                            const isCurrent = currentSlide === slideIndex;
-                                            const bgClass = isPast ? colors.past : isCurrent ? colors.active : colors.future;
-                                            return (
-                                                <div
-                                                    key={slideIndex}
-                                                    className={`h-full flex-1 min-w-[2px] transition-all duration-300 ${bgClass}`}
-                                                />
-                                            );
-                                        })}
-                                    </div>
-                                );
-                            })}
-                        </div>
-                        <div className="px-4 py-2 flex items-center justify-between text-xs">
-                            <span className="font-medium text-slate-500">
-                                第 {currentSection + 1} 段
-                            </span>
-                            <span className="font-bold text-slate-800">
-                                {sectionRanges[currentSection].label}
-                            </span>
-                            <span className="text-slate-400 font-mono">
-                                {currentSlide + 1} / {slides.length}
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            );
-        };
-
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<StrategyDeck />);
-    </script>
+<div class="page-number" id="page-num">01 / 18</div>
+</div>
+<script>
+const c=document.getElementById('slides-container'),s=document.querySelectorAll('.slide'),t=s.length,pn=document.getElementById('page-num'),pb=document.getElementById('progress-bar'),nd=document.querySelectorAll('.nav-dot'),si=Array.from(nd).map(d=>parseInt(d.dataset.slide));c.addEventListener('scroll',()=>{const st=c.scrollTop,h=c.clientHeight,ci=Math.min(Math.max(Math.round(st/h),0),t-1);pn.innerText=String(ci+1).padStart(2,'0')+' / '+String(t).padStart(2,'0');const mx=c.scrollHeight-c.clientHeight;pb.style.width=(mx>0?(st/mx)*100:0)+'%';nd.forEach((d,i)=>{const a=si[i],b=(i<si.length-1)?si[i+1]:t;d.classList.toggle('active',ci>=a&&ci<b);});});nd.forEach(d=>{d.addEventListener('click',()=>{const x=s[parseInt(d.dataset.slide)];if(x)x.scrollIntoView({behavior:'smooth'});});});document.addEventListener('keydown',e=>{const ci=Math.round(c.scrollTop/c.clientHeight);if(['ArrowDown','ArrowRight',' '].includes(e.key)||e.code==='Space'){e.preventDefault();s[Math.min(ci+1,t-1)].scrollIntoView({behavior:'smooth'});}else if(['ArrowUp','ArrowLeft'].includes(e.key)){e.preventDefault();s[Math.max(ci-1,0)].scrollIntoView({behavior:'smooth'});}});let ty=0;c.addEventListener('touchstart',e=>{ty=e.changedTouches[0].screenY;});c.addEventListener('touchend',e=>{const d=e.changedTouches[0].screenY-ty;if(Math.abs(d)>60){const ci=Math.round(c.scrollTop/c.clientHeight);s[d<0?Math.min(ci+1,t-1):Math.max(ci-1,0)].scrollIntoView({behavior:'smooth'});}});pb.style.width='0%';
+</script>
 </body>
-
 </html>
