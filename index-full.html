@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Web3 媒體執行計畫｜許明恩</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧭</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Urbanist:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{--brand-blue:#48AAE0;--brand-blue-light:#6BC0F0;--brand-dark-blue:#2A68A0;--brand-orange:#E07C38;--brand-dark-gray:#1a1d23;--brand-white:#FFF;--bg-color:var(--brand-dark-gray);--glass-bg:rgba(255,255,255,0.07);--glass-border:rgba(255,255,255,0.12);--text-primary:var(--brand-white);--text-secondary:rgba(255,255,255,0.72);--risk-color:var(--brand-orange);--shadow:0 8px 32px rgba(0,0,0,0.3)}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:auto}body{background-color:var(--bg-color);color:var(--text-primary);font-family:'Noto Sans TC',sans-serif;margin:0;overflow:hidden;height:100vh}
+.bg-effects{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden}.bg-effects .orb{position:absolute;border-radius:50%;filter:blur(120px);opacity:.22;animation:orbFloat 20s ease-in-out infinite}.orb-1{width:600px;height:600px;background:radial-gradient(circle,rgba(72,170,224,.4),transparent 70%);top:-10%;right:-10%}.orb-2{width:500px;height:500px;background:radial-gradient(circle,rgba(224,124,56,.3),transparent 70%);bottom:-15%;left:-5%;animation-delay:-7s}.orb-3{width:400px;height:400px;background:radial-gradient(circle,rgba(42,104,160,.35),transparent 70%);top:40%;left:50%;animation-delay:-14s}@keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-30px) scale(1.05)}66%{transform:translate(-30px,20px) scale(.95)}}
+.bg-grid{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 40%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 40%,transparent 100%)}
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--brand-blue),var(--brand-blue-light));z-index:200;transition:width .4s cubic-bezier(.4,0,.2,1);box-shadow:0 0 12px rgba(72,170,224,.5)}
+.slides-container{position:relative;z-index:2;height:100vh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth;-ms-overflow-style:none;scrollbar-width:none}.slides-container::-webkit-scrollbar{display:none}
+.slide{width:100%;height:100vh;min-height:100vh;padding:60px 80px;display:flex;flex-direction:column;justify-content:center;scroll-snap-align:start;scroll-snap-stop:always;overflow-y:hidden;position:relative}
+h1{font-size:64px;line-height:1.2;margin-bottom:20px;background:linear-gradient(135deg,var(--brand-white) 0%,var(--brand-blue-light) 50%,var(--brand-blue) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-.02em}
+h2{font-size:44px;color:var(--brand-blue);margin-bottom:36px;border-left:5px solid;border-image:linear-gradient(to bottom,var(--brand-blue-light),var(--brand-dark-blue)) 1;padding-left:28px;font-weight:700}
+h3{font-size:30px;color:var(--brand-white);margin-bottom:18px;font-weight:600}p,li{font-size:23px;line-height:1.7;color:var(--text-secondary);margin-bottom:18px}strong{color:var(--brand-white);font-weight:700}
+.diagram-box{background:var(--glass-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:16px;padding:36px;margin-top:20px;box-shadow:var(--shadow)}
+.flow-row{display:flex;justify-content:space-between;align-items:center;gap:20px}.flow-card{background:var(--glass-bg);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:28px;border-radius:16px;border:1px solid var(--glass-border);box-shadow:var(--shadow);flex:1;text-align:center;transition:transform .3s ease}.flow-card:hover{transform:translateY(-3px);border-color:rgba(72,170,224,.3)}
+.arrow-right{font-size:28px;color:var(--brand-blue);opacity:.6}
+.page-number{position:fixed;bottom:38px;left:40px;color:rgba(255,255,255,.35);font-family:'Urbanist',sans-serif;font-size:15px;font-weight:500;letter-spacing:2px;z-index:100}
+.side-nav{position:fixed;right:24px;top:50%;transform:translateY(-50%);z-index:150;display:flex;flex-direction:column;gap:14px;align-items:center}.nav-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.25);cursor:pointer;transition:all .3s ease;position:relative}.nav-dot:hover{background:rgba(72,170,224,.5);border-color:var(--brand-blue);transform:scale(1.3)}.nav-dot.active{background:var(--brand-blue);border-color:var(--brand-blue);box-shadow:0 0 10px rgba(72,170,224,.5);transform:scale(1.2)}.nav-dot .nav-tooltip{position:absolute;right:22px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.85);backdrop-filter:blur(10px);color:var(--brand-white);font-size:13px;padding:5px 10px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .25s ease}.nav-dot:hover .nav-tooltip{opacity:1}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:20px}.stat-card{background:var(--glass-bg);backdrop-filter:blur(16px);border:1px solid var(--glass-border);border-radius:16px;padding:28px;text-align:center}.stat-num{font-size:48px;font-weight:700;font-family:'Urbanist',sans-serif}.stat-label{font-size:16px;color:var(--text-secondary);margin-top:8px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}.highlight-box{background:rgba(72,170,224,.08);border:1px solid rgba(72,170,224,.25);border-radius:12px;padding:24px;margin-bottom:16px}
+.math-table{width:100%;border-collapse:separate;border-spacing:0;margin-top:10px;font-size:20px;border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}.math-table th{background:linear-gradient(135deg,var(--brand-dark-blue),var(--brand-blue));color:var(--brand-white);padding:14px 12px;text-align:center;font-weight:600;font-size:18px}.math-table td{background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.06);padding:13px 12px;text-align:center;color:var(--text-secondary)}.math-table tr:hover td{background:rgba(255,255,255,.08)}.math-table tr:last-child td{border-bottom:none;font-weight:bold;color:var(--brand-white);background:rgba(72,170,224,.15)}
+@media(max-width:1024px){.slide{padding:40px 30px;overflow-y:auto}h1{font-size:42px!important}h2{font-size:32px!important}.flow-row{flex-direction:column}.stat-grid{grid-template-columns:1fr!important}.two-col{grid-template-columns:1fr!important}div[style*="grid-template-columns"]{grid-template-columns:1fr!important}.side-nav{display:none}.bg-effects .orb{opacity:.15}}
+</style>
+</head>
+<body>
+<div class="bg-effects"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
+<div class="bg-grid"></div>
+<div class="progress-bar" id="progress-bar"></div>
+<div class="side-nav" id="side-nav">
+<div class="nav-dot" data-slide="1"><span class="nav-tooltip">痛點</span></div>
+<div class="nav-dot" data-slide="3"><span class="nav-tooltip">產品</span></div>
+<div class="nav-dot" data-slide="10"><span class="nav-tooltip">商業計畫</span></div>
+<div class="nav-dot" data-slide="13"><span class="nav-tooltip">條件</span></div>
+</div>
+<div class="slides-container" id="slides-container">
+<div class="slide"><div style="font-family:'Urbanist',sans-serif;letter-spacing:4px;color:var(--brand-blue);margin-bottom:20px;font-weight:700;font-size:24px">EXECUTION PLAN</div><h1 style="font-size:64px">Web3 媒體<br>執行計畫</h1><div style="font-size:32px;font-weight:700;color:var(--text-primary);margin-bottom:60px;line-height:1.4">產品 ・ 組織 ・ 提案</div><div style="font-size:28px;color:var(--text-secondary);border-left:6px solid var(--brand-blue);padding-left:30px">許明恩｜區塊勢創辦人</div><div style="font-size:18px;color:rgba(255,255,255,.3);margin-top:40px">僅供內部討論 ・ 2026 年 4 月</div></div>
+<div class="slide"><h2>企業現在怎麼跟上區塊鏈？</h2><div class="two-col" style="margin-top:10px;"><div class="diagram-box" style="margin-top:0;border-top:3px solid var(--brand-orange);"><h3 style="font-size:24px;color:var(--brand-orange);">找人蒐集新聞</h3><p style="font-size:17px;">但篩選標準是什麼？來源品質誰把關？執行者對領域若不夠熟悉，產出難以引起團隊重視。</p><div style="margin-top:14px;"><span style="display:inline-block;padding:4px 12px;background:rgba(224,124,56,0.12);border-radius:20px;font-size:14px;color:var(--brand-orange);margin:3px;">#缺乏專業篩選</span><span style="display:inline-block;padding:4px 12px;background:rgba(224,124,56,0.12);border-radius:20px;font-size:14px;color:var(--brand-orange);margin:3px;">#來源品質參差</span></div></div><div class="diagram-box" style="margin-top:0;border-top:3px solid var(--brand-orange);"><h3 style="font-size:24px;color:var(--brand-orange);">定期聽大神演講</h3><p style="font-size:17px;">但主題與頻率該如何規劃？太專業的受眾有限，太通識的缺乏實用性。知識吸收憑運氣，哪場研討會才值得參與？</p><div style="margin-top:14px;"><span style="display:inline-block;padding:4px 12px;background:rgba(224,124,56,0.12);border-radius:20px;font-size:14px;color:var(--brand-orange);margin:3px;">#低頻率</span><span style="display:inline-block;padding:4px 12px;background:rgba(224,124,56,0.12);border-radius:20px;font-size:14px;color:var(--brand-orange);margin:3px;">#一次性知識</span><span style="display:inline-block;padding:4px 12px;background:rgba(224,124,56,0.12);border-radius:20px;font-size:14px;color:var(--brand-orange);margin:3px;">#難以持續</span></div></div></div><div style="margin-top:18px;padding:16px;background:rgba(224,124,56,0.08);border-radius:12px;text-align:center;"><p style="font-size:19px;margin:0;">多數團隊缺乏共同的事實基礎。光是釐清「現在發生什麼事」就耗費不少精力，難以深入討論。</p></div></div>
+<div class="slide"><h2>缺乏可信的專家</h2><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-top:10px;"><div class="diagram-box" style="margin-top:0;border-left:4px solid var(--brand-orange);"><h3 style="font-size:20px;color:var(--brand-orange);">但問題是</h3><p style="font-size:17px;margin:0;">這樣的人去哪找？他的利益是否與企業一致？如果真的夠專業，成本是否負擔得起？</p></div><div class="diagram-box" style="margin-top:0;border-left:4px solid var(--text-secondary);"><h3 style="font-size:20px;">現實是</h3><p style="font-size:17px;margin:0;">關心區塊鏈的人不少，但多數從個人投資角度切入。能講代幣的人不難找，但同時具備技術背景、又關心企業應用如何實際落地的人，非常稀缺。</p></div><div class="diagram-box" style="margin-top:0;border-left:4px solid var(--brand-blue);"><h3 style="font-size:20px;color:var(--brand-blue);">所以需要</h3><p style="font-size:17px;margin:0;">一套與企業利益一致的機制。提供專業且穩定的服務，同時滿足多家企業需求。成為那個值得被信任的角色。</p></div></div><div style="margin-top:18px;padding:16px;background:rgba(72,170,224,0.06);border-radius:12px;text-align:center;"><p style="font-size:19px;margin:0;">光是為企業建立共同的事實基礎，就很有價值。因為多數媒體的商業模式，不是服務讀者。</p></div></div>
+
+<!-- Website Mockup - Verge-inspired dark -->
+<div class="slide" style="padding:30px 50px;">
+<h2 style="font-size:36px;margin-bottom:16px;">新聞網站示意圖</h2>
+<div style="background:#000;border-radius:10px;overflow:hidden;box-shadow:0 4px 40px rgba(0,0,0,0.7);height:68vh;display:flex;flex-direction:column;border:1px solid #222;">
+<!-- Top nav bar -->
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 20px;border-bottom:1px solid #222;flex-shrink:0;">
+<div style="display:flex;align-items:center;gap:20px;">
+<div style="font-size:24px;font-weight:900;color:#fff;font-family:system-ui,sans-serif;letter-spacing:-1px;">W3M</div>
+<div style="display:flex;gap:16px;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;font-family:system-ui,sans-serif;"><span style="color:#fff;">首頁</span><span style="color:#666;">週報</span><span style="color:#666;">工作坊</span><span style="color:#666;">活動</span></div>
+</div>
+<div style="display:flex;gap:14px;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;font-family:system-ui,sans-serif;"><span style="color:#666;">關於</span><span style="color:#48AAE0;">訂閱</span></div>
+</div>
+<!-- Main content area -->
+<div style="display:grid;grid-template-columns:1.5fr 1fr;flex:1;overflow:hidden;">
+<!-- Left: Hero story with image -->
+<div style="position:relative;overflow:hidden;">
+<img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&q=80" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.4);display:block;" alt="">
+<!-- Overlay content -->
+<div style="position:absolute;bottom:0;left:0;right:0;padding:28px;background:linear-gradient(transparent,rgba(0,0,0,0.85) 40%);">
+<div style="font-size:11px;color:#48AAE0;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;font-family:system-ui,sans-serif;">支付</div>
+<div style="font-size:28px;font-weight:900;color:#fff;line-height:1.2;font-family:'Noto Sans TC',sans-serif;margin-bottom:12px;">Stripe 宣布收購嵌入式錢包 Privy，擴大加密貨幣基礎設施佈局</div>
+<div style="font-size:12px;font-family:system-ui,sans-serif;"><span style="color:#48AAE0;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">許明恩</span><span style="color:#555;margin-left:10px;">2 小時前</span></div>
+</div>
+</div>
+<!-- Right: Top Stories -->
+<div style="padding:20px;overflow-y:auto;border-left:1px solid #222;">
+<div style="font-size:14px;font-weight:700;color:#48AAE0;margin-bottom:18px;font-family:system-ui,sans-serif;">Top Stories</div>
+<!-- Story 1 -->
+<div style="display:flex;gap:12px;padding-bottom:16px;margin-bottom:16px;border-bottom:1px solid #1a1a1a;">
+<div style="color:#48AAE0;font-size:18px;font-weight:900;font-family:system-ui;min-width:20px;padding-top:2px;">1</div>
+<div style="flex:1;">
+<div style="font-size:15px;font-weight:700;color:#fff;line-height:1.3;font-family:'Noto Sans TC',sans-serif;">兆豐金控完成首筆穩定幣跨境支付測試</div>
+<div style="font-size:10px;margin-top:6px;font-family:system-ui;"><span style="color:#48AAE0;text-transform:uppercase;letter-spacing:0.5px;font-weight:600;">許明恩</span><span style="color:#444;margin-left:8px;">5 小時前</span></div>
+</div>
+<img src="https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=120&q=80" style="width:56px;height:56px;object-fit:cover;border-radius:4px;flex-shrink:0;" alt="">
+</div>
+<!-- Story 2 -->
+<div style="display:flex;gap:12px;padding-bottom:16px;margin-bottom:16px;border-bottom:1px solid #1a1a1a;">
+<div style="color:#48AAE0;font-size:18px;font-weight:900;font-family:system-ui;min-width:20px;padding-top:2px;">2</div>
+<div style="flex:1;">
+<div style="font-size:15px;font-weight:700;color:#fff;line-height:1.3;font-family:'Noto Sans TC',sans-serif;">歐盟 MiCA 法規正式生效，交易所合規期限倒數</div>
+<div style="font-size:10px;margin-top:6px;font-family:system-ui;"><span style="color:#48AAE0;text-transform:uppercase;letter-spacing:0.5px;font-weight:600;">許明恩</span><span style="color:#444;margin-left:8px;">8 小時前</span></div>
+</div>
+<img src="https://images.unsplash.com/photo-1607434472257-d9f8e57a643d?w=120&q=80" style="width:56px;height:56px;object-fit:cover;border-radius:4px;flex-shrink:0;" alt="">
+</div>
+<!-- Story 3 -->
+<div style="display:flex;gap:12px;padding-bottom:16px;margin-bottom:16px;border-bottom:1px solid #1a1a1a;">
+<div style="color:#48AAE0;font-size:18px;font-weight:900;font-family:system-ui;min-width:20px;padding-top:2px;">3</div>
+<div style="flex:1;">
+<div style="font-size:15px;font-weight:700;color:#fff;line-height:1.3;font-family:'Noto Sans TC',sans-serif;">Ethereum Foundation 公佈新治理架構</div>
+<div style="font-size:10px;margin-top:6px;font-family:system-ui;"><span style="color:#48AAE0;text-transform:uppercase;letter-spacing:0.5px;font-weight:600;">林宜萱</span><span style="color:#444;margin-left:8px;">6 小時前</span></div>
+</div>
+<img src="https://images.unsplash.com/photo-1622630998477-20aa696ecb05?w=120&q=80" style="width:56px;height:56px;object-fit:cover;border-radius:4px;flex-shrink:0;" alt="">
+</div>
+<!-- Story 4 -->
+<div style="display:flex;gap:12px;padding-bottom:16px;margin-bottom:16px;border-bottom:1px solid #1a1a1a;">
+<div style="color:#48AAE0;font-size:18px;font-weight:900;font-family:system-ui;min-width:20px;padding-top:2px;">4</div>
+<div style="flex:1;">
+<div style="font-size:15px;font-weight:700;color:#fff;line-height:1.3;font-family:'Noto Sans TC',sans-serif;">Circle 提交 IPO 申請</div>
+<div style="font-size:10px;margin-top:6px;font-family:system-ui;"><span style="color:#48AAE0;text-transform:uppercase;letter-spacing:0.5px;font-weight:600;">許明恩</span><span style="color:#444;margin-left:8px;">10 小時前</span></div>
+</div>
+<img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=120&q=80" style="width:56px;height:56px;object-fit:cover;border-radius:4px;flex-shrink:0;" alt="">
+</div>
+<!-- Story 5 -->
+<div style="display:flex;gap:12px;">
+<div style="color:#48AAE0;font-size:18px;font-weight:900;font-family:system-ui;min-width:20px;padding-top:2px;">5</div>
+<div style="flex:1;">
+<div style="font-size:15px;font-weight:700;color:#fff;line-height:1.3;font-family:'Noto Sans TC',sans-serif;">日本三大銀行聯合測試區塊鏈貿易融資</div>
+<div style="font-size:10px;margin-top:6px;font-family:system-ui;"><span style="color:#48AAE0;text-transform:uppercase;letter-spacing:0.5px;font-weight:600;">林宜萱</span><span style="color:#444;margin-left:8px;">12 小時前</span></div>
+</div>
+<img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=120&q=80" style="width:56px;height:56px;object-fit:cover;border-radius:4px;flex-shrink:0;" alt="">
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Article Detail View -->
+<div class="slide" style="padding:30px 50px;">
+<h2 style="font-size:36px;margin-bottom:16px;">點進去看到什麼</h2>
+<div style="background:#000;border-radius:10px;overflow:hidden;box-shadow:0 4px 40px rgba(0,0,0,0.7);height:68vh;display:flex;flex-direction:column;border:1px solid #222;">
+<!-- Nav -->
+<div style="display:flex;align-items:center;padding:10px 20px;border-bottom:1px solid #222;flex-shrink:0;">
+<div style="font-size:20px;font-weight:900;color:#fff;font-family:system-ui,sans-serif;letter-spacing:-1px;">W3M</div>
+<div style="margin-left:16px;font-size:11px;color:#48AAE0;font-family:system-ui;">← 回首頁</div>
+</div>
+<!-- Article content -->
+<div style="flex:1;overflow-y:auto;display:grid;grid-template-columns:1.4fr 1fr;">
+<!-- Left: Article body -->
+<div style="padding:24px;border-right:1px solid #222;">
+<!-- Category -->
+<div style="font-size:10px;color:#48AAE0;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;font-family:system-ui;">支付</div>
+<!-- Headline -->
+<div style="font-size:24px;font-weight:900;color:#fff;line-height:1.25;font-family:'Noto Sans TC',sans-serif;margin-bottom:10px;">Stripe 宣布收購嵌入式錢包 Privy</div>
+<!-- Author + time -->
+<div style="font-size:10px;margin-bottom:16px;font-family:system-ui;"><span style="color:#48AAE0;font-weight:600;">許明恩</span><span style="color:#444;margin-left:10px;">2026 年 3 月 31 日</span></div>
+<!-- Key facts box - first thing readers see -->
+<div style="background:#111;border-radius:8px;padding:14px;margin-bottom:16px;border-left:3px solid #48AAE0;">
+<div style="font-size:10px;color:#48AAE0;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-family:system-ui;">關鍵事實</div>
+<div style="font-size:12px;color:rgba(255,255,255,0.65);line-height:1.8;font-family:'Noto Sans TC',sans-serif;">
+• Stripe 收購嵌入式錢包開發商 Privy，收購金額未公開<br>
+• Privy 的 SDK 讓 App 用戶無需理解私鑰即可使用鏈上功能<br>
+• Stripe 去年以 11 億美元收購穩定幣 API 新創 Bridge<br>
+• Privy 目前面臨 Magic Labs 的專利侵權訴訟
+</div>
+</div>
+<!-- Hero image -->
+<img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=700&q=80" style="width:100%;height:120px;object-fit:cover;border-radius:6px;margin-bottom:16px;" alt="">
+<!-- Full article body -->
+<div style="font-size:12px;color:rgba(255,255,255,0.6);line-height:1.8;font-family:'Noto Sans TC',sans-serif;">
+<p style="margin:0 0 10px;font-size:12px;">支付巨頭 Stripe 週一宣布收購加密貨幣錢包新創 Privy。Privy 提供白牌的用戶註冊與錢包服務，讓開發者能將其整合進各類加密貨幣應用。這家成立僅三年的公司成長迅速——去年 3 月募資時對外表示支援 5,000 萬個錢包，如今已成長至 7,500 萬個，服務超過 1,000 款應用程式，累計獲得 4,000 萬美元融資。</p>
+<p style="margin:0 0 10px;font-size:12px;">這筆交易是 Stripe 近期一連串區塊鏈佈局的延伸。上個月 Stripe 才剛推出穩定幣金融帳戶服務，而更早之前的 2024 年 10 月，Stripe 以 11 億美元收購穩定幣基礎設施公司 Bridge，震動市場。</p>
+<p style="margin:0 0 10px;font-size:12px;">事實上，Stripe 對區塊鏈的興趣並非突然。自 2021 年 11 月起，加密貨幣創投機構 Paradigm 的共同創辦人 Matt Huang 便加入了 Stripe 的董事會。值得注意的是，Stripe 的董事會規模極小，僅有七名成員，包含兩位創辦人及兩位來自 Sequoia 的代表。而 Paradigm 與 Sequoia 恰好都是 Privy 的投資人。</p>
+<p style="margin:0;font-size:12px;">這次收購也反映了 Stripe 從傳統支付向更廣泛金融基礎設施擴張的策略。Stripe 起初專注於電商支付，至今仍是核心業務，但 2018 年推出實體 POS 終端後便開始跨足線下場景。而 Privy 同樣在其錢包中內建了感應支付功能，目前的客戶涵蓋 NFT 平台 OpenSea、社群網路 Farcaster 和 Zora 等。</p>
+</div>
+</div>
+<!-- Right: Reports + Social - FULL VERSION -->
+<div style="padding:20px;overflow-y:auto;">
+<!-- Reports & sources -->
+<div style="margin-bottom:16px;">
+<div style="font-size:11px;color:#48AAE0;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;font-family:system-ui;">相關報導與觀點</div>
+<div style="display:flex;flex-direction:column;gap:6px;">
+<div style="background:#111;border-radius:6px;padding:9px 12px;">
+<div style="font-size:11px;color:#fff;font-weight:600;line-height:1.35;font-family:'Noto Sans TC',sans-serif;">Privy 宣布加入 Stripe</div>
+<div style="font-size:9px;color:#555;margin-top:3px;font-family:system-ui;">Privy Blog — 官方公告</div>
+</div>
+<div style="background:#111;border-radius:6px;padding:9px 12px;">
+<div style="font-size:11px;color:#fff;font-weight:600;line-height:1.35;font-family:'Noto Sans TC',sans-serif;">Stripe 收購 Privy，加速加密貨幣基礎設施佈局</div>
+<div style="font-size:9px;color:#555;margin-top:3px;font-family:system-ui;">Stripe Blog — 官方公告</div>
+</div>
+<div style="background:#111;border-radius:6px;padding:9px 12px;">
+<div style="font-size:11px;color:#fff;font-weight:600;line-height:1.35;font-family:'Noto Sans TC',sans-serif;">我們對 Privy 的投資：下一個篇章</div>
+<div style="font-size:9px;color:#555;margin-top:3px;font-family:system-ui;">Sequoia — 投資人觀點</div>
+</div>
+<div style="background:#111;border-radius:6px;padding:9px 12px;">
+<div style="font-size:11px;color:#fff;font-weight:600;line-height:1.35;font-family:'Noto Sans TC',sans-serif;">Stripe 收購加密錢包新創 Privy</div>
+<div style="font-size:9px;color:#555;margin-top:3px;font-family:system-ui;">Bloomberg</div>
+</div>
+<div style="background:#111;border-radius:6px;padding:9px 12px;">
+<div style="font-size:11px;color:#fff;font-weight:600;line-height:1.35;font-family:'Noto Sans TC',sans-serif;">Stripe 二度出手收購，釋出基礎設施佈局訊號</div>
+<div style="font-size:9px;color:#555;margin-top:3px;font-family:system-ui;">The Block</div>
+</div>
+<div style="background:#111;border-radius:6px;padding:9px 12px;">
+<div style="font-size:11px;color:#fff;font-weight:600;line-height:1.35;font-family:'Noto Sans TC',sans-serif;">Privy 被收購對嵌入式錢包市場意味著什麼</div>
+<div style="font-size:9px;color:#555;margin-top:3px;font-family:system-ui;">CoinDesk</div>
+</div>
+</div>
+</div>
+<!-- Social discussions -->
+<div>
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+<div style="font-size:11px;color:#E8913A;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;font-family:system-ui;">社群討論</div>
+<div style="font-size:9px;color:#444;font-family:system-ui;">持續更新中</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:6px;">
+<div style="background:#111;border-radius:6px;padding:9px 12px;border-left:3px solid #E8913A;">
+<div style="font-size:10px;color:rgba(255,255,255,0.65);line-height:1.5;font-family:'Noto Sans TC',sans-serif;">「加密貨幣的使用者體驗還停留在撥接時代。Privy 讓我們能從根本改變這件事。」</div>
+<div style="font-size:9px;color:#E8913A;margin-top:3px;font-family:system-ui;">Patrick Collison（Stripe 共同創辦人）— X</div>
+</div>
+<div style="background:#111;border-radius:6px;padding:9px 12px;border-left:3px solid #E8913A;">
+<div style="font-size:10px;color:rgba(255,255,255,0.65);line-height:1.5;font-family:'Noto Sans TC',sans-serif;">「加入 Stripe 讓我們能把嵌入式錢包帶給全球數百萬開發者。」</div>
+<div style="font-size:9px;color:#E8913A;margin-top:3px;font-family:system-ui;">Henri Stern（Privy 共同創辦人）— X</div>
+</div>
+<div style="background:#111;border-radius:6px;padding:9px 12px;border-left:3px solid #E8913A;">
+<div style="font-size:10px;color:rgba(255,255,255,0.65);line-height:1.5;font-family:'Noto Sans TC',sans-serif;">「Bridge 做後端、Privy 做前端，Stripe 的加密拼圖快完成了。」</div>
+<div style="font-size:9px;color:#E8913A;margin-top:3px;font-family:system-ui;">@balajis — X</div>
+</div>
+<div style="background:#111;border-radius:6px;padding:9px 12px;border-left:3px solid #E8913A;">
+<div style="font-size:10px;color:rgba(255,255,255,0.65);line-height:1.5;font-family:'Noto Sans TC',sans-serif;">「嵌入式錢包的護城河到底有多深？Magic Labs 的專利訴訟還在打。」</div>
+<div style="font-size:9px;color:#E8913A;margin-top:3px;font-family:system-ui;">@lex_node — X</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="slide"><h2>商業模式：信任</h2><p style="font-size:22px;margin-bottom:6px;">與讀者站在一起。內容不搶快，搶定義權。把每件事寫完整、驗證真實性，替讀者省時間。</p><div class="flow-row" style="margin-top:24px;"><div class="flow-card" style="border-bottom:3px solid #27ae60;padding:24px 20px;"><i class="fa-solid fa-newspaper" style="font-size:32px;color:#27ae60;display:block;margin-bottom:16px;"></i><strong style="font-size:20px;display:block;margin-bottom:14px;">事實｜免費（廣告）</strong><div style="font-size:16px;color:var(--text-secondary);line-height:1.7;text-align:left;">以事件為核心的新聞網站。每一則事件，附上各方相關報導與觀點，並寫出經過查核的客觀事實。</div></div><div class="arrow-right"><i class="fa-solid fa-arrow-right"></i></div><div class="flow-card" style="border-bottom:3px solid var(--brand-blue);padding:24px 20px;"><i class="fa-solid fa-brain" style="font-size:32px;color:var(--brand-blue);display:block;margin-bottom:16px;"></i><strong style="font-size:20px;display:block;margin-bottom:14px;">觀點與週報｜付費</strong><div style="font-size:16px;color:var(--text-secondary);line-height:1.7;text-align:left;">幫讀者省時間——從一週的事件中篩選出最重要的，梳理前因後果，提供專業判斷。</div></div><div class="arrow-right"><i class="fa-solid fa-arrow-right"></i></div><div class="flow-card" style="border-bottom:3px solid var(--brand-orange);padding:24px 20px;"><i class="fa-solid fa-chalkboard-user" style="font-size:32px;color:var(--brand-orange);display:block;margin-bottom:16px;"></i><strong style="font-size:20px;display:block;margin-bottom:14px;">工作坊｜付費</strong><div style="font-size:16px;color:var(--text-secondary);line-height:1.7;text-align:left;">開課滿足企業的實務需求，例如穩定幣收付、法律、會計等面向。</div></div></div><div style="margin-top:24px;padding:16px;background:rgba(72,170,224,.06);border-radius:12px;text-align:center;"><p style="font-size:19px;margin:0;">成為讀者信任的錨點——在資訊過載的時代，一個值得長期依賴的來源。</p></div></div>
+
+<!-- Paywall version of article -->
+<div class="slide" style="padding:30px 50px;">
+<h2 style="font-size:36px;margin-bottom:16px;">事實免費，省時付費</h2>
+<div style="background:#000;border-radius:10px;overflow:hidden;box-shadow:0 4px 40px rgba(0,0,0,0.7);height:68vh;display:flex;flex-direction:column;border:1px solid #222;">
+<div style="display:flex;align-items:center;padding:10px 20px;border-bottom:1px solid #222;flex-shrink:0;">
+<div style="font-size:20px;font-weight:900;color:#fff;font-family:system-ui,sans-serif;letter-spacing:-1px;">W3M</div>
+<div style="margin-left:16px;font-size:11px;color:#48AAE0;font-family:system-ui;">← 回首頁</div>
+</div>
+<div style="flex:1;overflow-y:auto;display:grid;grid-template-columns:1.4fr 1fr;">
+<!-- Left: same article body -->
+<div style="padding:24px;border-right:1px solid #222;">
+<div style="font-size:10px;color:#48AAE0;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;font-family:system-ui;">支付</div>
+<div style="font-size:24px;font-weight:900;color:#fff;line-height:1.25;font-family:'Noto Sans TC',sans-serif;margin-bottom:10px;">Stripe 宣布收購嵌入式錢包 Privy</div>
+<div style="font-size:10px;margin-bottom:16px;font-family:system-ui;"><span style="color:#48AAE0;font-weight:600;">許明恩</span><span style="color:#444;margin-left:10px;">2026 年 3 月 31 日</span></div>
+<div style="background:#111;border-radius:8px;padding:14px;margin-bottom:16px;border-left:3px solid #48AAE0;">
+<div style="font-size:10px;color:#48AAE0;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-family:system-ui;">關鍵事實</div>
+<div style="font-size:12px;color:rgba(255,255,255,0.65);line-height:1.8;font-family:'Noto Sans TC',sans-serif;">
+• Stripe 收購嵌入式錢包開發商 Privy，收購金額未公開<br>
+• Privy 的 SDK 讓 App 用戶無需理解私鑰即可使用鏈上功能<br>
+• Stripe 去年以 11 億美元收購穩定幣 API 新創 Bridge<br>
+• Privy 目前面臨 Magic Labs 的專利侵權訴訟
+</div>
+</div>
+<img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=700&q=80" style="width:100%;height:120px;object-fit:cover;border-radius:6px;margin-bottom:16px;" alt="">
+<div style="font-size:12px;color:rgba(255,255,255,0.6);line-height:1.8;font-family:'Noto Sans TC',sans-serif;">
+<p style="margin:0 0 10px;font-size:12px;">支付巨頭 Stripe 週一宣布收購加密貨幣錢包新創 Privy。Privy 提供白牌的用戶註冊與錢包服務，讓開發者能將其整合進各類加密貨幣應用。這家成立僅三年的公司成長迅速——去年 3 月募資時對外表示支援 5,000 萬個錢包，如今已成長至 7,500 萬個，服務超過 1,000 款應用程式，累計獲得 4,000 萬美元融資。</p>
+<p style="margin:0 0 10px;font-size:12px;">這筆交易是 Stripe 近期一連串區塊鏈佈局的延伸。上個月 Stripe 才剛推出穩定幣金融帳戶服務，而更早之前的 2024 年 10 月，Stripe 以 11 億美元收購穩定幣基礎設施公司 Bridge，震動市場。</p>
+<p style="margin:0 0 10px;font-size:12px;">事實上，Stripe 對區塊鏈的興趣並非突然。自 2021 年 11 月起，加密貨幣創投機構 Paradigm 的共同創辦人 Matt Huang 便加入了 Stripe 的董事會。值得注意的是，Stripe 的董事會規模極小，僅有七名成員，包含兩位創辦人及兩位來自 Sequoia 的代表。而 Paradigm 與 Sequoia 恰好都是 Privy 的投資人。</p>
+<p style="margin:0;font-size:12px;">這次收購也反映了 Stripe 從傳統支付向更廣泛金融基礎設施擴張的策略。Stripe 起初專注於電商支付，至今仍是核心業務，但 2018 年推出實體 POS 終端後便開始跨足線下場景。而 Privy 同樣在其錢包中內建了感應支付功能，目前的客戶涵蓋 NFT 平台 OpenSea、社群網路 Farcaster 和 Zora 等。</p>
+</div>
+</div>
+<!-- Right: with paywall -->
+<div style="padding:20px;overflow-y:auto;">
+<div style="margin-bottom:16px;">
+<div style="font-size:11px;color:#48AAE0;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;font-family:system-ui;">相關報導與觀點<span style="font-size:9px;color:#555;font-weight:400;text-transform:none;letter-spacing:0;margin-left:8px;">共 6 篇</span></div>
+<div style="display:flex;flex-direction:column;gap:6px;">
+<div style="background:#111;border-radius:6px;padding:9px 12px;">
+<div style="font-size:11px;color:#fff;font-weight:600;line-height:1.35;font-family:'Noto Sans TC',sans-serif;">Privy 宣布加入 Stripe</div>
+<div style="font-size:9px;color:#555;margin-top:3px;font-family:system-ui;">Privy Blog — 官方公告</div>
+</div>
+<div style="background:#111;border-radius:6px;padding:9px 12px;">
+<div style="font-size:11px;color:#fff;font-weight:600;line-height:1.35;font-family:'Noto Sans TC',sans-serif;">Stripe 收購 Privy，加速加密貨幣基礎設施佈局</div>
+<div style="font-size:9px;color:#555;margin-top:3px;font-family:system-ui;">Stripe Blog — 官方公告</div>
+</div>
+<div style="background:#111;border-radius:6px;padding:9px 12px;">
+<div style="font-size:11px;color:#fff;font-weight:600;line-height:1.35;font-family:'Noto Sans TC',sans-serif;">我們對 Privy 的投資：下一個篇章</div>
+<div style="font-size:9px;color:#555;margin-top:3px;font-family:system-ui;">Sequoia — 投資人觀點</div>
+</div>
+<div style="position:relative;height:80px;overflow:hidden;">
+<div style="opacity:0.4;">
+<div style="background:#111;border-radius:6px;padding:9px 12px;margin-bottom:6px;">
+<div style="font-size:11px;color:#fff;font-weight:600;font-family:'Noto Sans TC',sans-serif;">Stripe 收購加密錢包新創 Privy</div>
+<div style="font-size:9px;color:#555;margin-top:3px;">Bloomberg</div>
+</div>
+<div style="background:#111;border-radius:6px;padding:9px 12px;">
+<div style="font-size:11px;color:#fff;font-weight:600;font-family:'Noto Sans TC',sans-serif;">Stripe 二度出手收購，釋出基礎設施佈局訊號</div>
+<div style="font-size:9px;color:#555;margin-top:3px;">The Block</div>
+</div>
+</div>
+<div style="position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(180deg,transparent 0%,rgba(0,0,0,0.95) 100%);"></div>
+</div>
+</div>
+</div>
+<div>
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+<div style="font-size:11px;color:#E8913A;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;font-family:system-ui;">社群討論<span style="font-size:9px;color:#555;font-weight:400;text-transform:none;letter-spacing:0;margin-left:8px;">共 4 則</span></div>
+<div style="font-size:9px;color:#444;font-family:system-ui;">持續更新中</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:6px;">
+<div style="background:#111;border-radius:6px;padding:9px 12px;border-left:3px solid #E8913A;">
+<div style="font-size:10px;color:rgba(255,255,255,0.65);line-height:1.5;font-family:'Noto Sans TC',sans-serif;">「加密貨幣的使用者體驗還停留在撥接時代。Privy 讓我們能從根本改變這件事。」</div>
+<div style="font-size:9px;color:#E8913A;margin-top:3px;font-family:system-ui;">Patrick Collison（Stripe 共同創辦人）— X</div>
+</div>
+<div style="background:#111;border-radius:6px;padding:9px 12px;border-left:3px solid #E8913A;">
+<div style="font-size:10px;color:rgba(255,255,255,0.65);line-height:1.5;font-family:'Noto Sans TC',sans-serif;">「加入 Stripe 讓我們能把嵌入式錢包帶給全球數百萬開發者。」</div>
+<div style="font-size:9px;color:#E8913A;margin-top:3px;font-family:system-ui;">Henri Stern（Privy 共同創辦人）— X</div>
+</div>
+<div style="background:#111;border-radius:6px;padding:9px 12px;border-left:3px solid #E8913A;">
+<div style="font-size:10px;color:rgba(255,255,255,0.65);line-height:1.5;font-family:'Noto Sans TC',sans-serif;">「Bridge 做後端、Privy 做前端，Stripe 的加密拼圖快完成了。」</div>
+<div style="font-size:9px;color:#E8913A;margin-top:3px;font-family:system-ui;">@balajis — X</div>
+</div>
+<div style="position:relative;height:44px;overflow:hidden;">
+<div style="opacity:0.4;">
+<div style="background:#111;border-radius:6px;padding:9px 12px;border-left:3px solid #E8913A;">
+<div style="font-size:10px;color:rgba(255,255,255,0.65);line-height:1.5;font-family:'Noto Sans TC',sans-serif;">「嵌入式錢包的護城河到底有多深？」</div>
+<div style="font-size:9px;color:#E8913A;margin-top:3px;">@lex_node — X</div>
+</div>
+</div>
+<div style="position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(180deg,transparent 0%,rgba(0,0,0,0.95) 100%);"></div>
+</div>
+</div>
+</div>
+<!-- Paywall CTA -->
+<div style="margin-top:14px;text-align:center;">
+<div style="font-size:12px;color:#fff;font-weight:700;font-family:'Noto Sans TC',sans-serif;margin-bottom:4px;">解鎖完整報導與社群討論</div>
+<div style="font-size:10px;color:#888;margin-bottom:10px;font-family:'Noto Sans TC',sans-serif;">事實免費閱讀。省時間，付費解鎖全貌。</div>
+<div style="display:inline-block;background:#48AAE0;color:#fff;font-size:12px;font-weight:700;padding:10px 28px;border-radius:6px;font-family:'Noto Sans TC',sans-serif;cursor:pointer;">立即訂閱</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- International reference -->
+<div class="slide">
+<h2>國際參考：Ledger Insights</h2>
+<p style="font-size:20px;margin-bottom:24px;">付費訂閱制的區塊鏈媒體，在國際市場已有先例。</p>
+<div class="two-col">
+<div>
+<div class="diagram-box" style="margin-top:0;">
+<h3 style="font-size:22px;">定位</h3>
+<p style="font-size:18px;">專注機構級區塊鏈應用，涵蓋代幣化證券、機構 DLT、數位資產監管框架。不寫加密貨幣投資，只寫企業需要的內容。</p>
+</div>
+<div class="diagram-box">
+<h3 style="font-size:22px;">定價參考</h3>
+<div style="font-size:18px;line-height:2.2;">
+<div style="display:flex;justify-content:space-between;">個人月費<strong style="color:var(--brand-blue);">€50／月</strong></div>
+<div style="display:flex;justify-content:space-between;">個人年費<strong style="color:var(--brand-blue);">€500／年</strong></div>
+<div style="display:flex;justify-content:space-between;">換算台幣<strong style="color:var(--text-secondary);">約 NT$1,700／月</strong></div>
+</div>
+</div>
+</div>
+<div>
+<div class="diagram-box" style="margin-top:0;">
+<h3 style="font-size:22px;">訂閱機構（部分）</h3>
+<div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;">
+<span style="padding:8px 16px;background:rgba(255,255,255,0.06);border:1px solid var(--glass-border);border-radius:8px;font-size:16px;color:var(--text-primary);font-weight:600;">J.P. Morgan</span>
+<span style="padding:8px 16px;background:rgba(255,255,255,0.06);border:1px solid var(--glass-border);border-radius:8px;font-size:16px;color:var(--text-primary);font-weight:600;">Euroclear</span>
+<span style="padding:8px 16px;background:rgba(255,255,255,0.06);border:1px solid var(--glass-border);border-radius:8px;font-size:16px;color:var(--text-primary);font-weight:600;">KBC</span>
+<span style="padding:8px 16px;background:rgba(255,255,255,0.06);border:1px solid var(--glass-border);border-radius:8px;font-size:16px;color:var(--text-primary);font-weight:600;">Ava Labs</span>
+<span style="padding:8px 16px;background:rgba(255,255,255,0.06);border:1px solid var(--glass-border);border-radius:8px;font-size:16px;color:var(--text-primary);font-weight:600;">Simmons & Simmons</span>
+<span style="padding:8px 16px;background:rgba(255,255,255,0.06);border:1px solid var(--glass-border);border-radius:8px;font-size:16px;color:var(--text-primary);font-weight:600;">rwa.xyz</span>
+<span style="padding:8px 16px;background:rgba(255,255,255,0.06);border:1px solid var(--glass-border);border-radius:8px;font-size:16px;color:var(--text-primary);font-weight:600;">G7 & G20 央行</span>
+</div>
+</div>
+<div style="margin-top:16px;padding:16px;background:rgba(72,170,224,0.06);border-radius:12px;">
+<p style="font-size:17px;margin:0;">這個模式在國際市場已有先例。定價策略可參考此案例，再根據台灣市場調整。</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Taiwan reference -->
+<div class="slide">
+<h2>臺灣參考：電子時報（DIGITIMES）</h2>
+<p style="font-size:20px;margin-bottom:24px;">臺灣已有以付費訂閱制經營超過 25 年的垂直產業媒體。</p>
+<div class="two-col">
+<div>
+<div class="diagram-box" style="margin-top:0;">
+<h3 style="font-size:22px;">定位</h3>
+<p style="font-size:18px;margin:0;">專注全球電子資訊科技產業供應鏈，每日近百則新聞。1998 年創刊。</p>
+</div>
+<div class="diagram-box">
+<h3 style="font-size:22px;">營運模式</h3>
+<p style="font-size:17px;margin:0;">企業訂閱佔營收超過 90%，採長期訂單制。企業版以 IP 限制讓多人同時上線。定價不公開，採業務接洽制。</p>
+</div>
+</div>
+<div>
+<div class="diagram-box" style="margin-top:0;">
+<h3 style="font-size:22px;">為什麼可以參考</h3>
+<p style="font-size:17px;margin:0;">主題小眾（電子供應鏈），但對決策者是剛需。區塊鏈之於金融業，正走向類似的位置。</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Platform + 區塊勢 relationship -->
+<div class="slide">
+<h2>新媒體 × 區塊勢</h2>
+<p style="font-size:20px;margin-bottom:24px;">同一個平台，兩種內容，各自獨立。就像 Bloomberg 與 Matt Levine 的 Money Stuff。</p>
+<div class="two-col">
+<div class="diagram-box" style="margin-top:0;border-top:3px solid #27ae60;">
+<h3 style="font-size:22px;color:#27ae60;">新媒體｜事實</h3>
+<p style="font-size:17px;">以事件為核心的新聞網站。客觀整理、來源透明、經過查核。做深，不做廣——不追求每天填滿版面，而是每一則都做到全貌。</p>
+<p style="font-size:15px;color:var(--text-secondary);margin:0;">相當於 Bloomberg 的新聞平台。</p>
+</div>
+<div class="diagram-box" style="margin-top:0;border-top:3px solid var(--brand-blue);">
+<h3 style="font-size:22px;color:var(--brand-blue);">區塊勢｜觀點</h3>
+<p style="font-size:17px;">許明恩的深度分析與判斷。有自己的語氣、風格和讀者群。住在同一個平台上，但一看就知道是誰寫的。</p>
+<p style="font-size:15px;color:var(--text-secondary);margin:0;">相當於 Matt Levine 的 Money Stuff。</p>
+</div>
+</div>
+<div style="margin-top:20px;padding:18px;background:rgba(72,170,224,0.06);border-radius:12px;">
+<p style="font-size:17px;color:var(--text-secondary);margin:0;text-align:center;">事實與觀點必須分開。事實需要客觀，觀點需要立場。<br>分開才能各自建立信任，合在一起才能創造綜效。</p>
+</div>
+</div>
+
+<div class="slide"><h2>三人團隊</h2><p style="font-size:20px;margin-bottom:20px;">高度 AI 協作，從零打造產品。</p><div class="two-col"><div><div class="diagram-box" style="margin-top:0;border-left:4px solid var(--brand-blue);"><h3 style="font-size:20px;color:var(--brand-blue);">許明恩</h3><p style="font-size:16px;margin:0;">「區塊勢」專欄撰寫、產品工作流程設計與優化、產品品質的最終把關。</p></div><div class="diagram-box" style="border-left:4px solid var(--brand-orange);"><h3 style="font-size:20px;color:var(--brand-orange);">另外兩人</h3><p style="font-size:16px;margin:0;">觀察產業動態與讀者關心的議題，按照定義好的規格，透過 AI 輔助將事件整理成完整報導。涵蓋來源蒐集、社群追蹤、影音製作、工作坊執行。</p></div></div><div><div class="diagram-box" style="margin-top:0;"><h3 style="font-size:18px;">三個人都必須具備</h3><div style="display:flex;flex-direction:column;gap:14px;margin-top:12px;"><div><p style="font-size:16px;color:var(--brand-blue);font-weight:700;margin:0 0 4px;">內容產製能力</p><p style="font-size:14px;color:var(--text-secondary);margin:0;">能獨立寫出文章、測試讀者是否願意訂閱。自己判斷什麼值得寫、怎麼寫。</p></div><div><p style="font-size:16px;color:var(--brand-blue);font-weight:700;margin:0 0 4px;">客戶洞察能力</p><p style="font-size:14px;color:var(--text-secondary);margin:0;">到第一線接觸付費客戶，聽需求、看漏斗、找問題。</p></div><div><p style="font-size:16px;color:var(--brand-blue);font-weight:700;margin:0 0 4px;">產業理解能力</p><p style="font-size:14px;color:var(--text-secondary);margin:0;">對加密貨幣產業有足夠理解，能讀懂英文產業報導，研究別人的做法並動手試。</p></div></div></div></div></div></div>
+<div class="slide"><h2>營收基礎</h2><div class="two-col"><div><h3 style="font-size:22px;">新媒體定價</h3><div class="diagram-box" style="margin-top:0;"><div style="font-size:18px;line-height:2.4;"><div style="display:flex;justify-content:space-between;">企業訂閱（100 人份）<strong style="color:var(--brand-blue);">30 萬/年</strong></div><div style="display:flex;justify-content:space-between;">個人訂閱（月費）<strong>10 美元/月</strong></div><div style="display:flex;justify-content:space-between;">個人訂閱（年費）<strong>100 美元/年</strong></div><div style="display:flex;justify-content:space-between;">工作坊<strong>約 10 萬/場</strong></div></div></div></div><div><h3 style="font-size:22px;">潛在企業市場（保守估計）</h3><div class="diagram-box" style="margin-top:0;"><div style="font-size:17px;line-height:2;"><div style="display:flex;justify-content:space-between;">本國銀行（含金控）<strong>35 家</strong></div><div style="display:flex;justify-content:space-between;">目前已試辦或表達興趣<strong>19 家（54%）</strong></div><div style="display:flex;justify-content:space-between;">專法通過後 3 年預估涉足比例<strong style="color:var(--brand-blue);">~90%</strong></div><div style="display:flex;justify-content:space-between;border-top:1px solid var(--glass-border);padding-top:8px;margin-top:8px;">潛在企業客戶<strong style="color:var(--brand-blue);">~30 家</strong></div><div style="display:flex;justify-content:space-between;">× 企業訂閱 30 萬/年</div><div style="display:flex;justify-content:space-between;border-top:1px solid var(--glass-border);padding-top:8px;margin-top:8px;">企業訂閱年營收天花板<strong style="color:var(--brand-blue);">~900 萬</strong></div></div></div><p style="font-size:14px;color:var(--text-secondary);margin-top:10px;">僅計算銀行與金控。尚未包含券商、保險、政府機關、個人訂閱與工作坊。</p><div style="margin-top:12px;font-size:11px;color:rgba(255,255,255,0.3);line-height:1.8;">推估依據：① 19 家銀行對虛擬資產保管表達興趣，5 家已獲准試辦：聯邦、中信、凱基、國泰世華、台新（<a href="https://money.udn.com/money/story/5613/9397069" target="_blank" style="color:rgba(255,255,255,0.35);">經濟日報 2026/3/23</a>）②《虛擬資產服務法》草案已送行政院，力拚 2026 年通過，穩定幣發行由金融機構先行（<a href="https://money.udn.com/money/story/5613/9398336" target="_blank" style="color:rgba(255,255,255,0.35);">經濟日報 2026/3/23</a>）</div></div></div></div>
+<div class="slide"><h2>三年時程</h2><div class="flow-row"><div class="flow-card" style="border-top:3px solid #27ae60;"><div style="font-size:18px;color:#27ae60;font-weight:700;margin-bottom:10px;">YEAR 1</div><strong style="font-size:22px;">產品上線，驗證需求</strong><div style="font-size:18px;margin-top:12px;color:var(--text-secondary);line-height:1.7;text-align:left;">新聞網站上線<br>移轉既有企業客戶<br>企業客戶 10 家<br>企業訂閱營收約 300 萬<br>搭配個人訂閱與工作坊</div></div><div class="arrow-right"><i class="fa-solid fa-arrow-right"></i></div><div class="flow-card" style="border-top:3px solid var(--brand-blue);"><div style="font-size:18px;color:var(--brand-blue);font-weight:700;margin-bottom:10px;">YEAR 2</div><strong style="font-size:22px;">擴大企業客戶</strong><div style="font-size:18px;margin-top:12px;color:var(--text-secondary);line-height:1.7;text-align:left;">企業客戶 10→20 家<br>企業訂閱營收約 600 萬<br>工作坊與延伸服務展開<br>損益接近兩平</div></div><div class="arrow-right"><i class="fa-solid fa-arrow-right"></i></div><div class="flow-card" style="border-top:3px solid var(--brand-orange);"><div style="font-size:18px;color:var(--brand-orange);font-weight:700;margin-bottom:10px;">YEAR 3</div><strong style="font-size:22px;">逼近市場天花板</strong><div style="font-size:18px;margin-top:12px;color:var(--text-secondary);line-height:1.7;text-align:left;">企業客戶 20→30 家<br>企業訂閱營收約 900 萬<br>逼近銀行市場天花板<br>探索券商、保險、政府等延伸市場</div></div></div><div style="margin-top:18px;padding:14px;background:rgba(72,170,224,0.06);border-radius:12px;text-align:center;"><p style="font-size:17px;margin:0;">以上僅計算企業訂閱。個人訂閱、工作坊、延伸服務為額外營收。</p></div></div>
+<div class="slide"><h2>區塊勢的既有基礎</h2><p style="font-size:20px;margin-bottom:20px;">前面討論的潛在市場不是從零開始。區塊勢 8 年累積的基礎，就是這個媒體的起跑點。</p><div class="two-col"><div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;"><div class="stat-card"><div class="stat-num" style="color:var(--brand-blue);font-size:40px;">750+</div><div class="stat-label">篇原創文章</div></div><div class="stat-card"><div class="stat-num" style="color:var(--brand-blue);font-size:40px;">2 萬</div><div class="stat-label">訂閱者</div></div><div class="stat-card"><div class="stat-num" style="color:var(--brand-blue);font-size:40px;">6 家</div><div class="stat-label">企業客戶（含金管會）</div></div><div class="stat-card"><div class="stat-num" style="color:var(--brand-blue);font-size:40px;">8 年</div><div class="stat-label">持續經營</div></div></div><div><div class="diagram-box" style="margin-top:0;"><p style="font-size:18px;">這些資產會在第一天就移轉到新公司：品牌、內容版權、訂閱者、企業客戶關係、podcast、域名。</p><p style="font-size:18px;">新媒體不需要從零建立信任。金管會已經在看同一份內容，企業客戶知道這個名字。</p><p style="font-size:18px;color:var(--brand-blue);margin:0;"><strong>由我主導，這些基礎直接成為新媒體的起步。</strong></p></div></div></div></div>
+<div class="slide"><h2>收購區塊勢</h2><div class="two-col"><div><h3 style="font-size:22px;">標的</h3><p style="font-size:18px;line-height:1.8;">品牌・750+ 篇版權・2 萬訂閱者・6 家企業客戶（含金管會）・podcast・域名</p><h3 style="font-size:22px;margin-top:16px;">建議價格</h3><div style="font-size:56px;font-weight:800;color:var(--brand-blue);font-family:'Urbanist',sans-serif;margin:10px 0;">2,000 萬</div><p style="font-size:16px;color:var(--text-secondary);">經常性營收 250 萬 × PS 8x</p><p style="font-size:13px;color:rgba(255,255,255,0.3);margin-top:8px;">參考：The Athletic 收購倍數 8.5x、Substack 基本情境 7.2x</p></div><div><h3 style="font-size:22px;">支付方式</h3><div class="diagram-box" style="padding:20px;margin-top:0;"><p style="font-size:18px;margin:0;">優先以分期支付，具體時程與架構以雙方稅務最適化為原則。</p></div></div></div></div>
+<div class="slide"><h2>個人 Package</h2><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:10px;"><div class="stat-card" style="border-top:3px solid var(--brand-blue);"><i class="fa-solid fa-wallet" style="font-size:28px;color:var(--brand-blue);display:block;margin-bottom:16px;"></i><strong style="font-size:20px;display:block;margin-bottom:12px;">底薪</strong><div class="stat-num" style="color:var(--brand-blue);font-size:36px;margin:8px 0 12px;">28-32萬</div><div class="stat-label">月薪・已預留議價空間</div></div><div class="stat-card" style="border-top:3px solid var(--brand-orange);"><i class="fa-solid fa-chart-line" style="font-size:28px;color:var(--brand-orange);display:block;margin-bottom:16px;"></i><strong style="font-size:20px;display:block;margin-bottom:12px;">績效獎金</strong><div style="font-size:24px;font-weight:700;color:var(--brand-orange);margin:8px 0 12px;">營收連動</div><div class="stat-label">達標按比例發放</div></div><div class="stat-card" style="border-top:3px solid #27ae60;"><i class="fa-solid fa-gift" style="font-size:28px;color:#27ae60;display:block;margin-bottom:16px;"></i><strong style="font-size:20px;display:block;margin-bottom:12px;">簽約金</strong><div style="font-size:24px;font-weight:700;color:#27ae60;margin:8px 0 12px;">100-200萬</div><div class="stat-label">一次性・過渡期補償</div></div></div><div style="margin-top:24px;padding:16px;background:rgba(72,170,224,.06);border-radius:12px;text-align:center;"><p style="font-size:18px;margin:0;">收購價反映過去的累積，薪資反映未來的投入。兩者獨立計算。</p></div></div>
+<div class="slide"><h2>品牌與編輯原則</h2><p style="font-size:21px;margin-bottom:24px;">企業客戶訂閱的是<strong>一個人的判斷力</strong>，不是機構的名字。品牌建設要反映這個事實。</p><div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;"><div class="diagram-box" style="padding:24px;margin:0;"><i class="fa-solid fa-link" style="color:var(--brand-blue);font-size:24px;display:block;margin-bottom:12px;"></i><h3 style="font-size:20px;margin-bottom:8px;">創辦人 × 品牌綁定</h3><p style="font-size:17px;margin:0;">對外介紹、公關露出，許明恩與媒體品牌共同出現。讀者認的是人。</p></div><div class="diagram-box" style="padding:24px;margin:0;"><i class="fa-solid fa-pen-nib" style="color:var(--brand-blue);font-size:24px;display:block;margin-bottom:12px;"></i><h3 style="font-size:20px;margin-bottom:8px;">內容掛名</h3><p style="font-size:17px;margin:0;">文章和 podcast 以個人名義發出。讓讀者知道誰為這些判斷負責。</p></div><div class="diagram-box" style="padding:24px;margin:0;"><i class="fa-solid fa-microphone" style="color:var(--brand-blue);font-size:24px;display:block;margin-bottom:12px;"></i><h3 style="font-size:20px;margin-bottom:8px;">對外代表</h3><p style="font-size:17px;margin:0;">產業論壇、媒體採訪、企業拜訪，由社長代表出席。</p></div><div class="diagram-box" style="padding:24px;margin:0;"><i class="fa-solid fa-shield-halved" style="color:var(--brand-blue);font-size:24px;display:block;margin-bottom:12px;"></i><h3 style="font-size:20px;margin-bottom:8px;">編採獨立</h3><p style="font-size:17px;margin:0;">內容選題最終決定權歸社長，股東不介入編輯判斷。</p></div></div></div>
+<div class="slide"><h2>結構性保障</h2><div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;"><div class="diagram-box" style="padding:24px;margin:0;"><i class="fa-solid fa-shield-halved" style="color:var(--brand-blue);font-size:24px;display:block;margin-bottom:12px;"></i><h3 style="font-size:20px;">編採獨立</h3><p style="font-size:17px;margin:0;">選題最終決定權歸社長<br>股東不介入編輯判斷</p></div><div class="diagram-box" style="padding:24px;margin:0;"><i class="fa-solid fa-calendar-check" style="color:var(--brand-blue);font-size:24px;display:block;margin-bottom:12px;"></i><h3 style="font-size:20px;">合約保障 3 年</h3><p style="font-size:17px;margin:0;">非因重大過失不得解約</p></div><div class="diagram-box" style="padding:24px;margin:0;"><i class="fa-solid fa-rotate-left" style="color:var(--brand-orange);font-size:24px;display:block;margin-bottom:12px;"></i><h3 style="font-size:20px;">品牌回購條款</h3><p style="font-size:17px;margin:0;">JV 結束營運時<br>區塊勢品牌優先回歸創辦人</p></div><div class="diagram-box" style="padding:24px;margin:0;"><i class="fa-solid fa-house-laptop" style="color:#27ae60;font-size:24px;display:block;margin-bottom:12px;"></i><h3 style="font-size:20px;">生活彈性</h3><p style="font-size:17px;margin:0;">不要求固定坐班<br>以產出為導向</p></div></div></div>
+
+<!-- Reading List - hidden past the ending -->
+<div class="slide" style="justify-content:flex-start;padding-top:80px;">
+<div style="font-size:14px;color:rgba(255,255,255,0.2);letter-spacing:2px;font-family:'Urbanist',sans-serif;margin-bottom:30px;">READING LIST</div>
+<div style="display:flex;flex-direction:column;gap:20px;max-width:700px;">
+<a href="https://www.edge.org/conversation/kevin_kelly-better-than-free" target="_blank" style="text-decoration:none;display:block;">
+<div class="diagram-box" style="margin:0;padding:20px;cursor:pointer;transition:border-color 0.3s;">
+<div style="font-size:18px;color:var(--brand-blue);font-weight:700;font-family:'Noto Sans TC',sans-serif;">Better Than Free</div>
+<div style="font-size:14px;color:var(--text-secondary);margin-top:6px;">Kevin Kelly, 2008 — 當複製成本趨近零，值錢的是無法複製的 generatives：Trust、Interpretation、Findability、Authenticity、Personalization。</div>
+</div>
+</a>
+<a href="https://www.goodreads.com/quotes/8502027-in-an-information-rich-world-the-wealth-of-information-means-a" target="_blank" style="text-decoration:none;display:block;">
+<div class="diagram-box" style="margin:0;padding:20px;cursor:pointer;transition:border-color 0.3s;">
+<div style="font-size:18px;color:var(--brand-blue);font-weight:700;font-family:'Noto Sans TC',sans-serif;">The Wealth of Information</div>
+<div style="font-size:14px;color:var(--text-secondary);margin-top:6px;">Herbert Simon — 「資訊豐富的世界裡，資訊的充裕意味著其他東西的匱乏：接收資訊的人的注意力。」</div>
+</div>
+</a>
+</div>
+</div>
+
+<div class="page-number" id="page-num">01 / 18</div>
+</div>
+<script>
+const c=document.getElementById('slides-container'),s=document.querySelectorAll('.slide'),t=s.length,pn=document.getElementById('page-num'),pb=document.getElementById('progress-bar'),nd=document.querySelectorAll('.nav-dot'),si=Array.from(nd).map(d=>parseInt(d.dataset.slide));c.addEventListener('scroll',()=>{const st=c.scrollTop,h=c.clientHeight,ci=Math.min(Math.max(Math.round(st/h),0),t-1);pn.innerText=String(ci+1).padStart(2,'0')+' / '+String(t).padStart(2,'0');const mx=c.scrollHeight-c.clientHeight;pb.style.width=(mx>0?(st/mx)*100:0)+'%';nd.forEach((d,i)=>{const a=si[i],b=(i<si.length-1)?si[i+1]:t;d.classList.toggle('active',ci>=a&&ci<b);});});nd.forEach(d=>{d.addEventListener('click',()=>{const x=s[parseInt(d.dataset.slide)];if(x)x.scrollIntoView({behavior:'smooth'});});});document.addEventListener('keydown',e=>{const ci=Math.round(c.scrollTop/c.clientHeight);if(['ArrowDown','ArrowRight',' '].includes(e.key)||e.code==='Space'){e.preventDefault();s[Math.min(ci+1,t-1)].scrollIntoView({behavior:'smooth'});}else if(['ArrowUp','ArrowLeft'].includes(e.key)){e.preventDefault();s[Math.max(ci-1,0)].scrollIntoView({behavior:'smooth'});}});let ty=0;c.addEventListener('touchstart',e=>{ty=e.changedTouches[0].screenY;});c.addEventListener('touchend',e=>{const d=e.changedTouches[0].screenY-ty;if(Math.abs(d)>60){const ci=Math.round(c.scrollTop/c.clientHeight);s[d<0?Math.min(ci+1,t-1):Math.max(ci-1,0)].scrollIntoView({behavior:'smooth'});}});pb.style.width='0%';
+</script>
+</body>
+</html>
